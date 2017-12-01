@@ -2,11 +2,8 @@
 #include <QMainWindow>
 #include <QApplication>
 
-#define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 
-//#define BOOST_TEST_DYN_LINK
-//#define BOOST_TEST_MODULE Main
 
 int main(int argc, char *argv[])
 {
