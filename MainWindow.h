@@ -12,7 +12,7 @@ public:
 
 	MainWindow(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 	MainWindow(const MainWindow&) = delete;
-	MainWindow& operator=(const MainWindow&) = delete
+	MainWindow& operator=(const MainWindow&) = delete;
 private:
 	WorldWidget world_widget_;	
 };

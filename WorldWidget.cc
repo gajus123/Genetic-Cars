@@ -1,17 +1,17 @@
 #include "WorldWidget.h"
 
 WorldWidget::WorldWidget(QWidget *parent, Qt::WindowFlags flags) : QWidget(parent, flags), timerId_(0) {
-	b2Vec2 gravity(0.0f, -10.0f);
+	b2Vec2 gravity(GRAVITY_X, GRAVITY_Y);
 	world_ = new b2World(gravity);
 	
-	for (unsigned int i = 0; i < 30; ++i) {
-		int dx = 18 - qrand() % 36;
-		int dy = qrand() % 2;
-		balls_.append(createBall(b2Vec2(18.0f+dx, 62.0f-dy), 1.0f));
+	for (unsigned int i = 0; i < NUMBER_OF_BALLS; ++i) {
+		int dx = BALLS_MAX_DISTANCE_X/2 - qrand() % BALLS_MAX_DISTANCE_X;
+		int dy = qrand() % BALLS_MAX_DISTANCE_Y;
+		balls_.append(createBall(b2Vec2(BALLS_MAX_DISTANCE_X+dx, BALL_STARTING_Y-dy), BALL_RADIUS));
 	}
 	
-	transform_.scale(10.0f, -10.0f);
-	transform_.translate(0.0f, -64.0f);
+	transform_.scale(SCALE_X, SCALE_Y);
+	transform_.translate(TRANSLATE_X, TRANSLATE_Y);
 }
 void WorldWidget::paintEvent(QPaintEvent *event) {
 	QPainter p(this);
@@ -34,9 +34,9 @@ WorldWidget::Ball WorldWidget::createBall(const b2Vec2& pos, float32 radius) {
 	
 	b2FixtureDef fd;
 	fd.shape = &shape;
-	fd.density = 1.0f;
-	fd.friction = 1.0f;
-	fd.restitution = 0.6f;
+	fd.density = BALL_DENSITY;
+	fd.friction = BALL_FRICTION;
+	fd.restitution = BALL_RESTITUATION;
 	ball.fixture_ = ball.body_->CreateFixture(&fd);
 	return ball;
 }
@@ -48,14 +48,13 @@ void WorldWidget::drawEllipse(QPainter &p, const Ball& ball) {
 }
 void WorldWidget::timerEvent(QTimerEvent *event) {
 	if(event->timerId() == timerId_) {
-		world_->Step(1.0f/60.0f, 8, 3);
+		world_->Step(WORLD_STEP, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 		update();
 	}
 }
 void WorldWidget::start() {
-	std::cout << "Start\n";
 	if(!timerId_) {
-		timerId_ = startTimer(1000/60);
+		timerId_ = startTimer(FRAME_TIME);
 	}
 }
 WorldWidget::~WorldWidget() {
