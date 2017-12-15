@@ -1,6 +1,6 @@
 /*!
  * @authors Jakub Gajownik, Rafał Galczak
- * @date 15.12.17
+ * @date 14.12.17
  *
  * \brief MainWindow setups view and application window structure.
  *        As well as being in charge of interacting with user.
