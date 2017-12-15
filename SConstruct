@@ -60,9 +60,9 @@ env.VariantDir(build_path, src_path, duplicate=0)
 #Sources containing tests
 source_tests = search_for_files("test_.*\.(cc|cpp)")
 add_build_path(source_tests, build_path)
-#print(source_tests)
+
 #All sources
-source = search_for_files(".*\.(cc|cpp)") #"test_.*\.cpp"
+source = search_for_files(".*\.(cc|cpp)")
 add_build_path(source, build_path)
 
 #Main.cpp file
