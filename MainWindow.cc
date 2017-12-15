@@ -1,3 +1,8 @@
+/*!
+ * @authors Jakub Gajownik, Rafał Galczak
+ * @date 14.15.17
+ *
+ */
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags), world_widget_(this) {

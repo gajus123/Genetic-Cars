@@ -1,3 +1,12 @@
+/*!
+ * @author Jakub Gajownik
+ * @date 14.12.17
+ *
+ * \brief WorldWidget is an example class setting up physics, starting it
+ * 		  and drawing effects to the parent. Only to show that the libraries
+ * 		  are working properly.
+ */
+
 #ifndef WORLDWIDGET_H
 #define WORLDWIDGET_H
 

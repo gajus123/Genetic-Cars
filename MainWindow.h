@@ -1,3 +1,11 @@
+/*!
+ * @authors Jakub Gajownik, Rafał Galczak
+ * @date 15.12.17
+ *
+ * \brief MainWindow setups view and application window structure.
+ *        As well as being in charge of interacting with user.
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -14,7 +22,7 @@ public:
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 private:
-	WorldWidget world_widget_;	
+	WorldWidget world_widget_; //!< Brief: Setups physics and objects for the example
 };
 
 #endif

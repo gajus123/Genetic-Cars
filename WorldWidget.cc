@@ -1,3 +1,7 @@
+/*!
+ * @author Jakub Gajownik
+ * @date 14.12.17
+ */
 #include "WorldWidget.h"
 
 WorldWidget::WorldWidget(QWidget *parent, Qt::WindowFlags flags) : QWidget(parent, flags), timerId_(0) {
