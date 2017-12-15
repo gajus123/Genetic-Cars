@@ -1,6 +1,6 @@
 /*!
  * @authors Jakub Gajownik, Rafał Galczak
- * @date 14.15.17
+ * @date 14.12.17
  *
  */
 #include "MainWindow.h"
