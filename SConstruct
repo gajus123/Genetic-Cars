@@ -48,8 +48,8 @@ env.EnableQt5Modules([
                       'QtGui',
                       'QtCore',
                       'QtNetwork',
-		      'QtWidgets'
-                     ]) #QT5 modules used
+						'QtWidgets'
+                    ]) #QT5 modules used
 
 #Prepare Box2D
 box2D_sources = glob.glob('Box2D/*.cpp')+glob.glob('Box2D/*/*.cpp')+glob.glob('Box2D/*/*/*.cpp')
@@ -58,19 +58,21 @@ add_build_path(box2D_sources, build_path)
 env.VariantDir(build_path, src_path, duplicate=0)
 
 #Sources containing tests
-source_tests = search_for_files("test_.*\.cpp")
+source_tests = search_for_files("test_.*\.(cc|cpp)")
 add_build_path(source_tests, build_path)
-
+#print(source_tests)
 #All sources
-source = search_for_files(".*\.cpp") #"test_.*\.cpp"
+source = search_for_files(".*\.(cc|cpp)") #"test_.*\.cpp"
 add_build_path(source, build_path)
 
 #Main.cpp file
-source_main = search_for_files("main.cpp")
+source_main = search_for_files("main.cc")
 add_build_path(source_main, build_path)
 
 source_without_tests = filter(lambda x: x not in source_tests, source)
+print(source_without_tests)
 env.Program(target = build_path+'GeneticCars', source = source_without_tests)
 
 source_without_main = filter(lambda x: x not in source_main, source)
+print(source_without_main)
 env.Program(target = build_path+'tests_GeneticCars', source = source_without_main)
