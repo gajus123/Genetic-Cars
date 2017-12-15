@@ -1,5 +1,24 @@
 import glob
+import re
+import os
 
+def search_for_files(pattern):
+	test_pattern = re.compile(pattern)
+	test_files = []
+	
+	for root, dirs, files in os.walk("./"):
+		temp = filter(test_pattern.match, files)
+		if root != "./":
+			temp = [root + '\\' + x for x in temp]
+			for idx, x in enumerate(temp):
+				temp[idx] = x[2:]
+		test_files += temp
+	return test_files
+
+def add_build_path(files, build_path):
+	for i in xrange(0, len(files)):
+		files[i] = build_path + files[i]
+	
 QT5DIR = ''
 CXXFLAGS = []
 LINKFLAGS = []
@@ -13,10 +32,10 @@ env = Environment()
 if env['CXX'] == 'g++':
 	CXXFLAGS.extend(['-fPIC','-std=c++14'])
 	LIBS.extend(['boost_unit_test_framework'])
-elif env['CXX'] == 'cl':
+elif env['CXX'] == 'cl' or env['CC'] == 'cl':
 	CXXFLAGS.extend(['/std:c++14'])
-	LINKFLAGS.extend(['/LIBPATH:H:\\Kodzenie\\boost_1_65_1\\lib64-msvc-14.0'])
-	CPPPATH.extend(['H:\\Kodzenie\\boost_1_65_1'])
+	LINKFLAGS.extend(['/LIBPATH:..\\boost_1_65_1\\lib64-msvc-14.0'])
+	CPPPATH.extend(['..\\boost_1_65_1'])
 
 env.Append(CXXFLAGS=CXXFLAGS)
 env.Append(LINKFLAGS=LINKFLAGS)
@@ -24,7 +43,6 @@ env.Append(LIBS=LIBS)
 env.Append(CPPPATH=CPPPATH)
 
 #Prepare QT5 tool
-env['QT5DIR'] = 'H:\\Programy\\QT\\5.9.1\\msvc2015_64' #QT5 directory for Windows <- Windows only
 env.Tool('qt5') #Tool for qt5 building <- Both
 env.EnableQt5Modules([
                       'QtGui',
@@ -35,9 +53,24 @@ env.EnableQt5Modules([
 
 #Prepare Box2D
 box2D_sources = glob.glob('Box2D/*.cpp')+glob.glob('Box2D/*/*.cpp')+glob.glob('Box2D/*/*/*.cpp')
-for i in xrange(0, len(box2D_sources)):
-	box2D_sources[i] = build_path + box2D_sources[i]
+add_build_path(box2D_sources, build_path)
 
 env.VariantDir(build_path, src_path, duplicate=0)
-source = [build_path+'main.cpp'] + box2D_sources
-env.Program(target = build_path+'GeneticCars', source = source)
+
+#Sources containing tests
+source_tests = search_for_files("test_.*\.cpp")
+add_build_path(source_tests, build_path)
+
+#All sources
+source = search_for_files(".*\.cpp") #"test_.*\.cpp"
+add_build_path(source, build_path)
+
+#Main.cpp file
+source_main = search_for_files("main.cpp")
+add_build_path(source_main, build_path)
+
+source_without_tests = filter(lambda x: x not in source_tests, source)
+env.Program(target = build_path+'GeneticCars', source = source_without_tests)
+
+source_without_main = filter(lambda x: x not in source_main, source)
+env.Program(target = build_path+'tests_GeneticCars', source = source_without_main)
