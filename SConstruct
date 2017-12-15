@@ -70,9 +70,7 @@ source_main = search_for_files("main.cc")
 add_build_path(source_main, build_path)
 
 source_without_tests = filter(lambda x: x not in source_tests, source)
-print(source_without_tests)
 env.Program(target = build_path+'GeneticCars', source = source_without_tests)
 
 source_without_main = filter(lambda x: x not in source_main, source)
-print(source_without_main)
 env.Program(target = build_path+'tests_GeneticCars', source = source_without_main)
