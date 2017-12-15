@@ -1,11 +1,9 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags), button(this) {
-	connect(&button, SIGNAL(pressed()), this, SLOT(dupa()));
-	setCentralWidget(&button);
-	setObjectName("MainWindow");
-}
-void MainWindow::dupa()
-{
-	std::cout << "Dupa\n";
+MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags), world_widget_(this) {
+	setObjectName("GeneticCars");
+	setWindowTitle("Genetic Cars"); 
+	setCentralWidget(&world_widget_);
+	resize(500,500);
+	world_widget_.start();
 }
