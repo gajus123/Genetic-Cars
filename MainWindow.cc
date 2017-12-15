@@ -4,6 +4,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	setObjectName("GeneticCars");
 	setWindowTitle("Genetic Cars"); 
 	setCentralWidget(&world_widget_);
-	resize(window_width, window_height);
+	resize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	world_widget_.start();
 }

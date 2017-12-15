@@ -7,12 +7,12 @@
 class MainWindow : public QMainWindow {
 	Q_OBJECT
 public:
-    const int window_width = 500;
-    const int window_height = 500;
+    const int WINDOW_WIDTH = 500;
+    const int WINDOW_HEIGHT = 500;
 
 	MainWindow(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 	MainWindow(const MainWindow&) = delete;
-	MainWindow& operator=(const MainWindow&) = delete;
+	MainWindow& operator=(const MainWindow&) = delete
 private:
 	WorldWidget world_widget_;	
 };
