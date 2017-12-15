@@ -9,7 +9,7 @@ def search_for_files(pattern):
 	for root, dirs, files in os.walk("./"):
 		temp = filter(test_pattern.match, files)
 		if root != "./":
-			temp = [root + '\\' + x for x in temp]
+			temp = [root + '//' + x for x in temp]
 			for idx, x in enumerate(temp):
 				temp[idx] = x[2:]
 		test_files += temp
