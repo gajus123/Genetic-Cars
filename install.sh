@@ -7,7 +7,8 @@ sudo apt-get -y install gcc
 sudo apt-get -y install make
 
 #Install QT5
-sudo apt-get -y install qt5-default
+sudo apt-get -y install qtbase5-dev
+#sudo apt-get -y install qt5-default
 
 #sudo apt-get update
 #sudo apt-get install build-essential checkinstall
@@ -38,6 +39,8 @@ then
 	unzip 9caa36eb469d.zip -d 9caa36eb469d
 	mkdir -p ~/.scons/site_scons/site_tools/qt5/
 	mv ./9caa36eb469d/dirkbaechle-scons_qt5-9caa36eb469d/* ~/.scons/site_scons/site_tools/qt5/
+	rm -r 9caa36eb469d
+	sudo rm 9caa36eb469d.zip
 fi
 
 #Install pkg-config
