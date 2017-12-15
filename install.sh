@@ -22,7 +22,7 @@ sudo apt-get -y install libboost-test-dev
 
 #Download QT5 tool
 echo "Download Scons QT5 tool"
-if [ ! -n "$(ls -A ~/.scons/)" ]
+if [ ! -n "$(ls -A ./site_scons/site_tools/qt5)" ]
 then
 	echo "No QT5 tool"
 	sudo wget https://bitbucket.org/dirkbaechle/scons_qt5/get/9caa36eb469d.zip
