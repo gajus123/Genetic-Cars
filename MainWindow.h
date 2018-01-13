@@ -12,6 +12,14 @@
 #include "WorldWidget.h"
 #include "SimulationView.h"
 #include <QMainWindow>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QToolButton>
+#include <QLabel>
+#include <QLineEdit>
+#include <QWidget>
+#include <QGroupBox>
 
 class MainWindow : public QMainWindow {
 	Q_OBJECT
@@ -25,6 +33,15 @@ public:
 private:
 	WorldWidget world_widget_; //!< Brief: Setups physics and objects for the example
 	SimulationView simulation_view_;
+
+	QWidget central_widget_;
+	QPushButton reset_button_;
+	QPushButton pause_button_;
+	QToolButton speed_increase_button_;
+	QToolButton speed_decrease_button_;
+	QLabel speed_label_;
+	QLabel cars_count_label_;
+	QLineEdit cars_count_edit_;
 };
 
 #endif
