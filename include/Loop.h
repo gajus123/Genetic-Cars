@@ -8,28 +8,27 @@
 #include <thread>
 #include <atomic>
 
-#import "Box2D/Box2D.h"
+#include "Box2D/Box2D.h"
 
 
 namespace Physics {
 
     class Loop {
     public:
-        explicit Loop(b2Vec2 gravity = b2Vec2(0.0f, 9.8f), float32 time_step = 1f / 60f,
-                         int32 velocity_iterations = 8, int32 position_iterations = 3);
-
+        explicit Loop(b2Vec2 gravity = b2Vec2(0.0f, 9.8f),
+                      float32 time_step = 1.0f / 60.0f,
+                      int32 velocity_iterations = 8,
+                      int32 position_iterations = 3);
         Loop(const Loop &) = delete;
-
         Loop(Loop &&) = delete;
 
         void run();
-
         void stop();
 
-        b2World &getWorld() const;
+        b2World &getWorld();
 
     private:
-        std::atomic_bool stop_simulation = false;
+        std::atomic_bool stop_simulation;
 
         b2World world;
         b2Vec2 gravity;
@@ -40,7 +39,7 @@ namespace Physics {
         std::thread physics_t;
 
 
-        void start_physics();
+        static void start_physics(Loop& loop);
 
     };
 

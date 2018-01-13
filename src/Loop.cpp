@@ -15,22 +15,24 @@ namespace Physics {
     }
 
     void Loop::run() {
-        physics_t = std::thread(start_physics);
+        stop_simulation = false;
+        physics_t = std::thread(start_physics, std::ref(*this));
     }
 
-    void Loop::start_physics() {
-        while (!stop_simulation) {
-            world.Step(time_step, velocity_iterations, position_iterations);
+    void Loop::start_physics(Loop& loop) {
+        while (!loop.stop_simulation.load()) {
+            loop.world.Step(loop.time_step,
+                            loop.velocity_iterations,
+                            loop.position_iterations);
         }
     }
-
 
     void Loop::stop() {
         stop_simulation = true;
         physics_t.join();
     }
 
-    b2World &Loop::getWorld() const {
+    b2World &Loop::getWorld() {
         return world;
     }
 
