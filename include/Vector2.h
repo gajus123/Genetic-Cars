@@ -19,6 +19,13 @@ namespace Objects {
         b2Vec2 asb2Vec2() const {return {x, y};}
 
         Vector2 operator*(const float scalar) const { return {x*scalar, y*scalar}; }
+        Vector2 operator+(const Vector2& other) const { return {x+other.x, y+other.y}; }
+        Vector2 operator-(const Vector2& other) const { return {x-other.x, y-other.y}; }
+
+        Vector2 operator+=(const Vector2& other) {x += other.x, y += other.y; return *this;}
+        Vector2 operator-=(const Vector2& other) {x -= other.x, y -= other.y; return *this;}
+        Vector2 operator-=(const float& scalar) {x *= scalar, scalar; return *this;}
+
     };
 
 }

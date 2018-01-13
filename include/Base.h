@@ -11,17 +11,15 @@ namespace Objects {
 
     class Base {
     public:
-        explicit Base(Vector2 position = {0.0f, 0.0f}) : position(position) {
-			
-        };
-        virtual Vector2 getPosition() {return position;}
+        explicit Base(Vector2 position = {0.0f, 0.0f}) : start_position(position) {};
+        virtual Vector2 getPosition() {return {body->GetPosition()}; }
     protected:
         b2Body* body;
-        Vector2 position;
+        Vector2 start_position;
 
         virtual void beforeBodySetUp() = 0;
         virtual void createAndSetBody() = 0;
-        virtual void afterBodySetup() {body->SetTransform(position.asb2Vec2(), 0.0f);}
+        virtual void afterBodySetup() {body->SetTransform(start_position.asb2Vec2(), 0.0f);}
     };
 
 }
