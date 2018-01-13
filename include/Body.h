@@ -7,21 +7,29 @@
 
 
 #include "include/Vector2.h"
+#include "include/Base.h
 #include <vector>
 
 namespace Objects {
 
-    class Body {
+    class Body : public Base {
     public:
-        Body(std::vector<float> lenghts, Vector2 position);
+        Body(std::vector<float> lengths, Vector2 position) : position(position), lengths(std::move(lengths)), Base(position) {};
 
         Vector2 getPosition() const {return position;}
         std::vector<Vector2> getVertices() const {return vertices;}
-    private:
+
+    protected:
         b2Body* body;
 
         Vector2 position;
         std::vector<Vector2> vertices;
+        std::vector<float> lengths;
+
+        void beforeBodySetUp() override;
+        void calculateVertices();
+
+        void createAndSetBody();
     };
 
 }

@@ -8,23 +8,25 @@
 #include "Box2D/Box2D.h"
 
 #include "include/Vector2.h"
+#include "include/Base.h"
 
 namespace Objects {
 
-    class Wheel {
+    class Wheel : public Base {
     public:
-        Wheel(Vector2 position, float radius);
+        Wheel(Vector2 position, float radius) : position(position), radius(radius), Base(position) {};
 
 
         float getRadius() const {return radius;}
         Vector2 getPosition() const {return position;}
-    private:
+
+    protected:
         b2Body *body;
 
         Vector2 position;
         float radius;
 
-
+        void createAndSetBody() override;
     };
 
 }

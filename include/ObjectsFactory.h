@@ -34,7 +34,6 @@ namespace Physics {
 
         b2World &world;
 
-
         explicit ObjectsFactory(b2World &w);
         ObjectsFactory &operator=(ObjectsFactory const &);
 

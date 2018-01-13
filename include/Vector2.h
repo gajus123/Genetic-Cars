@@ -13,7 +13,12 @@ namespace Objects {
     public:
         float x, y;
 
+        Vector2(float x, float y) : x(x), y(y) {};
+        explicit Vector2(b2Vec2 other): x(other.x), y(other.y) {};
+
         b2Vec2 asb2Vec2() const {return {x, y};}
+
+        Vector2 operator*(const float scalar) const { return {x*scalar, y*scalar}; }
     };
 
 }
