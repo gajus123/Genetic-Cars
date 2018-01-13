@@ -5,7 +5,7 @@
  */
 #include "MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags), world_widget_(this) {
+MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags) {
 	setObjectName("GeneticCars");
 	setWindowTitle("Genetic Cars"); 
 
@@ -14,32 +14,10 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	QVBoxLayout* contentLayout = new QVBoxLayout();
 	content->setLayout(contentLayout);
 
-	//QChartView* chart_view_ = new QChartView(&chart_);
-
-	series.append(0, 6);
-	series.append(2, 4);
-	series.append(3, 8);
-	series.append(7, 4);
-	series.append(10, 5);
-	series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3) << QPointF(20, 2);
-	series2.append(0, 5);
-	series2.append(1, 3);
-	series2.append(2, 6);
-	series2.append(3, 5);
-	series2.append(4, 7);
-	series2.append(5, 8);
-	series2.append(6, 1);
-
-
-	series.append(25, 4);
-	series.append(30, 6);
-
 	statistic_view_.addData(1.0, 0.5, 0.2, 0.3);
 	statistic_view_.addData(2.0, 1.0, 0.6, 0.65);
 	statistic_view_.reset();
-	//statistic_view_.addData(0.5, 0.1, 0.3, 0.2);
-
-
+	statistic_view_.addData(0.5, 0.1, 0.3, 0.2);
 
 	QSizePolicy simulationViewPolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
 	simulationViewPolicy.setVerticalStretch(3);
@@ -70,11 +48,18 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	sidebar_widget_.setLayout(sidebar_layout);
 
 	sidebar_widget_.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-	//chart_view_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 	sidebar_layout->addWidget(&simulation_group_);
 	sidebar_layout->addWidget(&file_group_);
 	sidebar_layout->addWidget(&algorithm_group_);
+
+	connect(&mutation_rate_edit_, SIGNAL(editingFinished()), this, SLOT(mutationRateChanged()));
+	connect(&mutation_size_edit_, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
+	connect(&load_button_, SIGNAL(clicked()), this, SLOT(loadFromFile()));
+	connect(&save_button_, SIGNAL(clicked()), this, SLOT(saveToFile()));
+	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(resetSimulation()));
+	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
+	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 }
 void MainWindow::setupSimulationInterface() {
 	QVBoxLayout* layout = new QVBoxLayout();
@@ -109,6 +94,7 @@ void MainWindow::setupSimulationInterface() {
 
 	reset_button_.setText("Resetuj");
 	pause_button_.setText("Pauza");
+	pause_button_.setCheckable(true);
 	speed_decrease_button_.setText("-");
 	speed_increase_button_.setText("+");
 	speed_label_.setText("10");
@@ -147,12 +133,42 @@ void MainWindow::setupAlgorithmInterface() {
 	editsLayout->addWidget(&mutation_size_edit_);
 	editsLayout->addWidget(&mutation_rate_edit_);
 
-	
-
-
 	mutation_size_label_.setText("Prawdopodobieństwo mutacji:");
 	mutation_rate_label_.setText("Współczynnik mutacji:");
 
 	layout->addWidget(labelsWidget);
 	layout->addWidget(editsWidget);
+}
+void MainWindow::mutationRateChanged() {
+	bool number;
+	float temp = mutation_rate_edit_.text().toFloat(&number);
+	if (number)
+		qDebug() << "Rate";
+}
+void MainWindow::mutationSizeChanged() {
+	bool number;
+	float temp = mutation_rate_edit_.text().toFloat(&number);
+	if (number)
+		qDebug() << "Size";
+}
+void MainWindow::saveToFile() {
+	qDebug() << "Save";
+	QString fileName = QFileDialog::getSaveFileName(this,
+		"Save Population", "",
+		"Text Files (*.txt);;All Files (*)");
+}
+void MainWindow::loadFromFile() {
+	qDebug() << "Load";
+	QString fileName = QFileDialog::getOpenFileName(this,
+		"Load Population", "",
+		"Text Files (*.txt);;All Files (*)");
+}
+void MainWindow::resetSimulation() {
+	qDebug() << "Reset";
+}
+void MainWindow::pauseSimulation(bool paused) {
+	qDebug() << "Pause " << paused;
+}
+void MainWindow::carsNumberChanged() {
+	qDebug() << "Cars number";
 }

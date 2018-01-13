@@ -22,6 +22,8 @@
 #include <QWidget>
 #include <QGroupBox>
 #include <QtCharts>
+#include <QDebug>
+#include <QFileDialog>
 
 class MainWindow : public QMainWindow {
 	Q_OBJECT
@@ -32,16 +34,24 @@ public:
 	MainWindow(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
+private slots:
+	void mutationRateChanged();
+	void mutationSizeChanged();
+	void saveToFile();
+	void loadFromFile();
+	void resetSimulation();
+	void pauseSimulation(bool paused);
+	void carsNumberChanged();
 private:
 	void setupSimulationInterface();
 	void setupFileInterface();
 	void setupAlgorithmInterface();
 
-	WorldWidget world_widget_; //!< Brief: Setups physics and objects for the example
-	SimulationView simulation_view_;
+	//WorldWidget world_widget_; //!< Brief: Setups physics and objects for the example
 
-	StatisticView statistic_view_;
 	//UI
+	StatisticView statistic_view_;
+	SimulationView simulation_view_;
 	QWidget sidebar_widget_;
 
 	//Simulation interface
