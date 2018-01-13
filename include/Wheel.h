@@ -14,7 +14,7 @@ namespace Objects {
 
     class Wheel : public Base {
     public:
-        Wheel(Vector2 position, float radius) : position(position), radius(radius), Base(position) {};
+        Wheel(Vector2 position, float radius) : start_position(position), radius(radius), Base(position) {};
 
         float getRadius() const {return radius;}
     protected:

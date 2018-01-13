@@ -35,6 +35,15 @@ namespace Objects {
             b2_vertices.push_back(item.asb2Vec2());
         }
         body = Physics::ObjectsFactory::getInstance().createPolygon(b2_vertices, 1.0f, 0.3f);
-        body->SetTransform(position.asb2Vec2(), 0.0f);
     }
+
+    std::vector<Vector2> Body::getCurrentVertices() const {
+        Vector2 position = Vector2(body->GetPosition());
+        std::vector<Vector2> curr_vertices;
+        for (const auto &v : vertices) {
+            curr_vertices.push_back(v + position);
+        }
+        return curr_vertices;
+    }
+
 }
