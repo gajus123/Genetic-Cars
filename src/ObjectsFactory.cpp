@@ -48,9 +48,12 @@ namespace Physics {
     std::shared_ptr<b2Body> ObjectsFactory::createExampleGround() {
         b2BodyDef groundBodyDef;
         groundBodyDef.position.Set(0.0f, -10.0f);
+
         b2Body* groundBody = world.CreateBody(&groundBodyDef);
+
         b2PolygonShape groundBox;
         groundBox.SetAsBox(50.0f, 10.0f);
+
         groundBody->CreateFixture(&groundBox, 0.0f);
 
         return groundBody;
@@ -66,6 +69,29 @@ namespace Physics {
         body->CreateFixture(getFixtureDef(shape).get());
         return body;
     }
+
+    std::shared_ptr<b2Body> ObjectsFactory::createPolygon(std::vector<b2Vec2> vertices, float32 density, float32 friction) {
+        b2Body* body = world.CreateBody(getDefaultBodyDef().get());
+
+        b2PolygonShape polygon;
+        polygon.Set(&vertices[0], (int32)vertices.size());
+
+        body->CreateFixture(getFixtureDef(polygon, density, friction).get());
+        return body;
+    }
+
+    std::shared_ptr<b2Body> ObjectsFactory::createGround(std::vector<b2Vec2> vertices) {
+        b2ChainShape chain;
+        chain.CreateChain(&vertices[0], (int32)vertices.size());
+
+        b2BodyDef bodyDef;
+        bodyDef.position.Set(0.0f, 0.0f);
+
+        b2Body* body = world.CreateBody(&bodyDef);
+        body->CreateFixture(&chain, 0.0f);
+        return body;
+    }
+
 
     std::shared_ptr<const b2BodyDef> ObjectsFactory::getDefaultBodyDef() const {
         auto* bodyDef = new b2BodyDef();
