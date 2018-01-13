@@ -19,6 +19,8 @@ void SimulationView::drawTrack(QPainter& painter) {
 }
 void SimulationView::drawCar(QPainter& painter) {
 	Car car;
+
+	//Tranform to the center of car
 	transform_.translate(car.getPosition().first, car.getPosition().second);
 	painter.setTransform(transform_);
 
@@ -32,11 +34,10 @@ void SimulationView::drawCar(QPainter& painter) {
 
 	//Wheels
 	for (const auto& wheel : car.getWheels()) {
-		qreal temp1 = wheel.second;
-		const QPointF wheelPosition(wheel.first.first, wheel.first.second);
-		painter.drawEllipse(wheelPosition, temp1, temp1);
+		painter.drawEllipse(QPointF(wheel.first.first, wheel.first.second), wheel.second, wheel.second);
 	}
 
+	//Transform to the previous position
 	transform_.translate(-car.getPosition().first, -car.getPosition().second);
 	painter.setTransform(transform_);
 }
