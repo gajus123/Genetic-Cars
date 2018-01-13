@@ -10,6 +10,7 @@
 #define MAINWINDOW_H
 
 #include "WorldWidget.h"
+#include "SimulationView.h"
 #include <QMainWindow>
 
 class MainWindow : public QMainWindow {
@@ -23,6 +24,7 @@ public:
 	MainWindow& operator=(const MainWindow&) = delete;
 private:
 	WorldWidget world_widget_; //!< Brief: Setups physics and objects for the example
+	SimulationView simulation_view_;
 };
 
 #endif
