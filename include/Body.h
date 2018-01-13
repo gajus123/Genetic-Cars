@@ -16,13 +16,8 @@ namespace Objects {
     public:
         Body(std::vector<float> lengths, Vector2 position) : position(position), lengths(std::move(lengths)), Base(position) {};
 
-        Vector2 getPosition() const {return position;}
         std::vector<Vector2> getVertices() const {return vertices;}
-
     protected:
-        b2Body* body;
-
-        Vector2 position;
         std::vector<Vector2> vertices;
         std::vector<float> lengths;
 

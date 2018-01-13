@@ -16,14 +16,8 @@ namespace Objects {
     public:
         Wheel(Vector2 position, float radius) : position(position), radius(radius), Base(position) {};
 
-
         float getRadius() const {return radius;}
-        Vector2 getPosition() const {return position;}
-
     protected:
-        b2Body *body;
-
-        Vector2 position;
         float radius;
 
         void createAndSetBody() override;
