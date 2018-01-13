@@ -9,12 +9,36 @@ void SimulationView::paintEvent(QPaintEvent *event) {
 	p.setTransform(transform_);
 
 	drawTrack(p);
+	drawCar(p);
 }
 void SimulationView::drawTrack(QPainter& painter) {
 	auto trackPoints = track_.getTrackPoints();
 	for (unsigned int i = 1; i < trackPoints.size(); ++i) {
 		drawTrackSegment(trackPoints[i - 1], trackPoints[i], painter);
 	}
+}
+void SimulationView::drawCar(QPainter& painter) {
+	Car car;
+	transform_.translate(car.getPosition().first, car.getPosition().second);
+	painter.setTransform(transform_);
+
+	//Body
+	painter.setBrush(QBrush(Qt::green));
+	std::vector<QPoint> carBody;
+	for (const auto& point : car.getShapePoints()) {
+		carBody.push_back(QPoint(point.first,point.second));
+	}
+	painter.drawPolygon(&carBody[0], car.getShapePoints().size());
+
+	//Wheels
+	for (const auto& wheel : car.getWheels()) {
+		qreal temp1 = wheel.second;
+		const QPointF wheelPosition(wheel.first.first, wheel.first.second);
+		painter.drawEllipse(wheelPosition, temp1, temp1);
+	}
+
+	transform_.translate(-car.getPosition().first, -car.getPosition().second);
+	painter.setTransform(transform_);
 }
 void SimulationView::drawTrackSegment(const std::pair<float, float>& startPoint, const std::pair<float, float>& endPoint, QPainter& painter) {
 	painter.setBrush(QBrush(Qt::black));

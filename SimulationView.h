@@ -2,6 +2,7 @@
 #define SIMULATIONVIEW_H
 
 #include "Track.h"
+#include "Car.h"
 #include <QFrame>
 #include <QTransform>
 #include <QPainter>
@@ -13,7 +14,7 @@ public:
 	virtual void paintEvent(QPaintEvent *event);
 private:
 	void drawTrack(QPainter& painter);
-	void drawCar();
+	void drawCar(QPainter& painter);
 	void drawTrackSegment(const std::pair<float, float>& startPoint, const std::pair<float, float>& endPoint, QPainter& painter);
 
 	QTransform transform_;
