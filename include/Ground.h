@@ -6,16 +6,20 @@
 #define GENETIC_CARS_GROUND_H
 
 #include "include/Base.h"
+#include <vector>
 
 namespace Objects {
 
     class Ground : public Base {
     public:
         Ground(Vector2 position, float x_distance, std::vector<float> heights) :
-                position(position),
                 x_distance(x_distance),
                 heights(std::move(heights)),
-                Base(position) {}
+                Base(position) {
+			beforeBodySetUp();
+			createAndSetBody();
+			afterBodySetup();
+		}
 
         std::vector<Vector2> getVertices() { return vertices; }
         std::vector<float> getHeights() { return heights; }

@@ -7,7 +7,7 @@
 
 
 #include <Box2D/Dynamics/b2World.h>
-
+#include <vector>
 #include "Loop.h"
 
 namespace Physics {

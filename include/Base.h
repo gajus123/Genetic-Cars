@@ -12,9 +12,7 @@ namespace Objects {
     class Base {
     public:
         explicit Base(Vector2 position = {0.0f, 0.0f}) : position(position) {
-            beforeBodySetUp();
-            createAndSetBody();
-            afterBodySetup();
+			
         };
         virtual Vector2 getPosition() {return position;}
     protected:
