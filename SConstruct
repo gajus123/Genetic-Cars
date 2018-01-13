@@ -48,7 +48,8 @@ env.EnableQt5Modules([
                       'QtGui',
                       'QtCore',
                       'QtNetwork',
-						'QtWidgets'
+						'QtWidgets',
+						'QtCharts'
                     ]) #QT5 modules used
 
 #Prepare Box2D
