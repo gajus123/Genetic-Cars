@@ -6,7 +6,6 @@
 
 namespace Physics {
 
-    //TODO this not working
     ObjectsFactory ObjectsFactory::instance;
 
     ObjectsFactory &ObjectsFactory::init(Loop &p) {
@@ -19,7 +18,7 @@ namespace Physics {
 
 
     ObjectsFactory::ObjectsFactory(b2World &w) :
-            world(w) {
+            world(&w) {
 
     }
 
@@ -34,7 +33,7 @@ namespace Physics {
         bodyDef.type = b2_dynamicBody;
         bodyDef.position.Set(0.0f, 4.0f);
 
-        b2Body *body = world.CreateBody(&bodyDef);
+        b2Body *body = world->CreateBody(&bodyDef);
 
         b2PolygonShape dynamicBox;
         dynamicBox.SetAsBox(1.0f, 1.0f);
@@ -53,7 +52,7 @@ namespace Physics {
         b2BodyDef groundBodyDef;
         groundBodyDef.position.Set(0.0f, -10.0f);
 
-        b2Body* groundBody = world.CreateBody(&groundBodyDef);
+        b2Body* groundBody = world->CreateBody(&groundBodyDef);
 
         b2PolygonShape groundBox;
         groundBox.SetAsBox(50.0f, 10.0f);
@@ -64,7 +63,7 @@ namespace Physics {
     }
 
     b2Body * ObjectsFactory::createCircle(float32 radius, float32 density, float32 friction) {
-        b2Body *body = world.CreateBody(getDefaultBodyDef().get());
+        b2Body *body = world->CreateBody(getDefaultBodyDef().get());
 
         b2CircleShape shape;
         shape.m_p.Set(0.0f, 0.0f);
@@ -75,7 +74,7 @@ namespace Physics {
     }
 
     b2Body * ObjectsFactory::createPolygon(std::vector<b2Vec2> vertices, float32 density, float32 friction) {
-        b2Body* body = world.CreateBody(getDefaultBodyDef().get());
+        b2Body* body = world->CreateBody(getDefaultBodyDef().get());
 
         b2PolygonShape polygon;
         polygon.Set(&vertices[0], (int32)vertices.size());
@@ -91,7 +90,7 @@ namespace Physics {
         b2BodyDef bodyDef;
         bodyDef.position.Set(0.0f, 0.0f);
 
-        b2Body* body = world.CreateBody(&bodyDef);
+        b2Body* body = world->CreateBody(&bodyDef);
         body->CreateFixture(&chain, 0.0f);
         return body;
     }

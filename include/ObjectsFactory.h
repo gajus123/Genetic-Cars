@@ -16,7 +16,6 @@ namespace Physics {
     public:
         ObjectsFactory(ObjectsFactory const &) = delete;
         ObjectsFactory(ObjectsFactory &&) = delete;
-        ObjectsFactory() = delete;
 
 
         static ObjectsFactory &init(Loop &p);
@@ -32,8 +31,9 @@ namespace Physics {
     private:
         static ObjectsFactory instance;
 
-        b2World &world;
+        b2World* world;
 
+        ObjectsFactory() : world(nullptr) {};
         explicit ObjectsFactory(b2World &w);
         ObjectsFactory &operator=(ObjectsFactory const &);
 
