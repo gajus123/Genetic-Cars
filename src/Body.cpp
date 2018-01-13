@@ -31,7 +31,7 @@ namespace Objects {
 
     void Body::createAndSetBody() {
         std::vector<b2Vec2> b2_vertices;
-        for (const auto &&item : vertices) {
+        for (const auto &item : vertices) {
             b2_vertices.push_back(item.asb2Vec2());
         }
         body = Physics::ObjectsFactory::getInstance().createPolygon(b2_vertices, 1.0f, 0.3f);

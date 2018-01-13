@@ -23,7 +23,7 @@ namespace Objects {
 
         virtual void beforeBodySetUp() = 0;
         virtual void createAndSetBody() = 0;
-        virtual void afterBodySetup() {body->SetTransform(position.asb2Vec2(), 0.0f)};
+        virtual void afterBodySetup() {body->SetTransform(position.asb2Vec2(), 0.0f);}
     };
 
 }
