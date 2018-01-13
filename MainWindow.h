@@ -11,6 +11,7 @@
 
 #include "WorldWidget.h"
 #include "SimulationView.h"
+#include "StatisticView.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -39,6 +40,7 @@ private:
 	WorldWidget world_widget_; //!< Brief: Setups physics and objects for the example
 	SimulationView simulation_view_;
 
+	StatisticView statistic_view_;
 	//UI
 	QWidget sidebar_widget_;
 
@@ -67,6 +69,7 @@ private:
 	//Chart
 	QChart chart_;
 	QLineSeries series;
+	QLineSeries series2;
 };
 
 #endif
