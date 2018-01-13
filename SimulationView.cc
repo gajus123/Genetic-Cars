@@ -33,6 +33,7 @@ void SimulationView::drawCar(QPainter& painter) {
 	painter.drawPolygon(&carBody[0], car.getShapePoints().size());
 
 	//Wheels
+	painter.setBrush(QBrush(QColor(255,255,102)));
 	for (const auto& wheel : car.getWheels()) {
 		painter.drawEllipse(QPointF(wheel.first.first, wheel.first.second), wheel.second, wheel.second);
 	}
