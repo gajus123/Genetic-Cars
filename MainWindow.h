@@ -40,7 +40,7 @@ private:
 	SimulationView simulation_view_;
 
 	//UI
-	QWidget central_widget_;
+	QWidget sidebar_widget_;
 
 	//Simulation interface
 	QGroupBox simulation_group_;
@@ -63,6 +63,10 @@ private:
 	QLineEdit mutation_size_edit_;
 	QLabel mutation_rate_label_;
 	QLineEdit mutation_rate_edit_;
+
+	//Chart
+	QChart chart_;
+	QLineSeries series;
 };
 
 #endif

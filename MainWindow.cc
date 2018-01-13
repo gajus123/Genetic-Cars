@@ -9,17 +9,57 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	setObjectName("GeneticCars");
 	setWindowTitle("Genetic Cars"); 
 
+
+	QWidget* content = new QWidget();
+	QVBoxLayout* contentLayout = new QVBoxLayout();
+	content->setLayout(contentLayout);
+
+	QChartView* chart_view_ = new QChartView(&chart_);
+
+	series.append(0, 6);
+	series.append(2, 4);
+	series.append(3, 8);
+	series.append(7, 4);
+	series.append(10, 5);
+	series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3) << QPointF(20, 2);
+
+	chart_.addSeries(&series);
+	chart_.createDefaultAxes();
+
+	QSizePolicy simPolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+	simPolicy.setVerticalStretch(3);
+	simulation_view_.setSizePolicy(simPolicy);
+	contentLayout->addWidget(&simulation_view_);
+	QSizePolicy chartPolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+	chartPolicy.setVerticalStretch(2);
+	chart_view_->setSizePolicy(chartPolicy);
+	contentLayout->addWidget(chart_view_);
+
+	QWidget* centralWidget = new QWidget(this);
+	QHBoxLayout* centralLayout = new QHBoxLayout();
+	setCentralWidget(centralWidget);
+	centralWidget->setLayout(centralLayout);
+
+
+	centralLayout->addWidget(content);
+	centralLayout->addWidget(&sidebar_widget_);
+
+	//Sidebar setup
+	centralLayout->setAlignment(&sidebar_widget_, Qt::AlignTop);
+
 	setupSimulationInterface();
 	setupFileInterface();
 	setupAlgorithmInterface();
 
-	QVBoxLayout* layout = new QVBoxLayout();
-	setCentralWidget(&central_widget_);
-	central_widget_.setLayout(layout);
+	QVBoxLayout* sidebar_layout = new QVBoxLayout();
+	sidebar_widget_.setLayout(sidebar_layout);
 
-	layout->addWidget(&simulation_group_);
-	layout->addWidget(&file_group_);
-	layout->addWidget(&algorithm_group_);
+	sidebar_widget_.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+	//chart_view_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+	sidebar_layout->addWidget(&simulation_group_);
+	sidebar_layout->addWidget(&file_group_);
+	sidebar_layout->addWidget(&algorithm_group_);
 }
 void MainWindow::setupSimulationInterface() {
 	QVBoxLayout* layout = new QVBoxLayout();
@@ -91,6 +131,8 @@ void MainWindow::setupAlgorithmInterface() {
 
 	editsLayout->addWidget(&mutation_size_edit_);
 	editsLayout->addWidget(&mutation_rate_edit_);
+
+	
 
 
 	mutation_size_label_.setText("Prawdopodobieństwo mutacji:");
