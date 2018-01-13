@@ -1,6 +1,9 @@
 #include "SimulationView.h"
 
-SimulationView::SimulationView(QWidget *parent, Qt::WindowFlags flags) : QFrame(parent, flags) {
+SimulationView::SimulationView(QWidget *parent, Qt::WindowFlags flags) :
+	QFrame(parent, flags),
+	ground_(Objects::Vector2(0, 0), 5.0f, { 0.0f, 1.0f, 0.0f, 3.0f }),
+	wheel(Objects::Vector2(1, 0), 1) {
 	transform_.translate(10,10);
 }
 void SimulationView::paintEvent(QPaintEvent *event) {
@@ -42,6 +45,10 @@ void SimulationView::drawCar(QPainter& painter) {
 	transform_.translate(-car.getPosition().first, -car.getPosition().second);
 	painter.setTransform(transform_);
 }
+/*void SimulationView::drawWheel(const b2Vec2& position, QPainter& painter) {
+	painter.setBrush(QBrush(QColor(255, 255, 102)));
+	painter.drawEllipse(QPointF(wheel.first.first, wheel.first.second), wheel.second, wheel.second);
+}*/
 void SimulationView::drawTrackSegment(const std::pair<float, float>& startPoint, const std::pair<float, float>& endPoint, QPainter& painter) {
 	painter.setBrush(QBrush(Qt::black));
 	const QPoint points[4] = {
