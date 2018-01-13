@@ -29,7 +29,7 @@ namespace Objects {
         void beforeBodySetUp() override;
         void calculateVertices();
 
-        void createAndSetBody();
+        void createAndSetBody() override;
     };
 
 }
