@@ -91,9 +91,8 @@ namespace Physics {
         bodyDef.position.Set(0.0f, 0.0f);
 
         b2Body* body = world->CreateBody(&bodyDef);
-        /*body->CreateFixture(&chain, 0.0f);
-        return body;*/
-		return nullptr;
+        body->CreateFixture(&chain, 0.0f);
+        return body;
     }
 
 
