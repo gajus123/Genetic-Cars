@@ -23,7 +23,7 @@ private:
 
 	QTransform transform_;
 	Track track_;
-	Objects::Ground ground_;
+	//Objects::Ground ground_;
 	/*Objects::Wheel wheel_;*/
 };
 

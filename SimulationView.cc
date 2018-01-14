@@ -1,8 +1,8 @@
 #include "SimulationView.h"
 
 SimulationView::SimulationView(QWidget *parent, Qt::WindowFlags flags) :
-	QFrame(parent, flags),
-	ground_(Objects::Vector2(0, 0), 5.0f, { 0.0f, 1.0f, 0.0f, 3.0f })
+	QFrame(parent, flags)
+	//ground_(Objects::Vector2(0, 0), 5.0f, { 0.0f, 1.0f, 0.0f, 3.0f })
 	/*wheel_(Objects::Vector2(1, 100), 1.0f)*/ {
 	transform_.translate(10,10);
 }

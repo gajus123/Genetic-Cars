@@ -60,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(resetSimulation()));
 	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
+
+	Physics::ObjectsFactory::init(loop_);
+	loop_.run();
 }
 void MainWindow::setupSimulationInterface() {
 	QVBoxLayout* layout = new QVBoxLayout();
@@ -171,4 +174,7 @@ void MainWindow::pauseSimulation(bool paused) {
 }
 void MainWindow::carsNumberChanged() {
 	qDebug() << "Cars number";
+}
+MainWindow::~MainWindow() {
+	loop_.stop();
 }

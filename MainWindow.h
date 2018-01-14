@@ -12,6 +12,8 @@
 #include "WorldWidget.h"
 #include "SimulationView.h"
 #include "StatisticView.h"
+#include "include\Loop.h"
+#include "include\ObjectsFactory.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -32,6 +34,7 @@ public:
     const int WINDOW_HEIGHT = 500;
 
 	MainWindow(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
+	~MainWindow();
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 private slots:
@@ -48,6 +51,8 @@ private:
 	void setupAlgorithmInterface();
 
 	//WorldWidget world_widget_; //!< Brief: Setups physics and objects for the example
+
+	Physics::Loop loop_;
 
 	//UI
 	StatisticView statistic_view_;
