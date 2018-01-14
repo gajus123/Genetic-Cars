@@ -6,7 +6,10 @@
 #include "MainWindow.h"
 #include "include/GroundGenerator.h"
 
-MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags) {
+MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
+	QMainWindow(parent, flags),
+	simulation_(),
+	simulation_view_(simulation_) {
 	setObjectName("GeneticCars");
 	setWindowTitle("Genetic Cars"); 
 
@@ -63,8 +66,10 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 
 	Physics::ObjectsFactory::init(loop_);
-	simulation_view_.vehicles_.push_back(Objects::Vehicle(Objects::Vector2(1, 0.4), {0.2f, 0.2f, 0.5f, 0.28f, 0.28f, 0.28f, 0.5f, 0.2f}, 0.35f, 0.35f));
-	simulation_view_.ground_.push_back(*GroundGenerator(1000, 1.2, 1.0f).genereteNew({0.0f, 5.0f}));
+	simulation_view_.vehicles_.push_back(Objects::Vehicle(Objects::Vector2(0, 0.4), {0.2f, 0.2f, 0.5f, 0.28f, 0.2f, 0.28f, 0.5f, 0.2f}, 0.35f, 0.35f));
+
+	simulation_.newGround();
+	simulation_.newVehicles();
 }
 void MainWindow::setupSimulationInterface() {
 	QVBoxLayout* layout = new QVBoxLayout();
@@ -158,13 +163,11 @@ void MainWindow::mutationSizeChanged() {
 		qDebug() << "Size";
 }
 void MainWindow::saveToFile() {
-	qDebug() << "Save";
 	QString fileName = QFileDialog::getSaveFileName(this,
 		"Save Population", "",
 		"Text Files (*.txt);;All Files (*)");
 }
 void MainWindow::loadFromFile() {
-	qDebug() << "Load";
 	QString fileName = QFileDialog::getOpenFileName(this,
 		"Load Population", "",
 		"Text Files (*.txt);;All Files (*)");
@@ -173,7 +176,6 @@ void MainWindow::resetSimulation() {
 	qDebug() << "Reset";
 }
 void MainWindow::pauseSimulation(bool paused) {
-	qDebug() << "Pause " << paused;
 	if (paused)
 		loop_.stop();
 	else
@@ -181,7 +183,4 @@ void MainWindow::pauseSimulation(bool paused) {
 }
 void MainWindow::carsNumberChanged() {
 	qDebug() << "Cars number";
-}
-MainWindow::~MainWindow() {
-	//loop_.stop();
 }
