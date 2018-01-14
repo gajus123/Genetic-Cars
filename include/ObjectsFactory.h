@@ -19,6 +19,9 @@ namespace Objects {
 
 namespace Physics {
 
+	const float MAX_MOTOR_TORQUE = 20.0f;
+	const float MOTOR_SPEED = -2 * 3.14; //1 turn per second clockwise
+
     class ObjectsFactory {
     public:
         ObjectsFactory(ObjectsFactory const &) = delete;

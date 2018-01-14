@@ -99,6 +99,9 @@ namespace Physics {
 	{
 		b2RevoluteJointDef jointDef;
 		jointDef.Initialize(a.body, b.body, point);
+		jointDef.enableMotor = true;
+		jointDef.maxMotorTorque = MAX_MOTOR_TORQUE;
+		jointDef.motorSpeed = MOTOR_SPEED;
 		b2RevoluteJoint * joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
 		return joint;
 	}
