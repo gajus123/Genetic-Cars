@@ -21,9 +21,9 @@ namespace Objects {
 			afterBodySetup();
 		}
 
-        std::vector<Vector2> getVertices() { return vertices; }
-        std::vector<float> getHeights() { return heights; }
-        float getXDistance() { return x_distance; }
+        std::vector<Vector2> getVertices() const { return vertices; }
+        std::vector<float> getHeights() const { return heights; }
+        float getXDistance() const { return x_distance; }
     protected:
         std::vector<Vector2> vertices;
 
