@@ -19,7 +19,7 @@ namespace Objects {
     public:
 		friend class Physics::ObjectsFactory;
 
-        explicit Base(Vector2 position = {0.0f, 0.0f}) : start_position(position) {};
+		explicit Base(Vector2 position = { 0.0f, 0.0f }) : start_position(position) {};
         virtual Vector2 getPosition() const { return Vector2(body->GetPosition()); }
 		virtual float getAngle() const { return (float)body->GetAngle();  }
 
