@@ -13,7 +13,7 @@ namespace Objects {
     }
 
     void Body::calculateVertices() {
-        assert(lengths.size() == 8);
+        assert(lengths.size() == BODY_SEGMENTS);
         std::vector<Vector2> normals = {
                 {0.0f, 1.0f},
                 {-1.0f, 1.0f},

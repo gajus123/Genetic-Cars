@@ -13,6 +13,8 @@
 
 namespace Objects {
 
+	const unsigned int BODY_SEGMENTS = 8;
+
     class Body : public Base {
     public:
         Body(std::vector<float> lengths, Vector2 position) : lengths(std::move(lengths)), Base(position) {
