@@ -9,17 +9,22 @@
 #include "include/Vector2.h"
 #include "include/Base.h"
 #include <vector>
+#include <cstdio>
 
 namespace Objects {
 
     class Body : public Base {
     public:
-        Body(std::vector<float> lengths, Vector2 position) : lengths(std::move(lengths)), Base(position) {};
+        Body(std::vector<float> lengths, Vector2 position) : lengths(std::move(lengths)), Base(position) {
+			beforeBodySetUp();
+			createAndSetBody();
+			afterBodySetup();
+		};
 
         std::vector<Vector2> getVertices() const { return vertices; };
         std::vector<Vector2> getCurrentVertices() const;
 
-		virtual void destroy() = 0;
+		//virtual void destroy() = 0;
     protected:
         std::vector<Vector2> vertices;
         std::vector<float> lengths;
