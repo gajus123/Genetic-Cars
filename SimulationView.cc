@@ -11,7 +11,7 @@ void SimulationView::paintEvent(QPaintEvent *event) {
 	p.setRenderHint(QPainter::Antialiasing, true);
 	p.setTransform(transform_);
 
-	/*qDebug() << wheel_.getPosition().y;*/
+	qDebug() << wheel_[0].getPosition().x << " " << wheel_[0].getPosition().y;
 
 	drawTrack(p);
 	drawCar(p);

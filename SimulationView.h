@@ -15,6 +15,8 @@ class SimulationView : public QFrame {
 public:
 	SimulationView(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 	virtual void paintEvent(QPaintEvent *event);
+	std::vector<Objects::Ground> ground_;
+	std::vector<Objects::Wheel> wheel_;
 private:
 	void drawTrack(QPainter& painter);
 	void drawCar(QPainter& painter);
