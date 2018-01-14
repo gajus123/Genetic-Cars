@@ -22,10 +22,10 @@ namespace Algorithm {
 	//	sort();
 	//}
 
-	void Population::sort() {
-		std::sort(genotypes.begin(), genotypes.end(),
-			[](const Genotype& a, const Genotype& b) -> bool {
-				return a.fitness > b.fitness;
-		});
-	}
+	//void Population::sort() {
+	//	std::sort(genotypes.begin(), genotypes.end(),
+	//		[](const Genotype& a, const Genotype& b) -> bool {
+	//			return a.fitness > b.fitness;
+	//	});
+	//}
 }

@@ -7,6 +7,8 @@
 
 
 namespace Algorithm {
+	//todo make sort work
+	//todo make new population work as well
 
 	const int DEFAULT_ELITE_SPECIMEN = 5;
 
@@ -22,7 +24,7 @@ namespace Algorithm {
 	private:
 		std::vector<Genotype> genotypes;
 		
-		void sort();
+		//void sort();
 
 	};
 
