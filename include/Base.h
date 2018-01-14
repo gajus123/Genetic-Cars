@@ -12,13 +12,13 @@ namespace Objects {
     class Base {
     public:
         explicit Base(Vector2 position = {0.0f, 0.0f}) : start_position(position) {};
-        virtual Vector2 getPosition() {return {body->GetPosition()}; }
+        virtual Vector2 getPosition() {return Vector2(body->GetPosition()); }
     protected:
         b2Body* body;
         Vector2 start_position;
 
-        virtual void beforeBodySetUp() = 0;
-        virtual void createAndSetBody() = 0;
+		virtual void beforeBodySetUp() {};
+		virtual void createAndSetBody() {};
         virtual void afterBodySetup() {body->SetTransform(start_position.asb2Vec2(), 0.0f);}
     };
 

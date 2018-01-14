@@ -25,12 +25,12 @@ namespace Physics {
         void run();
         void stop();
 
-        b2World &getWorld();
+        b2World* getWorld();
 
     private:
         std::atomic_bool stop_simulation;
 
-        b2World world;
+        b2World* world;
         b2Vec2 gravity;
         float32 time_step;
         int32 velocity_iterations;

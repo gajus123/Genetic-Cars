@@ -18,9 +18,12 @@ int main(int argc, char *argv[])
 	
 	Physics::Loop loop;
 	Physics::ObjectsFactory::init(loop);
+	loop.run();
 	
 	MainWindow window;
 	window.show();
 
-	return app.exec();
+	int result = app.exec();
+	loop.stop();
+	return result;
 }

@@ -34,7 +34,7 @@ namespace Physics {
         b2World* world;
 
         ObjectsFactory() : world(nullptr) {};
-        explicit ObjectsFactory(b2World &w);
+        explicit ObjectsFactory(b2World* w);
         ObjectsFactory &operator=(ObjectsFactory const &);
 
         static std::shared_ptr<const b2BodyDef> getDefaultBodyDef();

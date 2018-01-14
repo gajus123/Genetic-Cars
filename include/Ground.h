@@ -13,13 +13,12 @@ namespace Objects {
     class Ground : public Base {
     public:
         Ground(Vector2 position, float x_distance, std::vector<float> heights) :
-                start_position(position),
                 x_distance(x_distance),
                 heights(std::move(heights)),
                 Base(position) {
 			beforeBodySetUp();
 			createAndSetBody();
-			afterBodySetup();
+			//afterBodySetup();
 		}
 
         std::vector<Vector2> getVertices() { return vertices; }

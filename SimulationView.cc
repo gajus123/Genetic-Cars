@@ -2,14 +2,16 @@
 
 SimulationView::SimulationView(QWidget *parent, Qt::WindowFlags flags) :
 	QFrame(parent, flags),
-	ground_(Objects::Vector2(0, 0), 5.0f, { 0.0f, 1.0f, 0.0f, 3.0f }),
-	wheel(Objects::Vector2(1, 0), 1) {
+	ground_(Objects::Vector2(0, 0), 5.0f, { 0.0f, 1.0f, 0.0f, 3.0f })
+	/*wheel_(Objects::Vector2(1, 100), 1.0f)*/ {
 	transform_.translate(10,10);
 }
 void SimulationView::paintEvent(QPaintEvent *event) {
 	QPainter p(this);
 	p.setRenderHint(QPainter::Antialiasing, true);
 	p.setTransform(transform_);
+
+	/*qDebug() << wheel_.getPosition().y;*/
 
 	drawTrack(p);
 	drawCar(p);

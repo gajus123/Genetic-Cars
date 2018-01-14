@@ -14,7 +14,7 @@ namespace Objects {
 
     class Body : public Base {
     public:
-        Body(std::vector<float> lengths, Vector2 position) : start_position(position), lengths(std::move(lengths)), Base(position) {};
+        Body(std::vector<float> lengths, Vector2 position) : lengths(std::move(lengths)), Base(position) {};
 
         std::vector<Vector2> getVertices() const { return vertices; };
         std::vector<Vector2> getCurrentVertices() const;

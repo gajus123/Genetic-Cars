@@ -9,6 +9,7 @@
 #include <QTransform>
 #include <QPainter>
 #include <QPoint>
+#include <QDebug>
 
 class SimulationView : public QFrame {
 public:
@@ -23,7 +24,7 @@ private:
 	QTransform transform_;
 	Track track_;
 	Objects::Ground ground_;
-	Objects::Wheel wheel_;
+	/*Objects::Wheel wheel_;*/
 };
 
 #endif

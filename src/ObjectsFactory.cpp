@@ -17,8 +17,8 @@ namespace Physics {
     }
 
 
-    ObjectsFactory::ObjectsFactory(b2World &w) :
-            world(&w) {
+    ObjectsFactory::ObjectsFactory(b2World* w) :
+            world(w) {
 
     }
 
@@ -91,8 +91,9 @@ namespace Physics {
         bodyDef.position.Set(0.0f, 0.0f);
 
         b2Body* body = world->CreateBody(&bodyDef);
-        body->CreateFixture(&chain, 0.0f);
-        return body;
+        /*body->CreateFixture(&chain, 0.0f);
+        return body;*/
+		return nullptr;
     }
 
 
