@@ -5,6 +5,7 @@
 #ifndef GENETIC_CARS_PHYSICSOBJECTSFACTORY_H
 #define GENETIC_CARS_PHYSICSOBJECTSFACTORY_H
 
+#include <QtMath>
 
 #include <Box2D/Dynamics/b2World.h>
 #include "Box2D/Box2D.h"
@@ -20,7 +21,10 @@ namespace Objects {
 namespace Physics {
 
 	const float MAX_MOTOR_TORQUE = 20.0f;
-	const float MOTOR_SPEED = -2 * 3.14; //1 turn per second clockwise
+	const float MOTOR_SPEED = 2 * M_PI; //1 turn per second clockwise
+	const float DEFAULT_DENSITY = 1.0f;
+	const int DEFAULT_GROUP_INDEX = -1;
+	const float DEFAULT_FRICTION = 0.3f;
 
     class ObjectsFactory {
     public:
@@ -52,7 +56,11 @@ namespace Physics {
         ObjectsFactory &operator=(ObjectsFactory const &);
 
         static std::shared_ptr<const b2BodyDef> getDefaultBodyDef();
-        static std::shared_ptr<const b2FixtureDef> getFixtureDef(b2Shape& shape, float32 density = 1.0f, float32 friction = 0.3f, int16 groupIndex = -1);
+        static std::shared_ptr<const b2FixtureDef> getFixtureDef(
+			b2Shape& shape,
+			float32 density = DEFAULT_DENSITY,
+			float32 friction = DEFAULT_FRICTION,
+			int16 groupIndex = DEFAULT_GROUP_INDEX);
     };
 
 }
