@@ -38,10 +38,10 @@ namespace Objects {
     }
 
     std::vector<Vector2> Body::getCurrentVertices() const {
-        Vector2 position = Vector2(body->GetPosition());
+		Vector2 position = getPosition();
         std::vector<Vector2> curr_vertices;
         for (const auto &v : vertices) {
-            curr_vertices.push_back(v + position);
+            curr_vertices.emplace_back(v + position);
         }
         return curr_vertices;
     }
