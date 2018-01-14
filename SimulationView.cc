@@ -7,8 +7,10 @@ void SimulationView::paintEvent(QPaintEvent *event) {
 	QPainter p(this);
 	p.setRenderHint(QPainter::Antialiasing, true);
 
+	p.translate(-vehicles_[0].getPosition().x*100+200, -vehicles_[0].getPosition().y*100+200);
 	drawTrack(ground_[0], p);
 	drawCar(vehicles_[0], p);
+	p.translate(vehicles_[0].getPosition().x, vehicles_[0].getPosition().y);
 }
 void SimulationView::drawTrack(const Objects::Ground& track, QPainter& painter) {
 	painter.save();
@@ -59,6 +61,10 @@ void SimulationView::drawCar(const Objects::Vehicle& car, QPainter& painter) {
 
 	painter.setBrush(QBrush(QColor(255, 255, 102)));
 	painter.drawEllipse(QPointF(0, 0), car.getBackWheel().getRadius()*100, car.getBackWheel().getRadius()*100);
+
+	painter.rotate(-car.getBackWheel().getAngle() / M_PI*180.0f);
+	painter.drawLine(0, 0, car.getBackWheel().getRadius()*100, 0);
+	painter.rotate(car.getBackWheel().getAngle() / M_PI*180.0f);
 
 	painter.restore();
 
