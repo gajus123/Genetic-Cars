@@ -95,6 +95,14 @@ namespace Physics {
         return body;
     }
 
+	b2RevoluteJoint * ObjectsFactory::createJoint(Objects::Base& a, Objects::Base& b, b2Vec2 point)
+	{
+		b2RevoluteJointDef jointDef;
+		jointDef.Initialize(a.body, b.body, point);
+		b2RevoluteJoint * joint = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
+		return joint;
+	}
+
 
     std::shared_ptr<const b2BodyDef> ObjectsFactory::getDefaultBodyDef(){
         auto* bodyDef = new b2BodyDef();

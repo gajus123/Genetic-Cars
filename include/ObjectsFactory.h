@@ -7,8 +7,14 @@
 
 
 #include <Box2D/Dynamics/b2World.h>
+#include "Box2D/Box2D.h"
 #include <vector>
 #include "Loop.h"
+#include "include/Base.h"
+
+namespace Objects {
+	class Base;
+}
 
 namespace Physics {
 
@@ -27,6 +33,7 @@ namespace Physics {
         b2Body* createCircle(float32 radius, float32 density, float32 friction);
         b2Body* createPolygon(std::vector<b2Vec2> vertices, float32 density, float32 friction);
         b2Body* createGround(std::vector<b2Vec2> vertices);
+		b2RevoluteJoint* createJoint(Objects::Base& a, Objects::Base& b, b2Vec2 point);
 
     private:
         static ObjectsFactory instance;

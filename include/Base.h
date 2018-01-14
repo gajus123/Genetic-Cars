@@ -5,12 +5,19 @@
 #ifndef GENETIC_CARS_BASE_H
 #define GENETIC_CARS_BASE_H
 
-#include "Vector2.h"
+#include "include/Vector2.h"
+#include "include/ObjectsFactory.h"
+
+namespace Physics {
+	class ObjectsFactory;
+}
 
 namespace Objects {
 
     class Base {
     public:
+		friend class Physics::ObjectsFactory;
+
         explicit Base(Vector2 position = {0.0f, 0.0f}) : start_position(position) {};
         virtual Vector2 getPosition() { return Vector2(body->GetPosition()); }
     protected:
