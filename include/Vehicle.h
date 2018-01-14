@@ -13,7 +13,8 @@ namespace Objects {
 
     class Vehicle {
     public:
-		Vehicle(Body& body,
+		Vehicle(Vector2 position,
+			std::vector<float> body,
 			float front_wheel_radius,
 			float back_wheel_radius);
 		
@@ -22,7 +23,7 @@ namespace Objects {
 		Wheel& getFrontWheel() { return front; }
 		Wheel& getBackWheel() { return back; }
     private:
-		Body& body;
+		Body body;
 		Wheel front;
 		Wheel back;
 
