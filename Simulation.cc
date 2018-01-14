@@ -37,6 +37,10 @@ void Simulation::newVehicles() {
 		vehicles_.push_back(Objects::Vehicle(Objects::Vector2(0, 0.4), points, uni(rng), uni(rng)));
 	}
 }
+void Simulation::reset() {
+	newGround();
+	newVehicles();
+}
 const std::vector<Objects::Vehicle> Simulation::getVehicles() const {
 	return this->vehicles_;
 }

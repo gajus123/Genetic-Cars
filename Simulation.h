@@ -10,18 +10,19 @@
 #include "include\ObjectsFactory.h"
 #include <cstdio>
 
-class Simulation : QObject {
+class Simulation : public QObject {
 	Q_OBJECT
 public:
 	Simulation(QObject *parent = Q_NULLPTR);
 	void nextGeneration();
-	void reset();
 
 	const Objects::Vehicle& getBestVehicle() const;
 	const std::vector<Objects::Vehicle> getVehicles() const;
 	const std::weak_ptr<Objects::Ground> getGround() const;
 	void newGround();
 	void newVehicles();
+public slots:
+	void reset();
 private:
 	void clearVehicles();
 
