@@ -5,6 +5,7 @@
 #include "Car.h"
 #include "include\Ground.h"
 #include "include\Wheel.h"
+#include "include\ObjectsFactory.h"
 #include <QFrame>
 #include <QTransform>
 #include <QPainter>
@@ -17,6 +18,7 @@ public:
 	virtual void paintEvent(QPaintEvent *event);
 	std::vector<Objects::Ground> ground_;
 	std::vector<Objects::Wheel> wheel_;
+	std::vector<b2Body*> ground2_;
 private:
 	void drawTrack(QPainter& painter);
 	void drawCar(QPainter& painter);

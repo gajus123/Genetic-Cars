@@ -9,8 +9,8 @@
 namespace Objects {
 
     void Ground::beforeBodySetUp() {
-        for (const auto &h : heights) {
-            vertices.emplace_back(std::move(Vector2(x_distance, h)));
+        for (int i = 0; i < heights.size(); ++i) {
+            vertices.emplace_back(std::move(Vector2(x_distance*i, heights[i])));
         }
     }
 

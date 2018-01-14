@@ -86,7 +86,7 @@ namespace Physics {
     b2Body * ObjectsFactory::createGround(std::vector<b2Vec2> vertices) {
         b2ChainShape chain;
         chain.CreateChain(&vertices[0], (int32)vertices.size());
-
+        
         b2BodyDef bodyDef;
         bodyDef.position.Set(0.0f, 0.0f);
 
