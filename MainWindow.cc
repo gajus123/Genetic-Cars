@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	connect(&mutation_size_edit_, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
 	connect(&load_button_, SIGNAL(clicked()), this, SLOT(loadFromFile()));
 	connect(&save_button_, SIGNAL(clicked()), this, SLOT(saveToFile()));
-	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(resetSimulation()));
+	connect(&reset_button_, SIGNAL(clicked()), &simulation_, SLOT(reset()));
 	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 
@@ -171,9 +171,6 @@ void MainWindow::loadFromFile() {
 	QString fileName = QFileDialog::getOpenFileName(this,
 		"Load Population", "",
 		"Text Files (*.txt);;All Files (*)");
-}
-void MainWindow::resetSimulation() {
-	qDebug() << "Reset";
 }
 void MainWindow::pauseSimulation(bool paused) {
 	if (paused)

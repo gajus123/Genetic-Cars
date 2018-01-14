@@ -43,7 +43,6 @@ private slots:
 	void mutationSizeChanged();
 	void saveToFile();
 	void loadFromFile();
-	void resetSimulation();
 	void pauseSimulation(bool paused);
 	void carsNumberChanged();
 private:
