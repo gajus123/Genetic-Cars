@@ -18,7 +18,7 @@ namespace Objects {
                 Base(position) {
 			beforeBodySetUp();
 			createAndSetBody();
-			//afterBodySetup();
+			afterBodySetup();
 		}
 
         std::vector<Vector2> getVertices() { return vertices; }
