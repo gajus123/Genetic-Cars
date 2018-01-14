@@ -7,6 +7,7 @@
 #include "include\Wheel.h"
 #include "include\Vehicle.h"
 #include "include\ObjectsFactory.h"
+#include "Simulation.h"
 #include <QFrame>
 #include <QTransform>
 #include <QPainter>
@@ -20,7 +21,7 @@
 
 class SimulationView : public QFrame {
 public:
-	SimulationView(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
+	SimulationView(Simulation& simulation, QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 	virtual void paintEvent(QPaintEvent *event);
 	std::vector<Objects::Ground> ground_;
 	std::vector<Objects::Vehicle> vehicles_;
@@ -35,6 +36,7 @@ private:
 	void drawTrackSegment(const Objects::Vector2& startPoint, const Objects::Vector2& endPoint, QPainter& painter);
 
 	QTransform transform_;
+	Simulation& simulation_;
 	
 	float display_width_;
 	float width_multipier_;

@@ -1,6 +1,7 @@
 #include "SimulationView.h"
 
-SimulationView::SimulationView(QWidget *parent, Qt::WindowFlags flags) :
+SimulationView::SimulationView(Simulation& simulation, QWidget *parent, Qt::WindowFlags flags) :
+	simulation_(simulation),
 	QFrame(parent, flags),
 	display_width_(10.0) {
 	width_multipier_ = this->width() / display_width_;
@@ -9,10 +10,20 @@ void SimulationView::paintEvent(QPaintEvent *event) {
 	QPainter p(this);
 	p.setRenderHint(QPainter::Antialiasing, true);
 
-	p.translate(-vehicles_[0].getPosition().x*width_multipier_ + display_center_x_, -vehicles_[0].getPosition().y*width_multipier_ + display_center_y_);
-	drawTrack(ground_[0], p);
-	drawCar(vehicles_[0], p);
+	const std::vector<Objects::Vehicle> vehicles = simulation_.getVehicles();
+	if (vehicles.size() != 0) {
+		const Objects::Vehicle& bestVehicle = simulation_.getBestVehicle();
+		p.translate(-bestVehicle.getPosition().x*width_multipier_ + display_center_x_, -bestVehicle.getPosition().y*width_multipier_ + display_center_y_);
+	}
+	if (auto sim = simulation_.getGround().lock()) {
+		drawTrack(*sim.get(), p);
+	}
+	for (const auto& vehicle : vehicles) {
+		drawCar(vehicle, p);
+	}
 	p.translate(vehicles_[0].getPosition().x, vehicles_[0].getPosition().y);
+
+	update();
 }
 void SimulationView::drawTrack(const Objects::Ground& track, QPainter& painter) {
 	painter.save();
@@ -42,8 +53,6 @@ void SimulationView::drawCar(const Objects::Vehicle& car, QPainter& painter) {
 
 	drawWheel(car.getFrontWheel(), painter);
 	drawWheel(car.getBackWheel(), painter);
-
-	update();
 }
 void SimulationView::drawWheel(const Objects::Wheel& wheel, QPainter& painter) {
 	painter.save();
