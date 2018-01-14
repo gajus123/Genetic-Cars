@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 
 	Physics::ObjectsFactory::init(loop_);
 	simulation_view_.vehicles_.push_back(Objects::Vehicle(Objects::Vector2(1, 0.4), {0.2f, 0.2f, 0.5f, 0.28f, 0.28f, 0.28f, 0.5f, 0.2f}, 0.35f, 0.35f));
-	simulation_view_.ground_.push_back(*GroundGenerator(1000, 2.0, 0.5f).genereteNew());
+	simulation_view_.ground_.push_back(*GroundGenerator(1000, 1.2, 1.0f).genereteNew({0.0f, 5.0f}));
 }
 void MainWindow::setupSimulationInterface() {
 	QVBoxLayout* layout = new QVBoxLayout();

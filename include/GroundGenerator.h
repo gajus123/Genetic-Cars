@@ -10,7 +10,7 @@ class GroundGenerator
 {
 public:
 	GroundGenerator(int segments, float x_distance, float max_delta = 10.0f);
-	Objects::Ground* genereteNew(Vector2 position);
+	Objects::Ground* genereteNew(Objects::Vector2 position);
 	
 private:
 	int segments_;
@@ -19,7 +19,7 @@ private:
 
 	std::random_device rd_;
 	std::mt19937 rng_;
-	std::uniform_int_distribution<int> uni;
+	std::uniform_real_distribution<float> uni;
 
 };
 

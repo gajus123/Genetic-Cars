@@ -8,10 +8,11 @@
 		max_delta_(max_delta)
 	{
 		rng_ = std::mt19937(rd_());
-		uni = std::uniform_int_distribution<int>(-max_delta_, max_delta_);
+		uni = std::uniform_real_distribution<float>(-max_delta_, max_delta_);
+		
 	}
 
-	Objects::Ground * GroundGenerator::genereteNew(Vector2 position) {
+	Objects::Ground * GroundGenerator::genereteNew(Objects::Vector2 position) {
 		std::vector<float> heights = {
 				0.0f,
 				0.0f,
