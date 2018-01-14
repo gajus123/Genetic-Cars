@@ -16,4 +16,12 @@ namespace Objects {
 		joint_back = Physics::ObjectsFactory::getInstance().createJoint(car_body, back, back.getPosition().asb2Vec2());
 	}
 
+	void Vehicle::destroy()
+	{
+
+		Physics::ObjectsFactory::getInstance().destroyBody(car_body);
+		Physics::ObjectsFactory::getInstance().destroyBody(front);
+		Physics::ObjectsFactory::getInstance().destroyBody(back);
+	}
+
 }

@@ -9,10 +9,12 @@
 #include "include/Body.h"
 #include "Box2D/Box2D.h"
 
+
 namespace Objects {
 
     class Vehicle {
     public:
+
 		Vehicle(Vector2 position,
 			std::vector<float> body,
 			float front_wheel_radius,
@@ -22,6 +24,8 @@ namespace Objects {
 		const Body& getBody() const { return car_body; }
 		const Wheel& getFrontWheel() const { return front; }
 		const Wheel& getBackWheel() const { return back; }
+
+		void destroy();
     private:
 		Body car_body;
 		Wheel front;

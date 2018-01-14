@@ -24,7 +24,6 @@ namespace Objects {
         std::vector<Vector2> getVertices() const { return vertices; };
         std::vector<Vector2> getCurrentVertices() const;
 
-		//virtual void destroy() = 0;
     protected:
         std::vector<Vector2> vertices;
         std::vector<float> lengths;

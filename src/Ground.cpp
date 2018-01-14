@@ -8,6 +8,16 @@
 
 namespace Objects {
 
+	Ground::Ground(Vector2 position, float x_distance, std::vector<float> heights) :
+		x_distance(x_distance),
+		heights(std::move(heights)),
+		Base(position) {
+
+		beforeBodySetUp();
+		createAndSetBody();
+		afterBodySetup();
+	}
+
     void Ground::beforeBodySetUp() {
         for (int i = 0; i < heights.size(); ++i) {
             vertices.emplace_back(std::move(Vector2(x_distance*i, heights[i])));
