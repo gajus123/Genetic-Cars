@@ -16,6 +16,7 @@
 #include <QWidget>
 #include <QGLWidget>
 #include <QWheelEvent>
+#include <cmath>
 
 class SimulationView : public QFrame {
 public:

@@ -31,6 +31,7 @@ void SimulationView::resizeEvent(QResizeEvent *event) {
 }
 void SimulationView::wheelEvent(QWheelEvent * event) {
 	display_width_ -= event->delta() / 120;
+	display_width_ = std::max(display_width_, 2.0f);
 	resizeEvent(nullptr);
 }
 void SimulationView::drawCar(const Objects::Vehicle& car, QPainter& painter) {
