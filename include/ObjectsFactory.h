@@ -22,7 +22,7 @@ namespace Physics {
 
 	const float MAX_MOTOR_TORQUE = 60.0f; //50000000
 	const float MOTOR_SPEED = 5.0 * M_PI; //1 turn per second clockwise 200000
-	const float DEFAULT_DENSITY = 1.0f; //10
+	const float DEFAULT_DENSITY = 10.0f; //10
 	const int DEFAULT_GROUP_INDEX = -1; 
 	const float DEFAULT_FRICTION = 1.0f; //30
 
