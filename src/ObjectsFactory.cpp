@@ -91,7 +91,7 @@ namespace Physics {
         bodyDef.position.Set(0.0f, 0.0f);
 
         b2Body* body = world->CreateBody(&bodyDef);
-        body->CreateFixture(&chain, 0.0f);
+        body->CreateFixture(&chain, DEFAULT_FRICTION);
         return body;
     }
 

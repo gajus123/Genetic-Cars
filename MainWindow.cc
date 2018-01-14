@@ -4,6 +4,7 @@
  *
  */
 #include "MainWindow.h"
+#include "include/GroundGenerator.h"
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags) {
 	setObjectName("GeneticCars");
@@ -62,8 +63,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 
 	Physics::ObjectsFactory::init(loop_);
-	simulation_view_.ground_.push_back(Objects::Ground(Objects::Vector2(0, 3), 2.0f, { 0.2f, 0.0f, 0.0f, 0.4f, -0.6f, 0.3f}));
 	simulation_view_.vehicles_.push_back(Objects::Vehicle(Objects::Vector2(1, 0.4), {0.2f, 0.2f, 0.5f, 0.28f, 0.28f, 0.28f, 0.5f, 0.2f}, 0.35f, 0.35f));
+	simulation_view_.ground_.push_back(*GroundGenerator(1000, 2.0, 0.5f).genereteNew());
 }
 void MainWindow::setupSimulationInterface() {
 	QVBoxLayout* layout = new QVBoxLayout();
