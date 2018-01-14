@@ -16,14 +16,19 @@
 
 namespace Physics {
 
+	const b2Vec2 DEFAULT_GRAVITY = b2Vec2(0.0f, -9.8f);
+	const float32 TIME_STEP = 1.0f / 60.0f;
+	const int32 VELOCITY_ITERATIONS = 8;
+	const int32 POSITION_ITERATIONS = 3;
+
     class Loop : public QObject {
 		Q_OBJECT
 
     public:
-        explicit Loop(b2Vec2 gravity = b2Vec2(0.0f, -9.8f),
-                      float32 time_step = 1.0f / 60.0f,
-                      int32 velocity_iterations = 8,
-                      int32 position_iterations = 3);
+        explicit Loop(b2Vec2 gravity = DEFAULT_GRAVITY,
+                      float32 time_step = TIME_STEP,
+                      int32 velocity_iterations = VELOCITY_ITERATIONS,
+                      int32 position_iterations = POSITION_ITERATIONS);
         Loop(const Loop &) = delete;
         Loop(Loop &&) = delete;
 
