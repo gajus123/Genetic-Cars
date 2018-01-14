@@ -9,15 +9,12 @@
 class GroundGenerator
 {
 public:
-	GroundGenerator(int segments, float x_distance, float min_delta = 0.0f, float max_delta = 10.0f);
-
-
-	Ground* genereteNew();
+	GroundGenerator(int segments, float x_distance, float max_delta = 10.0f);
+	Objects::Ground* genereteNew();
 	
 private:
 	int segments_;
 	float x_distance_;
-	float min_delta_;
 	float max_delta_;
 
 	std::random_device rd_;

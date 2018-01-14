@@ -1,18 +1,24 @@
 #include "include/GroundGenerator.h"
-#include "..\include\GroundGenerator.h"
+#include <vector>
 
 
-	GroundGenerator::GroundGenerator(int segments, float x_distance, float min_delta, float max_delta):
+	GroundGenerator::GroundGenerator(int segments, float x_distance, float max_delta):
 		segments_(segments),
 		x_distance_(x_distance),
-		min_delta_(min_delta),
 		max_delta_(max_delta)
 	{
 		rng_ = std::mt19937(rd_());
-		uni = std::uniform_int_distribution<int>(min_delta_, max_delta_);
+		uni = std::uniform_int_distribution<int>(-max_delta_, max_delta_);
 	}
 
-	Ground * GroundGenerator::genereteNew()
-	{
-		std::vector<float> heights;
+	Objects::Ground * GroundGenerator::genereteNew() {
+		std::vector<float> heights = {
+				0.0f,
+				0.0f,
+				0.0f,
+		};
+		for (int i = heights.size(); i < segments_; ++i) {
+			heights.push_back(heights[i-1] + (float)uni(rng_));
+		}
+		return new Objects::Ground({-100.0f, 200.0f}, x_distance_, heights);
 	}

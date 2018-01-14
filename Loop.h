@@ -16,7 +16,7 @@
 
 namespace Physics {
 
-	const b2Vec2 DEFAULT_GRAVITY = b2Vec2(0.0f, -9.8f);
+	const b2Vec2 DEFAULT_GRAVITY = b2Vec2(0.0f, 90.8f);
 	const float32 TIME_STEP = 1.0f / 60.0f;
 	const int32 VELOCITY_ITERATIONS = 8;
 	const int32 POSITION_ITERATIONS = 3;
