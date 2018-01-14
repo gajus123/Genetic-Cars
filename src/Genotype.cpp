@@ -76,8 +76,6 @@ namespace Algorithm {
 	}
 
 
-
-
 	std::uint32_t Genotype::grey2NKB(std::uint32_t grey)
 	{
 		std::uint32_t res = 0;

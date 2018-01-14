@@ -20,9 +20,11 @@ namespace Algorithm {
 	class Genotype
 	{
 	public:
+		float fitness;
+
 		Genotype();
 		Genotype(const Genotype& other);
-		
+
 		void inflateWithRandom();
 		void mutate(float mutation_rate);
 		Genotype cross(Genotype& other);
