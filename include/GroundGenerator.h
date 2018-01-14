@@ -4,13 +4,13 @@
 #include <random>
 
 #include "include/Ground.h"
-
+#include "include/Vector2.h"
 
 class GroundGenerator
 {
 public:
 	GroundGenerator(int segments, float x_distance, float max_delta = 10.0f);
-	Objects::Ground* genereteNew();
+	Objects::Ground* genereteNew(Vector2 position);
 	
 private:
 	int segments_;

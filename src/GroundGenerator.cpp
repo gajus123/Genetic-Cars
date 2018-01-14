@@ -11,7 +11,7 @@
 		uni = std::uniform_int_distribution<int>(-max_delta_, max_delta_);
 	}
 
-	Objects::Ground * GroundGenerator::genereteNew() {
+	Objects::Ground * GroundGenerator::genereteNew(Vector2 position) {
 		std::vector<float> heights = {
 				0.0f,
 				0.0f,
@@ -20,5 +20,5 @@
 		for (int i = heights.size(); i < segments_; ++i) {
 			heights.push_back(heights[i-1] + (float)uni(rng_));
 		}
-		return new Objects::Ground({-100.0f, 200.0f}, x_distance_, heights);
+		return new Objects::Ground(position, x_distance_, heights);
 	}
