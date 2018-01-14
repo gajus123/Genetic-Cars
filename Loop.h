@@ -7,40 +7,41 @@
 
 #include <thread>
 #include <atomic>
+#include <QTimer>
+#include <QDebug>
+#include <QObject>
 
 #include "Box2D/Box2D.h"
 
 
 namespace Physics {
 
-    class Loop {
+    class Loop : public QObject {
+		Q_OBJECT
+
     public:
-        explicit Loop(b2Vec2 gravity = b2Vec2(0.0f, 9.8f),
+        explicit Loop(b2Vec2 gravity = b2Vec2(0.0f, -9.8f),
                       float32 time_step = 1.0f / 60.0f,
                       int32 velocity_iterations = 8,
                       int32 position_iterations = 3);
         Loop(const Loop &) = delete;
         Loop(Loop &&) = delete;
 
-        void run();
+		void start();
         void stop();
 
         b2World* getWorld();
-
+	private slots:
+		void update();
     private:
-        std::atomic_bool stop_simulation;
+		int PHYSICS_FRAME_TIME = 16;
+		QTimer timer_;
 
         b2World* world;
         b2Vec2 gravity;
         float32 time_step;
         int32 velocity_iterations;
         int32 position_iterations;
-
-        std::thread physics_t;
-
-
-        static void start_physics(Loop& loop);
-
     };
 
 }
