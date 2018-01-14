@@ -30,12 +30,12 @@ src_path = './'
 
 env = Environment()
 if env['CXX'] == 'g++':
-	CXXFLAGS.extend(['-fPIC','-std=c++14','-pthread'])
-	LINKFLAGS.extend(['-lpthread'])
-	LIBS.extend(['boost_unit_test_framework', 'pthread'])
+	CXXFLAGS.extend(['-fPIC','-std=c++14'])
+	#LINKFLAGS.extend(['-lpthread'])
+	LIBS.extend(['boost_unit_test_framework'])
 elif env['CXX'] == 'cl' or env['CC'] == 'cl':
-	CXXFLAGS.extend(['/std:c++14', '-pthread'])
-	LINKFLAGS.extend(['/LIBPATH:..\\boost_1_65_1\\lib64-msvc-14.0', '-lpthread'])
+	CXXFLAGS.extend(['/std:c++14'])
+	LINKFLAGS.extend(['/LIBPATH:..\\boost_1_65_1\\lib64-msvc-14.0'])
 	CPPPATH.extend(['..\\boost_1_65_1'])
 
 env.Append(CXXFLAGS=CXXFLAGS)
