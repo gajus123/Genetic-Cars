@@ -62,7 +62,10 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 
 	Physics::ObjectsFactory::init(loop_);
-	loop_.run();
+	simulation_view_.ground_.push_back(Objects::Ground(Objects::Vector2(0, 0), 5.0f, { 0.0f, 1.0f, 0.0f, 3.0f }));
+	simulation_view_.wheel_.push_back(Objects::Wheel(Objects::Vector2(1, 100), 1.0f));
+	//wheel_(Objects::Vector2(1, 100), 1.0f)
+	//loop_.run();
 }
 void MainWindow::setupSimulationInterface() {
 	QVBoxLayout* layout = new QVBoxLayout();
@@ -98,6 +101,7 @@ void MainWindow::setupSimulationInterface() {
 	reset_button_.setText("Resetuj");
 	pause_button_.setText("Pauza");
 	pause_button_.setCheckable(true);
+	//pause_button_.setChecked(true);
 	speed_decrease_button_.setText("-");
 	speed_increase_button_.setText("+");
 	speed_label_.setText("10");
@@ -171,10 +175,14 @@ void MainWindow::resetSimulation() {
 }
 void MainWindow::pauseSimulation(bool paused) {
 	qDebug() << "Pause " << paused;
+	if (paused)
+		loop_.stop();
+	else
+		loop_.start();
 }
 void MainWindow::carsNumberChanged() {
 	qDebug() << "Cars number";
 }
 MainWindow::~MainWindow() {
-	loop_.stop();
+	//loop_.stop();
 }

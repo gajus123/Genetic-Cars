@@ -12,7 +12,7 @@
 #include "WorldWidget.h"
 #include "SimulationView.h"
 #include "StatisticView.h"
-#include "include\Loop.h"
+#include "Loop.h"
 #include "include\ObjectsFactory.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
@@ -26,6 +26,7 @@
 #include <QtCharts>
 #include <QDebug>
 #include <QFileDialog>
+#include <QTimerEvent>
 
 class MainWindow : public QMainWindow {
 	Q_OBJECT
@@ -49,8 +50,6 @@ private:
 	void setupSimulationInterface();
 	void setupFileInterface();
 	void setupAlgorithmInterface();
-
-	//WorldWidget world_widget_; //!< Brief: Setups physics and objects for the example
 
 	Physics::Loop loop_;
 
