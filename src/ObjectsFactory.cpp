@@ -103,6 +103,16 @@ namespace Physics {
 		return joint;
 	}
 
+	void ObjectsFactory::destroyBody(Objects::Base & body)
+	{
+		world->DestroyBody(body.body);
+	}
+
+	void ObjectsFactory::destroyJoint(b2RevoluteJoint * joint)
+	{
+		world->DestroyJoint(joint);
+	}
+
 
     std::shared_ptr<const b2BodyDef> ObjectsFactory::getDefaultBodyDef(){
         auto* bodyDef = new b2BodyDef();

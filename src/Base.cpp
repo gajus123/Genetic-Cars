@@ -5,5 +5,4 @@
 #include "include/Base.h"
 
 namespace Objects {
-
 }

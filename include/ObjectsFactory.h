@@ -16,6 +16,7 @@ namespace Objects {
 	class Base;
 }
 
+
 namespace Physics {
 
     class ObjectsFactory {
@@ -34,6 +35,9 @@ namespace Physics {
         b2Body* createPolygon(std::vector<b2Vec2> vertices, float32 density, float32 friction);
         b2Body* createGround(std::vector<b2Vec2> vertices);
 		b2RevoluteJoint* createJoint(Objects::Base& a, Objects::Base& b, b2Vec2 point);
+
+		void destroyBody(Objects::Base& body);
+		void destroyJoint(b2RevoluteJoint* joint);
 
     private:
         static ObjectsFactory instance;

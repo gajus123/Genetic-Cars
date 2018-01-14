@@ -12,6 +12,7 @@ namespace Physics {
 	class ObjectsFactory;
 }
 
+
 namespace Objects {
 
     class Base {
@@ -19,8 +20,9 @@ namespace Objects {
 		friend class Physics::ObjectsFactory;
 
         explicit Base(Vector2 position = {0.0f, 0.0f}) : start_position(position) {};
-        virtual Vector2 getPosition() { return Vector2(body->GetPosition()); }
-		virtual float getAngle() { return (float)body->GetAngle();  }
+        virtual Vector2 getPosition() const { return Vector2(body->GetPosition()); }
+		virtual float getAngle() const { return (float)body->GetAngle();  }
+
     protected:
         b2Body* body;
         Vector2 start_position;
