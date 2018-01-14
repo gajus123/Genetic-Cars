@@ -20,6 +20,7 @@ namespace Objects {
 
         explicit Base(Vector2 position = {0.0f, 0.0f}) : start_position(position) {};
         virtual Vector2 getPosition() { return Vector2(body->GetPosition()); }
+		virtual float getAngle() { return (float)body->GetAngle();  }
     protected:
         b2Body* body;
         Vector2 start_position;

@@ -17,7 +17,10 @@ namespace Objects {
 			float front_wheel_radius,
 			float back_wheel_radius);
 		
-		Vector2 getPosition() { return body.getPosition(); }
+		Vector2 getPosition() const { return body.getPosition(); }
+		Body& getBody() { return body; }
+		Wheel& getFrontWheel() { return front; }
+		Wheel& getBackWheel() { return back; }
     private:
 		Body& body;
 		Wheel front;
