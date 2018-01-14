@@ -62,8 +62,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 
 	Physics::ObjectsFactory::init(loop_);
-	simulation_view_.ground_.push_back(Objects::Ground(Objects::Vector2(100, 200), 100.0f, { 2.0f, 0.0f, 0.0f, 2.0f }));
-	simulation_view_.vehicles_.push_back(Objects::Vehicle(Objects::Vector2(100, 40), {20.0, 20.0, 50.0, 28.0, 20.0, 28.0, 50.0, 20.0}, 40.0, 40.0));
+	simulation_view_.ground_.push_back(Objects::Ground(Objects::Vector2(0, 3), 2.0f, { 0.2f, 0.0f, 0.0f, 0.4f, -0.6f, 0.3f}));
+	simulation_view_.vehicles_.push_back(Objects::Vehicle(Objects::Vector2(1, 0.4), {0.2f, 0.2f, 0.5f, 0.28f, 0.28f, 0.28f, 0.5f, 0.2f}, 0.35f, 0.35f));
 }
 void MainWindow::setupSimulationInterface() {
 	QVBoxLayout* layout = new QVBoxLayout();

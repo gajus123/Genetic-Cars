@@ -14,8 +14,9 @@
 #include <QDebug>
 #include <QtMath>
 #include <QWidget>
+#include <QGLWidget>
 
-class SimulationView : public QWidget {
+class SimulationView : public QFrame {
 public:
 	SimulationView(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 	virtual void paintEvent(QPaintEvent *event);

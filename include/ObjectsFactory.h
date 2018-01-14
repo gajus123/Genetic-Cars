@@ -20,11 +20,11 @@ namespace Objects {
 
 namespace Physics {
 
-	const float MAX_MOTOR_TORQUE = 20.0f;
-	const float MOTOR_SPEED = 2 * M_PI; //1 turn per second clockwise
-	const float DEFAULT_DENSITY = 1.0f;
-	const int DEFAULT_GROUP_INDEX = -1;
-	const float DEFAULT_FRICTION = 0.3f;
+	const float MAX_MOTOR_TORQUE = 10.0f; //50000000
+	const float MOTOR_SPEED = 2.0 * M_PI; //1 turn per second clockwise 200000
+	const float DEFAULT_DENSITY = 1.0f; //10
+	const int DEFAULT_GROUP_INDEX = -1; 
+	const float DEFAULT_FRICTION = 1.0f; //30
 
     class ObjectsFactory {
     public:
