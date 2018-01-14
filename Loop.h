@@ -20,7 +20,7 @@ namespace Physics {
 		Q_OBJECT
 
     public:
-        explicit Loop(b2Vec2 gravity = b2Vec2(0.0f, -9.8f),
+        explicit Loop(b2Vec2 gravity = b2Vec2(0.0f, 98.0f),
                       float32 time_step = 1.0f / 60.0f,
                       int32 velocity_iterations = 8,
                       int32 position_iterations = 3);
