@@ -21,7 +21,6 @@ void SimulationView::paintEvent(QPaintEvent *event) {
 	for (const auto& vehicle : vehicles) {
 		drawCar(vehicle, p);
 	}
-	p.translate(vehicles_[0].getPosition().x, vehicles_[0].getPosition().y);
 
 	update();
 }

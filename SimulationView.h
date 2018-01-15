@@ -20,20 +20,17 @@
 class SimulationView : public QFrame {
 public:
 	SimulationView(Simulation& simulation, QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
-	virtual void paintEvent(QPaintEvent *event);
-	std::vector<Objects::Ground> ground_;
-	std::vector<Objects::Vehicle> vehicles_;
 protected:
+	virtual void paintEvent(QPaintEvent *event);
 	virtual void resizeEvent(QResizeEvent *event);
 	virtual void wheelEvent(QWheelEvent * event);
 private:
-	void drawTrack(const Objects::Ground& track, QPainter& painter);
 	void drawCar(const Objects::Vehicle& car, QPainter& painter);
 	void drawWheel(const Objects::Wheel& wheel, QPainter& painter);
 	void drawBody(const Objects::Body& body, QPainter& painter);
+	void drawTrack(const Objects::Ground& track, QPainter& painter);
 	void drawTrackSegment(const Objects::Vector2& startPoint, const Objects::Vector2& endPoint, QPainter& painter);
 
-	QTransform transform_;
 	Simulation& simulation_;
 	
 	float display_width_;
