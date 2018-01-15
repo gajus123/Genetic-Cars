@@ -3,6 +3,7 @@
 Simulation::Simulation(QObject *parent) :
 	QObject(parent),
 	watchdog_(this),
+	population_(10),
 	population_size_(CARS_NUMBER_ON_START) {
 
 	population_.inflateRandom(CARS_NUMBER_ON_START);

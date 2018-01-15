@@ -1,16 +1,38 @@
 #ifndef _GROUND_GENERATOR_H_
 #define _GROUND_GENERATOR_H_
 
+/**
+*	@author Rafa³ Galczak
+*   @date 13.01.17
+*/
+
 #include <random>
 
 #include "include/Ground.h"
 #include "include/Vector2.h"
 
+
+/*!
+  \class GroundGenerator
+  \brief generates random ground
+
+  GrounfGenerator generatees random groud, constrained by given parameters.
+  One ground generator can construct many grounds.
+*/
 class GroundGenerator
 {
 public:
-	GroundGenerator(int segments, float x_distance, float max_delta = 10.0f);
-	Objects::Ground* genereteNew(Objects::Vector2 position);
+	static const float DEFAULT_MAX_DELTA; //!< Brief: Max delta designated for optimal track generation
+
+	/*!
+		\param segments - number of road segments
+		\param x_distance - distance on x axis between two neighboring vertices
+		\param max_delta - maximum y distance between two neighboring vertices
+							defaults to DEFAULT_MAX_DELTA
+	*/
+	GroundGenerator(int segments, float x_distance, float max_delta = DEFAULT_MAX_DELTA);
+
+	Objects::Ground* genereteNew(Objects::Vector2 position); //!< Brief: creates new random ground starting at /param position
 	
 private:
 	int segments_;

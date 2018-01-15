@@ -1,5 +1,6 @@
 //
-// Created by igor on 13.01.18.
+// \author Rafa³ Galczak
+// \date 12.01.18
 //
 
 #ifndef GENETIC_CARS_BASE_H
@@ -12,16 +13,19 @@ namespace Physics {
 	class ObjectsFactory;
 }
 
-
+/*!
+*/
 namespace Objects {
 
+	/*!
+	*/
     class Base {
     public:
 		friend class Physics::ObjectsFactory;
 
-		explicit Base(Vector2 position = { 0.0f, 0.0f }) : start_position(position) {};
-        virtual Vector2 getPosition() const { return Vector2(body->GetPosition()); }
-		virtual float getAngle() const { return (float)body->GetAngle();  }
+		explicit Base(Vector2 position = { 0.0f, 0.0f });
+        virtual Vector2 getPosition() const;
+		virtual float getAngle() const;
 
     protected:
         b2Body* body;
@@ -29,7 +33,7 @@ namespace Objects {
 
 		virtual void beforeBodySetUp() {};
 		virtual void createAndSetBody() {};
-        virtual void afterBodySetup() { body->SetTransform(start_position.asb2Vec2(), 0.0f); }
+		virtual void afterBodySetup();
     };
 
 }

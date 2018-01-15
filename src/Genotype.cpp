@@ -34,7 +34,7 @@ namespace Algorithm {
 
 		front_radius = uni(rng);
 		back_radius = uni(rng);
-		for (std::uint32_t i = 0; i < Objects::BODY_SEGMENTS; ++i) {
+		for (std::uint32_t i = 0; i < Objects::Body::BODY_SEGMENTS; ++i) {
 			heights.push_back(uni(rng));
 		}
 
@@ -42,35 +42,14 @@ namespace Algorithm {
 
 	void Genotype::mutate(float mutation_rate)
 	{
-		uint32_t mask = 0;
-		for (unsigned int i = 0; i < INT_NUM_BITS; ++i) {
-			if (random_(rng_) < MAX_RAND_VALUE) {
-				mask |= uint32_t(1);
-			}
-			mask <<= 1;
-		}
-		front_radius ^= mask;
-	
-		mask = 0;
-		for (unsigned int i = 0; i < INT_NUM_BITS; ++i) {
-			if (random_(rng_) < MAX_RAND_VALUE) {
-				mask |= uint32_t(1);
-			}
-			mask <<= 1;
-		}
-		back_radius ^= mask;
-
+		front_radius = mutate_value(front_radius, mutation_rate);
+		back_radius = mutate_value(back_radius, mutation_rate);
 		for (unsigned int i = 0; i < heights.size(); ++i) {
-			mask = 0;
-			for (unsigned int i = 0; i < INT_NUM_BITS; ++i) {
-				if (random_(rng_) < MAX_RAND_VALUE) {
-					mask |= uint32_t(1);
-				}
-				mask <<= 1;
-			}
-			heights[i] ^= mask;
+			heights[i] = mutate_value(heights[i], mutation_rate);
 		}
 	}
+
+	
 
 	Genotype Genotype::cross(Genotype & other) const
 	{
@@ -100,6 +79,18 @@ namespace Algorithm {
 	std::uint32_t Genotype::NKB2Gray(std::uint32_t nkb) const 
 	{
 		return nkb ^ (nkb >> 1);
+	}
+
+	std::uint32_t Genotype::mutate_value(std::uint32_t value, float mutation_rate)
+	{
+		std::uint32_t mask = 0;
+		for (unsigned int i = 0; i < INT_NUM_BITS; ++i) {
+			if (random_(rng_) < mutation_rate) {
+				mask |= uint32_t(1);
+			}
+			mask <<= 1;
+		}
+		return value ^ mask;
 	}
 
 	std::uint32_t Genotype::crossValues(std::uint32_t a, std::uint32_t b) const
