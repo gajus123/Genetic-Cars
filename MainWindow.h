@@ -14,7 +14,6 @@
 #include "Simulation.h"
 #include "Statistics.h"
 #include "Loop.h"
-#include "include\ObjectsFactory.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -25,9 +24,7 @@
 #include <QWidget>
 #include <QGroupBox>
 #include <QtCharts>
-#include <QDebug>
 #include <QFileDialog>
-#include <QTimerEvent>
 
 class MainWindow : public QMainWindow {
 	Q_OBJECT
@@ -39,13 +36,13 @@ public:
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 private slots:
-	void reset();
-	void mutationRateChanged();
-	void mutationSizeChanged();
-	void saveToFile();
-	void loadFromFile();
-	void pauseSimulation(bool paused); //!< Brief: Pause physics and simulation.
-	void carsNumberChanged(); //!< Brief: Change cars number in simulation if writted text is number.
+	void reset(); //!< Brief: Resets whole simulation and genetic algorithm.
+	void mutationRateChanged(); //!< Brief: Reacts to change of mutation rate edit line.
+	void mutationSizeChanged();//!< Brief: Reacts to change of mutation size edit line.
+	void saveToFile(); //!< Brief: Reacts to 'Save' button clicks.
+	void loadFromFile(); //!< Brief: Reacts to 'Load' button clicks.
+	void pauseSimulation(bool paused); //!< Brief: Pauses physics and simulation.
+	void carsNumberChanged(); //!< Brief: Changes cars number in simulation if writted text is number.
 private:
 	QWidget* createSimulationWidgets(); //!< Brief: Creates GUI part responsible for Simulation settings manipulation/displaying. Return pointer to widgets container.
 	QWidget* createFileWidgets(); //!< Brief: Creates GUI part responsible for saving/loading buttons. Return pointer to widgets container.
@@ -64,7 +61,6 @@ private:
 	StatisticView statistic_view_;
 	SimulationView simulation_view_;
 
-	//Simulation widgets
 	QPushButton reset_button_;
 	QPushButton pause_button_;
 	QToolButton speed_increase_button_;
@@ -73,12 +69,10 @@ private:
 	QLabel cars_count_label_;
 	QLineEdit cars_count_edit_;
 
-	//File widgets
 	QGroupBox file_group_;
 	QPushButton load_button_;
 	QPushButton save_button_;
 
-	//Genetic widgets
 	QLabel mutation_size_label_;
 	QLineEdit mutation_size_edit_;
 	QLabel mutation_rate_label_;

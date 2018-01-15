@@ -16,6 +16,7 @@
 #include "include\Ground.h"
 #include "include\GroundGenerator.h"
 #include "include\ObjectsFactory.h"
+#include "include\Population.h"
 #include <cstdio>
 #include <cmath>
 #include <QTimer>
@@ -57,6 +58,8 @@ private:
 	std::vector<float> fitnesses_;
 	std::vector<Objects::Vehicle> vehicles_;
 	std::shared_ptr<Objects::Ground> ground_;
+
+	Algorithm::Population population_;
 };
 
 #endif

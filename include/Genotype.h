@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 #include <cstdint>
+#include <cstdio>
 
 #include "include/Vehicle.h"
 

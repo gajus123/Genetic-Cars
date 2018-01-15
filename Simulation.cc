@@ -3,8 +3,10 @@
 Simulation::Simulation(QObject *parent) :
 	QObject(parent),
 	watchdog_(this),
+	population_(10),
 	population_size_(CARS_NUMBER_ON_START) {
 
+	population_.inflateRandom(CARS_NUMBER_ON_START);
 	watchdog_.setInterval(2000);
 	connect(&watchdog_, SIGNAL(timeout()), this, SLOT(checkActivity()));
 	watchdog_.start();
@@ -22,24 +24,16 @@ void Simulation::newGround() {
 		Physics::ObjectsFactory::getInstance().destroyBody(*ground_.get());
 	}
 	ground_.reset();
-	ground_ = std::shared_ptr<Objects::Ground>(GroundGenerator(TRACK_SEGMENTS, TRACK_SEGMENT_WIDTH, TRACK_SEGMENTS_DELTA).genereteNew({ 0.0f, 0.0f }));
+	ground_ = std::shared_ptr<Objects::Ground>(GroundGenerator(TRACK_SEGMENTS, TRACK_SEGMENT_WIDTH, TRACK_SEGMENTS_DELTA).genereteNew({ -4.0f, 5.4f }));
 }
 void Simulation::newVehicles() {
 	clearVehicles();
 
-	std::random_device rd;
-	std::mt19937 rng(rd());
-	std::uniform_real_distribution<float> uni(0.3, 0.6);
-
-
-	for (std::size_t i = 0; i < population_size_; ++i) {
-		std::vector<float> points;
-		for (std::size_t i = 0; i < 8; ++i) {
-			points.push_back(uni(rng));
-		}
-		vehicles_.push_back(Objects::Vehicle(Objects::Vector2(CARS_START_X, CARS_START_Y), points, uni(rng), uni(rng)));
+	for (const auto& genotype : population_.getGenotypes()) {
+		vehicles_.push_back(genotype.generate());
 		fitnesses_.emplace_back(0.0f);
 	}
+	printf("%d\n", vehicles_.size());
 }
 void Simulation::reset() {
 	newGround();
@@ -62,6 +56,13 @@ void Simulation::checkActivity() {
 	}
 	if (!active) {
 		emit roundEnd(fitnesses_);
+
+		auto& genotypes = population_.getGenotypes();
+		for (std::size_t i = 0; i < fitnesses_.size(); ++i) {
+			genotypes[i].fitness = fitnesses_[i];
+		}
+
+		population_.nextPopulation();
 		newVehicles();
 	}
 }

@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <random>
+#include <cstdio>
 #include "include/Genotype.h"
 
 
@@ -26,7 +27,7 @@ namespace Algorithm {
 		float getMutationRate() { return mutation_rate_; }
 		void setMutationRate(float rate);
 
-		Population newPopulation();
+		void nextPopulation();
 	private:
 		std::random_device rd_;
 		std::mt19937 rng_;
