@@ -1,6 +1,10 @@
+//
+// \author Rafa³ Galczak
+// \date 15.01.18
+//
+
 #ifndef _GENETIC_CARS_POPULATION_H_
 #define _GENETIC_CARS_POPULATION_H_
-
 
 #include <vector>
 #include <random>
