@@ -15,12 +15,16 @@ namespace Algorithm {
 	public:
 		unsigned int elite_specimen = DEFAULT_ELITE_SPECIMEN;
 
-		Population();
+		Population() = delete;
+		Population(float mutation_rate);
 		Population(const Population& other);
-		explicit Population(std::vector<Genotype> genotypes);
+		explicit Population(std::vector<Genotype> genotypes, float mutation_rate);
 
 		void inflateRandom(unsigned int size);
 		std::vector<Genotype>& getGenotypes();
+		
+		float getMutationRate() { return mutation_rate_; }
+		void setMutationRate(float rate);
 
 		Population newPopulation();
 	private:
@@ -28,7 +32,8 @@ namespace Algorithm {
 		std::mt19937 rng_;
 
 		std::vector<Genotype> genotypes;
-		
+		float mutation_rate_;
+
 		std::pair<Genotype, Genotype> getNewChildren();
 		Genotype& getRandomParent();
 		void sort();

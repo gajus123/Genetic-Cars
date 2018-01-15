@@ -6,15 +6,15 @@
 
 namespace Algorithm {
 	
-	Population::Population() {
+	Population::Population(float mutation_rate) : mutation_rate_(mutation_rate) {
 		rng_ = std::mt19937(rd_());
 	}
 
-	Population::Population(const Population & other) : Population() {
+	Population::Population(const Population & other) : Population(other.mutation_rate_) {
 		genotypes = other.genotypes;
 	}
 
-	Population::Population(std::vector<Genotype> genotypes) : Population() {
+	Population::Population(std::vector<Genotype> genotypes, float mutation_rate) : Population(mutation_rate) {
 		this->genotypes = genotypes;
 	}
 
@@ -30,6 +30,13 @@ namespace Algorithm {
 		return genotypes;
 	}
 
+	void Population::setMutationRate(float rate)
+	{
+		if (rate > MAX_RAND_VALUE)
+			rate = MAX_RAND_VALUE;
+		mutation_rate_ = rate;
+	}
+
 	Population Population::newPopulation() {
 		sort();
 		std::vector<Genotype> new_population;
@@ -39,10 +46,12 @@ namespace Algorithm {
 		}
 		for (int i = elite_specimen; i < genotypes.size()/2 + 1; ++i) {
 			std::pair<Genotype, Genotype> children = getNewChildren();
+			children.first.mutate(mutation_rate_);
+			children.second.mutate(mutation_rate_);
 			new_population.push_back(children.first);
 			new_population.push_back(children.second);
 		}
-		return Population(new_population);
+		return Population(new_population, mutation_rate_);
 	}
 
 	std::pair<Genotype, Genotype> Population::getNewChildren() {		
