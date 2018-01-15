@@ -66,6 +66,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 
+	connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &statistics_, SLOT(calculateStatistics(std::vector<float>)));
+	connect(&statistics_, SIGNAL(newValues(float, float, float, float)), &statistic_view_, SLOT(addData(float, float, float, float)));
+
 	Physics::ObjectsFactory::init(loop_);
 
 	simulation_.newGround();

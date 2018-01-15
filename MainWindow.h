@@ -13,6 +13,7 @@
 #include "SimulationView.h"
 #include "StatisticView.h"
 #include "Simulation.h"
+#include "Statistics.h"
 #include "Loop.h"
 #include "include\ObjectsFactory.h"
 #include <QMainWindow>
@@ -55,6 +56,7 @@ private:
 
 	Physics::Loop loop_;
 	Simulation simulation_;
+	Statistics statistics_;
 
 	//UI
 	StatisticView statistic_view_;
