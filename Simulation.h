@@ -37,10 +37,14 @@ public:
 	void stop();
 	void start();
 	void newGround();
+	void resetTimers();
 	void newVehicles();
 	void setMutationRate(float mutation_rate);
 	void setPopulationSize(std::size_t new_size);
 	void setEliteSpecimen(std::size_t elite_specimen);
+
+	void loadFromFile(std::string filename);
+	void saveToFile(std::string filename) const;
 
 	float getMutationRate() const;
 	std::size_t getEliteSpecimen() const;

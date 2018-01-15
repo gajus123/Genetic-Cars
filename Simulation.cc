@@ -41,8 +41,7 @@ void Simulation::reset() {
 	newGround();
 	population_.reset();
 	newVehicles();
-	watchdog_.start(CHECK_TIME);
-	round_timer_.start(MAX_ROUND_TIME);
+	resetTimers();
 }
 void Simulation::stop() {
 	watchdog_.stop();
@@ -56,7 +55,7 @@ void Simulation::checkActivity() {
 	bool active = false;
 	for (std::size_t i = 0; i < vehicles_.size(); ++i) {
 		float x_position = vehicles_[i].getPosition().x;
-		if (x_position > fitnesses_[i]) {
+		if (x_position - 0.1f > fitnesses_[i]) {
 			fitnesses_[i] = x_position;
 			active = true;
 		}
@@ -110,4 +109,17 @@ std::size_t Simulation::getEliteSpecimen() const {
 }
 void Simulation::setEliteSpecimen(std::size_t elite_specimen) {
 	population_.setEliteSpecimen(elite_specimen);
+}
+void Simulation::loadFromFile(std::string filename) {
+	population_.loadFromFile(filename);
+
+	newVehicles();
+	resetTimers();
+}
+void Simulation::saveToFile(std::string filename) const {
+	population_.saveToFile(filename);
+}
+void Simulation::resetTimers() {
+	watchdog_.start(CHECK_TIME);
+	round_timer_.start(MAX_ROUND_TIME);
 }
