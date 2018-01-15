@@ -14,7 +14,6 @@
 #include "Simulation.h"
 #include "Statistics.h"
 #include "Loop.h"
-#include "include\ObjectsFactory.h"
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -25,9 +24,7 @@
 #include <QWidget>
 #include <QGroupBox>
 #include <QtCharts>
-#include <QDebug>
 #include <QFileDialog>
-#include <QTimerEvent>
 
 class MainWindow : public QMainWindow {
 	Q_OBJECT
