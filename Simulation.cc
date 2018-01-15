@@ -41,6 +41,9 @@ void Simulation::reset() {
 	newGround();
 	newVehicles();
 }
+void Simulation::setPopulationSize(std::size_t newSize) {
+	this->population_size_ = std::min(newSize, MAXIMUM_CARS);
+}
 const std::vector<Objects::Vehicle> Simulation::getVehicles() const {
 	return this->vehicles_;
 }
@@ -58,4 +61,7 @@ const Objects::Vehicle& Simulation::getBestVehicle() const {
 	}
 
 	return *bestVehicle;
+}
+std::size_t Simulation::getPopulationSize() const {
+	return this->population_size_;
 }
