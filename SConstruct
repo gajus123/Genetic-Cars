@@ -34,7 +34,7 @@ if env['CXX'] == 'g++':
 	#LINKFLAGS.extend(['-lpthread'])
 	LIBS.extend(['boost_unit_test_framework'])
 elif env['CXX'] == 'cl' or env['CC'] == 'cl':
-	CXXFLAGS.extend(['/std:c++14'])
+	CXXFLAGS.extend(['/std:c++14', '/EHsc'])
 	LINKFLAGS.extend(['/LIBPATH:..\\boost_1_65_1\\lib64-msvc-14.0'])
 	CPPPATH.extend(['..\\boost_1_65_1'])
 
@@ -50,8 +50,7 @@ env.EnableQt5Modules([
                       'QtCore',
                       'QtNetwork',
 						'QtWidgets',
-						'QtCharts',
-						'QtOpenGL'
+						'QtCharts'
                     ]) #QT5 modules used
 
 #Prepare Box2D
