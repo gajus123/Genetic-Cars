@@ -1,5 +1,13 @@
-#ifndef _SIMULATION_H_
-#define _SIMULATION_H_
+/*!
+* @authors Jakub Gajownik, Rafa³ Galczak
+* @date 15.01.18
+*
+* \brief Simulation aggregate physics objects like Ground and Vehicles.
+*        As well as being in charge of interacting with other systems using signals (observers).
+*/
+
+#ifndef SIMULATION_H
+#define SIMULATION_H
 
 #include <QObject>
 #include <memory>

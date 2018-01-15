@@ -1,15 +1,14 @@
 /*!
  * @authors Jakub Gajownik, Rafał Galczak
- * @date 14.12.17
+ * @date 15.01.18
  *
  * \brief MainWindow setups view and application window structure.
  *        As well as being in charge of interacting with user.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MAIN_WINDOW_H
+#define MAIN_WINDOW_H
 
-#include "WorldWidget.h"
 #include "SimulationView.h"
 #include "StatisticView.h"
 #include "Simulation.h"
@@ -45,25 +44,27 @@ private slots:
 	void mutationSizeChanged();
 	void saveToFile();
 	void loadFromFile();
-	void pauseSimulation(bool paused);
-	void carsNumberChanged();
+	void pauseSimulation(bool paused); //!< Brief: Pause physics and simulation.
+	void carsNumberChanged(); //!< Brief: Change cars number in simulation if writted text is number.
 private:
-	QWidget* createSimulationWidgets();
-	QWidget* createFileWidgets();
-	QWidget* createAlgorithmWidgets();
+	QWidget* createSimulationWidgets(); //!< Brief: Creates GUI part responsible for Simulation settings manipulation/displaying. Return pointer to widgets container.
+	QWidget* createFileWidgets(); //!< Brief: Creates GUI part responsible for saving/loading buttons. Return pointer to widgets container.
+	QWidget* createAlgorithmWidgets(); //!< Brief: Creates GUI part responsible for Algorithm settings manipulation/displaying. Return pointer to widgets container.
+									
 
 	template<class WidgetType, class LayoutType>
-	std::tuple<WidgetType*, LayoutType*> createLayout(QLayout* parent_layout = Q_NULLPTR);
+	std::tuple<WidgetType*, LayoutType*> createLayout(QLayout* parent_layout = Q_NULLPTR); //!< Brief: Creates container of WidgetType, sets its layout to new LayoutType object.
+																						   //!<		   If parent_layout is not Q_NULLPTR, it also adds container into parent_layout.
+																						   //!<		   Returns tuple of pointers of created container and layout.
 
 	Physics::Loop loop_;
 	Simulation simulation_;
 	Statistics statistics_;
 
-	//UI
 	StatisticView statistic_view_;
 	SimulationView simulation_view_;
 
-	//Simulation interface
+	//Simulation widgets
 	QPushButton reset_button_;
 	QPushButton pause_button_;
 	QToolButton speed_increase_button_;
@@ -72,22 +73,16 @@ private:
 	QLabel cars_count_label_;
 	QLineEdit cars_count_edit_;
 
-	//File interface
+	//File widgets
 	QGroupBox file_group_;
 	QPushButton load_button_;
 	QPushButton save_button_;
 
-	//Genetic algorithm
-	QGroupBox algorithm_group_;
+	//Genetic widgets
 	QLabel mutation_size_label_;
 	QLineEdit mutation_size_edit_;
 	QLabel mutation_rate_label_;
 	QLineEdit mutation_rate_edit_;
-
-	//Chart
-	QChart chart_;
-	QLineSeries series;
-	QLineSeries series2;
 };
 
 #endif
