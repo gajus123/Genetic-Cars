@@ -15,6 +15,14 @@ namespace Algorithm {
 		heights = other.heights;
 	}
 
+	Genotype& Genotype::operator=(const Genotype & other)
+	{
+		front_radius = other.front_radius;
+		back_radius = other.back_radius;
+		heights = other.heights;
+		return *this;
+	}
+
 	void Genotype::inflateWithRandom()
 	{
 		std::random_device rd;
@@ -64,7 +72,7 @@ namespace Algorithm {
 		}
 	}
 
-	Genotype Genotype::cross(Genotype & other)
+	Genotype Genotype::cross(Genotype & other) const
 	{
 		Genotype child;
 		child.front_radius = crossValues(this->front_radius, other.front_radius);
@@ -76,7 +84,7 @@ namespace Algorithm {
 	}
 
 
-	std::uint32_t Genotype::grey2NKB(std::uint32_t grey)
+	std::uint32_t Genotype::grey2NKB(std::uint32_t grey) const 
 	{
 		std::uint32_t res = 0;
 		std::uint32_t mask = 1;
@@ -88,12 +96,12 @@ namespace Algorithm {
 		return res;
 	}
 
-	std::uint32_t Genotype::NKB2Gray(std::uint32_t nkb)
+	std::uint32_t Genotype::NKB2Gray(std::uint32_t nkb) const 
 	{
 		return nkb ^ (nkb >> 1);
 	}
 
-	std::uint32_t Genotype::crossValues(std::uint32_t a, std::uint32_t b)
+	std::uint32_t Genotype::crossValues(std::uint32_t a, std::uint32_t b) const
 	{
 		uint32_t mask = 0;
 		mask = ~mask;
@@ -102,7 +110,7 @@ namespace Algorithm {
 		return (a & mask) | (b & (~mask));
 	}
 
-	float Genotype::castSignedValue(std::uint32_t grey, float maximum_value)
+	float Genotype::castSignedValue(std::uint32_t grey, float maximum_value) const 
 	{
 		std::uint32_t half_limit = 0;
 		half_limit = ~half_limit;
@@ -114,7 +122,7 @@ namespace Algorithm {
 		return  (res/half_limit) * maximum_value;
 	}
 
-	float Genotype::castUnsignedValue(std::uint32_t grey, float maximum_value)
+	float Genotype::castUnsignedValue(std::uint32_t grey, float maximum_value) const 
 	{
 		std::uint32_t limit = 0;
 		limit = ~limit;
@@ -123,7 +131,7 @@ namespace Algorithm {
 		return (float)grey2NKB(grey) / denominal;
 	}
 
-	Objects::Vehicle Genotype::generate(Objects::Vector2 position)
+	Objects::Vehicle Genotype::generate(Objects::Vector2 position) const 
 	{
 		float front_wheel_r = castUnsignedValue(front_radius, MAX_RADIUS_LIMIT);
 		float back_wheel_r = castUnsignedValue(back_radius, MAX_RADIUS_LIMIT);
