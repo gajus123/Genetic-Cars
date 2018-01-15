@@ -62,7 +62,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	connect(&mutation_size_edit_, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
 	connect(&load_button_, SIGNAL(clicked()), this, SLOT(loadFromFile()));
 	connect(&save_button_, SIGNAL(clicked()), this, SLOT(saveToFile()));
-	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(reset()));
+	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(resetSimulation()));
 	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 	connect(&simulation_speed_chooser_, SIGNAL(currentIndexChanged(int)), this, SLOT(speedChanged()));
@@ -70,10 +70,13 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &statistics_, SLOT(calculateStatistics(std::vector<float>)));
 	connect(&statistics_, SIGNAL(newValues(float, float, float, float)), &statistic_view_, SLOT(addData(float, float, float, float)));
 
+	connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &population_, SLOT(nextPopulation(std::vector<float>)));
+	connect(&population_, SIGNAL(newVehiclesGenerated(std::vector<Objects::Vehicle>)), &simulation_, SLOT(newRound(std::vector<Objects::Vehicle>)));
+
 	Physics::ObjectsFactory::init(loop_);
 
 	simulation_.newGround();
-	simulation_.newVehicles();
+	population_.inflateRandom();
 }
 QWidget* MainWindow::createSimulationWidgets() {
 	//Create container for Simulation manipulation widgets
@@ -104,9 +107,9 @@ QWidget* MainWindow::createSimulationWidgets() {
 
 	//Set widgets properties
 	pause_button_.setCheckable(true);
-	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
-	mutation_size_edit_.setText(QString().setNum(simulation_.getMutationRate()));
-	elite_specimen_number_edit_.setText(QString::number(simulation_.getEliteSpecimen()));
+	cars_count_edit_.setText(QString::number(population_.getNextGenerationSize()));
+	mutation_size_edit_.setText(QString().setNum(population_.getMutationRate()));
+	elite_specimen_number_edit_.setText(QString::number(population_.getEliteSpecimen()));
 
 	initializeSpeedWidget();
 
@@ -165,75 +168,73 @@ void MainWindow::mutationRateChanged() {
 	bool is_int;
 	std::size_t elite_specimen = new_text.toInt(&is_int);
 	if (is_int)
-		simulation_.setEliteSpecimen(elite_specimen);
-	elite_specimen_number_edit_.setText(QString::number(simulation_.getEliteSpecimen()));
+		population_.setEliteSpecimen(elite_specimen);
+	elite_specimen_number_edit_.setText(QString::number(population_.getEliteSpecimen()));
 }
 void MainWindow::mutationSizeChanged() {
 	bool is_float;
 	float mutation_size = mutation_size_edit_.text().toFloat(&is_float);
 	if (is_float)
-		simulation_.setMutationRate(mutation_size);
-	mutation_size_edit_.setText(QString().setNum(simulation_.getMutationRate()));
+		population_.setMutationRate(mutation_size);
+	mutation_size_edit_.setText(QString().setNum(population_.getMutationRate()));
 }
 void MainWindow::saveToFile() {
-	if (!pause_button_.isChecked()) {
-		loop_.stop();
-		simulation_.stop();
-	}
+	if (!pause_button_.isChecked())
+		pauseSimulation();
 
 	QString filename = QFileDialog::getSaveFileName(this,
 		"Save Population", "",
 		"Text Files (*.txt);;All Files (*)");
 
 	if (!filename.isEmpty())
-		simulation_.saveToFile(filename.toStdString());
+		population_.saveToFile(filename.toStdString());
 
-	if (!pause_button_.isChecked()) {
-		loop_.start();
-		simulation_.start();
-	}
+	if (!pause_button_.isChecked())
+		resumeSimulation();
 }
 void MainWindow::loadFromFile() {
-	if (!pause_button_.isChecked()) {
-		loop_.stop();
-		simulation_.stop();
-	}
+	if (!pause_button_.isChecked())
+		pauseSimulation();
+
 	QString filename = QFileDialog::getOpenFileName(this,
 		"Load Population", "",
 		"Text Files (*.txt);;All Files (*)");
 
 	if (!filename.isEmpty())
-		simulation_.loadFromFile(filename.toStdString());
+		population_.loadFromFile(filename.toStdString());
 
-	if (!pause_button_.isChecked()) {
-		loop_.start();
-		simulation_.start();
-	}
+	if (!pause_button_.isChecked())
+		resumeSimulation();
 }
 void MainWindow::pauseSimulation(bool paused) {
-	if (paused) {
-		loop_.stop();
-		simulation_.stop();
-	}
-	else {
-		loop_.start();
-		simulation_.start();
-	}
+	if (paused)
+		pauseSimulation();
+	else
+		resumeSimulation();
 }
 void MainWindow::carsNumberChanged() {
 	QString new_text = cars_count_edit_.text();
 	bool is_int;
 	std::size_t cars_number = new_text.toInt(&is_int);
 	if (is_int)
-		simulation_.setPopulationSize(cars_number);
-	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
+		population_.setNextGenerationSize(cars_number);
+	cars_count_edit_.setText(QString::number(population_.getNextGenerationSize()));
 }
-void MainWindow::reset() {
-	this->statistic_view_.reset();
-	this->simulation_.reset();
+void MainWindow::resetSimulation() {
+	statistic_view_.reset();
+	simulation_.reset();
+	population_.reset();
 }
 void MainWindow::speedChanged() {
 	loop_.setTimeStep(simulation_speed_chooser_.currentData().toFloat());
+}
+void MainWindow::pauseSimulation() {
+	loop_.stop();
+	simulation_.stop();
+}
+void MainWindow::resumeSimulation() {
+	loop_.start();
+	simulation_.start();
 }
 
 template<class WidgetType, class LayoutType>

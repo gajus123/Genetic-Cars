@@ -9,6 +9,7 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
+#include "Population.h"
 #include "SimulationView.h"
 #include "StatisticView.h"
 #include "Simulation.h"
@@ -37,7 +38,7 @@ public:
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 private slots:
-	void reset(); //!< Brief: Resets whole simulation and genetic algorithm.
+	void resetSimulation(); //!< Brief: Resets whole simulation and genetic algorithm.
 	void mutationRateChanged(); //!< Brief: Reacts to change of mutation rate edit line.
 	void mutationSizeChanged();//!< Brief: Reacts to change of mutation size edit line.
 	void saveToFile(); //!< Brief: Reacts to 'Save' button clicks.
@@ -50,6 +51,8 @@ private:
 	QWidget* createFileWidgets(); //!< Brief: Creates GUI part responsible for saving/loading buttons. Return pointer to widgets container.
 	QWidget* createAlgorithmWidgets(); //!< Brief: Creates GUI part responsible for Algorithm settings manipulation/displaying. Return pointer to widgets container.
 	void initializeSpeedWidget();
+	void pauseSimulation();
+	void resumeSimulation();
 
 	template<class WidgetType, class LayoutType>
 	std::tuple<WidgetType*, LayoutType*> createLayout(QLayout* parent_layout = Q_NULLPTR); //!< Brief: Creates container of WidgetType, sets its layout to new LayoutType object.
@@ -57,6 +60,7 @@ private:
 																						   //!<		   Returns tuple of pointers of created container and layout.
 
 	Physics::Loop loop_;
+	Algorithm::Population population_;
 	Simulation simulation_;
 	Statistics statistics_;
 
