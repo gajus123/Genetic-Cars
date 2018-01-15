@@ -8,6 +8,7 @@ Simulation::Simulation(QObject *parent) :
 	population_.inflateRandom();
 	watchdog_.setInterval(CHECK_TIME);
 	round_timer_.setInterval(MAX_ROUND_TIME);
+	round_timer_.setSingleShot(true);
 	connect(&watchdog_, SIGNAL(timeout()), this, SLOT(checkActivity()));
 	connect(&round_timer_, SIGNAL(timeout()), this, SLOT(endRound()));
 	watchdog_.start();
@@ -26,7 +27,7 @@ void Simulation::newGround() {
 		Physics::ObjectsFactory::getInstance().destroyBody(*ground_.get());
 	}
 	ground_.reset();
-	ground_ = std::shared_ptr<Objects::Ground>(GroundGenerator(TRACK_SEGMENTS, TRACK_SEGMENT_WIDTH, TRACK_SEGMENTS_DELTA).genereteNew({ -4.0f, 5.4f }));
+	ground_ = std::shared_ptr<Objects::Ground>(GroundGenerator(TRACK_SEGMENTS, TRACK_SEGMENT_WIDTH, TRACK_SEGMENTS_DELTA).genereteNew({ -CARS_START_X, -CARS_START_Y }));
 }
 void Simulation::newVehicles() {
 	clearVehicles();
@@ -38,7 +39,10 @@ void Simulation::newVehicles() {
 }
 void Simulation::reset() {
 	newGround();
+	population_.reset();
 	newVehicles();
+	watchdog_.start(CHECK_TIME);
+	round_timer_.start(MAX_ROUND_TIME);
 }
 void Simulation::stop() {
 	watchdog_.stop();
@@ -98,4 +102,12 @@ void Simulation::endRound() {
 	}
 	population_.nextPopulation();
 	newVehicles();
+
+	round_timer_.start(MAX_ROUND_TIME);
+}
+std::size_t Simulation::getEliteSpecimen() const {
+	return population_.getEliteSpecimen();
+}
+void Simulation::setEliteSpecimen(std::size_t elite_specimen) {
+	population_.setEliteSpecimen(elite_specimen);
 }
