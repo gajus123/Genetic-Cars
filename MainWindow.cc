@@ -21,15 +21,15 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	setWindowTitle("Genetic Cars"); 
 	
 	//Create container for left and right side
-	QWidget* centralWidget;
-	QHBoxLayout* centralLayout;
-	std::tie(centralWidget, centralLayout) = createLayout<QWidget, QHBoxLayout>();
-	setCentralWidget(centralWidget);
+	QWidget* central_widget;
+	QHBoxLayout* central_layout;
+	std::tie(central_widget, central_layout) = createLayout<QWidget, QHBoxLayout>();
+	setCentralWidget(central_widget);
 
 	//Create left side container 
 	QWidget* content;
-	QVBoxLayout* contentLayout;
-	std::tie(content, contentLayout) = createLayout<QWidget, QVBoxLayout>(centralLayout);
+	QVBoxLayout* content_layout;
+	std::tie(content, content_layout) = createLayout<QWidget, QVBoxLayout>(central_layout);
 
 	//Create size policy for left side
 	QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -37,32 +37,31 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 
 	//Set simulation view to expand and height to 3/5
 	simulation_view_.setSizePolicy(sizePolicy);
-	contentLayout->addWidget(&simulation_view_);
+	content_layout->addWidget(&simulation_view_);
 
 	//Set statistic view to expand and height to 2/5
 	sizePolicy.setVerticalStretch(2);
 	statistic_view_.setSizePolicy(sizePolicy);
-	contentLayout->addWidget(&statistic_view_);
+	content_layout->addWidget(&statistic_view_);
 
 
 	//Create right side container
-	QWidget* sidebarContainer;
-	QVBoxLayout* sidebarLayout;
-	std::tie(sidebarContainer, sidebarLayout) = createLayout<QWidget, QVBoxLayout>(centralLayout);
+	QWidget* sidebar_container;
+	QVBoxLayout* sidebar_layout;
+	std::tie(sidebar_container, sidebar_layout) = createLayout<QWidget, QVBoxLayout>(central_layout);
 	
-	centralLayout->setAlignment(sidebarContainer, Qt::AlignTop);
-	sidebarContainer->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+	central_layout->setAlignment(sidebar_container, Qt::AlignTop);
+	sidebar_container->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-	sidebarLayout->addWidget(setupSimulationInterface());
-	sidebarLayout->addWidget(setupFileInterface());
-	sidebarLayout->addWidget(setupAlgorithmInterface());
+	sidebar_layout->addWidget(createSimulationWidgets());
+	sidebar_layout->addWidget(createFileWidgets());
+	sidebar_layout->addWidget(createAlgorithmWidgets());
 
 
 	connect(&mutation_rate_edit_, SIGNAL(editingFinished()), this, SLOT(mutationRateChanged()));
 	connect(&mutation_size_edit_, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
 	connect(&load_button_, SIGNAL(clicked()), this, SLOT(loadFromFile()));
 	connect(&save_button_, SIGNAL(clicked()), this, SLOT(saveToFile()));
-	//connect(&reset_button_, SIGNAL(clicked()), &simulation_, SLOT(reset()));
 	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(reset()));
 	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
@@ -75,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	simulation_.newGround();
 	simulation_.newVehicles();
 }
-QWidget* MainWindow::setupSimulationInterface() {
+QWidget* MainWindow::createSimulationWidgets() {
 	//Create container for Simulation manipulation widgets
 	QGroupBox* groupBox;
 	QVBoxLayout* layout;
@@ -115,7 +114,7 @@ QWidget* MainWindow::setupSimulationInterface() {
 
 	return groupBox;
 }
-QWidget* MainWindow::setupFileInterface() {
+QWidget* MainWindow::createFileWidgets() {
 	//Create group box for File manipulation widgets
 	QGroupBox* groupBox;
 	QHBoxLayout* layout;
@@ -128,7 +127,7 @@ QWidget* MainWindow::setupFileInterface() {
 
 	return groupBox;
 }
-QWidget* MainWindow::setupAlgorithmInterface() {
+QWidget* MainWindow::createAlgorithmWidgets() {
 	//Create group box for Algorithm settings
 	QGroupBox* groupBox;
 	QHBoxLayout* layout;
@@ -184,12 +183,12 @@ void MainWindow::pauseSimulation(bool paused) {
 	}
 }
 void MainWindow::carsNumberChanged() {
-	QString newText = cars_count_edit_.text();
-	bool ok;
-	std::size_t newCarNumber = newText.toInt(&ok);
-	if (ok)
+	QString new_text = cars_count_edit_.text();
+	bool is_int;
+	std::size_t cars_number = new_text.toInt(&is_int);
+	if (is_int)
 	{
-		simulation_.setPopulationSize(newCarNumber);
+		simulation_.setPopulationSize(cars_number);
 	}
 	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
 }
@@ -199,11 +198,11 @@ void MainWindow::reset() {
 }
 
 template<class WidgetType, class LayoutType>
-std::tuple<WidgetType*, LayoutType*> MainWindow::createLayout(QLayout* parentLayout) {
+std::tuple<WidgetType*, LayoutType*> MainWindow::createLayout(QLayout* parent_layout) {
 	WidgetType* widget = new WidgetType();
 	LayoutType* layout = new LayoutType(widget);
 
-	if (parentLayout != Q_NULLPTR)
-		parentLayout->addWidget(widget);
+	if (parent_layout != Q_NULLPTR)
+		parent_layout->addWidget(widget);
 	return std::make_tuple(widget, layout);
 }

@@ -24,17 +24,17 @@ class Simulation : public QObject {
 	const float CARS_START_Y = -5.4f;
 public:
 	Simulation(QObject *parent = Q_NULLPTR);
-	void nextGeneration();
 
+	void stop();
+	void start();
+	void newGround();
+	void newVehicles();
+	void setPopulationSize(std::size_t newSize);
+
+	std::size_t getPopulationSize() const;
 	const Objects::Vehicle& getBestVehicle() const;
 	const std::vector<Objects::Vehicle> getVehicles() const;
 	const std::weak_ptr<Objects::Ground> getGround() const;
-	void newGround();
-	void newVehicles();
-	std::size_t getPopulationSize() const;
-	void setPopulationSize(std::size_t newSize);
-	void stop();
-	void start();
 public slots:
 	void reset();
 	void checkActivity();
@@ -43,12 +43,12 @@ signals:
 private:
 	void clearVehicles();
 
-	std::vector<Objects::Vehicle> vehicles_;
-	std::vector<float> fitnesses_;
-	std::shared_ptr<Objects::Ground> ground_;
-	unsigned int population_size_;
-
 	QTimer watchdog_;
+
+	unsigned int population_size_;
+	std::vector<float> fitnesses_;
+	std::vector<Objects::Vehicle> vehicles_;
+	std::shared_ptr<Objects::Ground> ground_;
 };
 
 #endif

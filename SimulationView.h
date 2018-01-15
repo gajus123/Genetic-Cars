@@ -19,6 +19,7 @@
 
 class SimulationView : public QFrame {
 	const QColor WHEEL_COLOR = QColor(255, 255, 102);
+	const QColor BODY_COLOR = Qt::green;
 public:
 	SimulationView(Simulation& simulation, QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 protected:
@@ -30,14 +31,13 @@ private:
 	void drawWheel(const Objects::Wheel& wheel, QPainter& painter);
 	void drawBody(const Objects::Body& body, QPainter& painter);
 	void drawTrack(const Objects::Ground& track, QPainter& painter);
-	void drawTrackSegment(const Objects::Vector2& startPoint, const Objects::Vector2& endPoint, QPainter& painter);
+	void drawTrackSegment(const Objects::Vector2& start_point, const Objects::Vector2& end_point, QPainter& painter);
 
 	Simulation& simulation_;
 	
 	float display_width_;
 	float width_multipier_;
-	float display_center_x_;
-	float display_center_y_;
+	QPointF display_center_;
 };
 
 #endif

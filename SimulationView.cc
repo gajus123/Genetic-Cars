@@ -13,8 +13,8 @@ void SimulationView::paintEvent(QPaintEvent *event) {
 
 	const std::vector<Objects::Vehicle> vehicles = simulation_.getVehicles();
 	if (vehicles.size() != 0) {
-		const Objects::Vehicle& bestVehicle = simulation_.getBestVehicle();
-		p.translate(-bestVehicle.getPosition().x*width_multipier_ + display_center_x_, -bestVehicle.getPosition().y*width_multipier_ + display_center_y_);
+		const Objects::Vehicle& best_vehicle = simulation_.getBestVehicle();
+		p.translate(-best_vehicle.getPosition().x*width_multipier_ + display_center_.x(), -best_vehicle.getPosition().y*width_multipier_ + display_center_.y());
 	}
 	if (auto sim = simulation_.getGround().lock()) {
 		drawTrack(*sim.get(), p);
@@ -28,17 +28,17 @@ void SimulationView::paintEvent(QPaintEvent *event) {
 void SimulationView::drawTrack(const Objects::Ground& track, QPainter& painter) {
 	painter.save();
 	painter.translate(track.getPosition().x*width_multipier_, track.getPosition().y*width_multipier_);
-	auto trackPoints = track.getVertices();
+	auto track_points = track.getVertices();
 	for (unsigned int i = 1; i < track.getVertices().size(); ++i) {
-		drawTrackSegment(trackPoints[i - 1], trackPoints[i], painter);
+		drawTrackSegment(track_points[i - 1], track_points[i], painter);
 	}
 	painter.restore();
 }
 void SimulationView::resizeEvent(QResizeEvent *event) {
 	width_multipier_ = this->width() / display_width_;
 
-	display_center_x_ = this->width() * 0.5f;
-	display_center_y_ = this->height() * 0.66f;
+	display_center_.setX(this->width() * 0.5f);
+	display_center_.setY(this->height() * 0.66f);
 }
 void SimulationView::wheelEvent(QWheelEvent * event) {
 	display_width_ -= event->delta() / 120;
@@ -58,36 +58,37 @@ void SimulationView::drawWheel(const Objects::Wheel& wheel, QPainter& painter) {
 	painter.save();
 	painter.translate(wheel.getPosition().x*width_multipier_, wheel.getPosition().y*width_multipier_);
 
-	painter.setBrush(QBrush(QColor(255, 255, 102)));
 	painter.setBrush(QBrush(WHEEL_COLOR));
 	painter.drawEllipse(QPointF(0, 0), wheel.getRadius()*width_multipier_, wheel.getRadius()*width_multipier_);
 
 	painter.rotate(-wheel.getAngle() / M_PI*180.0f);
 	painter.drawLine(0, 0, wheel.getRadius()*width_multipier_, 0);
-	painter.rotate(wheel.getAngle() / M_PI*180.0f);
 
 	painter.restore();
 }
 void SimulationView::drawBody(const Objects::Body& body, QPainter& painter) {
+	painter.save();
+
 	painter.rotate(body.getAngle() / M_PI * 180.0f);
 
-	std::vector<QPointF> bodyShape;
+	std::vector<QPointF> body_shape;
 	for (const auto& point : body.getVertices()) {
-		bodyShape.emplace_back(std::move(QPointF(point.x*width_multipier_, point.y*width_multipier_)));
+		body_shape.emplace_back(std::move(QPointF(point.x*width_multipier_, point.y*width_multipier_)));
 	}
 
-	painter.setBrush(QBrush(Qt::green));
-	painter.drawPolygon(&bodyShape[0], bodyShape.size());
+	painter.setBrush(QBrush(BODY_COLOR));
+	painter.drawPolygon(&body_shape[0], body_shape.size());
 
+	painter.restore();
 }
 
-void SimulationView::drawTrackSegment(const Objects::Vector2& startPoint, const Objects::Vector2& endPoint, QPainter& painter) {
+void SimulationView::drawTrackSegment(const Objects::Vector2& start_point, const Objects::Vector2& end_point, QPainter& painter) {
 	painter.setBrush(QBrush(Qt::black));
 	const QPoint points[4] = {
-		QPoint(startPoint.x*width_multipier_, startPoint.y*width_multipier_),
-		QPoint(endPoint.x*width_multipier_, endPoint.y*width_multipier_),
-		QPoint(endPoint.x*width_multipier_, (endPoint.y+0.05f)*width_multipier_),
-		QPoint(startPoint.x*width_multipier_, (startPoint.y+0.05f)*width_multipier_)
+		QPoint(start_point.x*width_multipier_, start_point.y*width_multipier_),
+		QPoint(end_point.x*width_multipier_, end_point.y*width_multipier_),
+		QPoint(end_point.x*width_multipier_, (end_point.y+0.05f)*width_multipier_),
+		QPoint(start_point.x*width_multipier_, (start_point.y+0.05f)*width_multipier_)
 	};
 	painter.drawPolygon(points, 4);
 }

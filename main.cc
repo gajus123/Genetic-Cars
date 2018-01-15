@@ -8,7 +8,6 @@
 #include "Box2D/Box2D.h"
 #include <QApplication>
 #include "MainWindow.h"
-//#include "include\Loop.h"
 #include "include\ObjectsFactory.h"
 
 

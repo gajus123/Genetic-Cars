@@ -54,9 +54,9 @@ void Simulation::start() {
 void Simulation::checkActivity() {
 	bool active = false;
 	for (std::size_t i = 0; i < vehicles_.size(); ++i) {
-		float xPosition = vehicles_[i].getPosition().x;
-		if (xPosition > fitnesses_[i]) {
-			fitnesses_[i] = xPosition;
+		float x_position = vehicles_[i].getPosition().x;
+		if (x_position > fitnesses_[i]) {
+			fitnesses_[i] = x_position;
 			active = true;
 		}
 	}
@@ -75,16 +75,16 @@ const std::weak_ptr<Objects::Ground> Simulation::getGround() const {
 	return this->ground_;
 }
 const Objects::Vehicle& Simulation::getBestVehicle() const {
-	const Objects::Vehicle* bestVehicle = nullptr;
+	const Objects::Vehicle* best_vehicle = nullptr;
 
 	for (const auto& vehicle : vehicles_) {
-		if (bestVehicle == nullptr)
-			bestVehicle = &vehicle;
-		else if (bestVehicle->getPosition().x < vehicle.getPosition().x)
-			bestVehicle = &vehicle;
+		if (best_vehicle == nullptr)
+			best_vehicle = &vehicle;
+		else if (best_vehicle->getPosition().x < vehicle.getPosition().x)
+			best_vehicle = &vehicle;
 	}
 
-	return *bestVehicle;
+	return *best_vehicle;
 }
 std::size_t Simulation::getPopulationSize() const {
 	return this->population_size_;

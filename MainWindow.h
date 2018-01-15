@@ -48,12 +48,12 @@ private slots:
 	void pauseSimulation(bool paused);
 	void carsNumberChanged();
 private:
-	QWidget* setupSimulationInterface();
-	QWidget* setupFileInterface();
-	QWidget* setupAlgorithmInterface();
+	QWidget* createSimulationWidgets();
+	QWidget* createFileWidgets();
+	QWidget* createAlgorithmWidgets();
 
 	template<class WidgetType, class LayoutType>
-	std::tuple<WidgetType*, LayoutType*> createLayout(QLayout* parentLayout = Q_NULLPTR);
+	std::tuple<WidgetType*, LayoutType*> createLayout(QLayout* parent_layout = Q_NULLPTR);
 
 	Physics::Loop loop_;
 	Simulation simulation_;
@@ -62,10 +62,8 @@ private:
 	//UI
 	StatisticView statistic_view_;
 	SimulationView simulation_view_;
-	//QWidget sidebar_widget_;
 
 	//Simulation interface
-	//QGroupBox simulation_group_;
 	QPushButton reset_button_;
 	QPushButton pause_button_;
 	QToolButton speed_increase_button_;
