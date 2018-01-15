@@ -46,7 +46,6 @@ namespace Algorithm {
 
 		void reset();
 		void inflateRandom(); //!< Brief: Fills population with random genotypes. Size as set in setNextGenerationSize
-		//void nextPopulation(); //!< Brief: Creates next population of genotypes based on fitness of the current one
 		std::vector<Genotype>& getGenotypes(); //!< Brief: Returns reference to Genotype's container
 
 		void setMutationRate(float rate); //!< Brief: Sets mutatios rate while creating children for the next generation
