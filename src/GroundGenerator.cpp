@@ -14,12 +14,13 @@ GroundGenerator::GroundGenerator(int segments, float x_distance, float max_delta
 
 Objects::Ground * GroundGenerator::genereteNew(Objects::Vector2 position) {
 	std::vector<float> heights = {
-			0.0f,
+			-10.0f,
 			0.0f,
 			0.0f,
 	};
 	for (int i = heights.size(); i < segments_; ++i) {
 		heights.push_back(heights[i-1] + (float)uni(rng_));
 	}
+	heights.push_back(10.0f);
 	return new Objects::Ground(position, x_distance_, heights);
 }

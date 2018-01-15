@@ -25,7 +25,7 @@ namespace Objects {
 namespace Physics {
 
 	const float MAX_MOTOR_TORQUE = 60.0f; //!< Brief: max Vehicle motor torque
-	const float MOTOR_SPEED = 10.0 * M_PI; //!< Brief: radians per second
+	const float MOTOR_SPEED = 7.0 * M_PI; //!< Brief: radians per second
 	const float DEFAULT_DENSITY = 10.0f; //!< Breif: evaluates to object mass
 	const int DEFAULT_GROUP_INDEX = -1;  //!< Brief: default collision layer for dynamic objects
 	const float DEFAULT_FRICTION = 3.0f; //!< Brief: default friction for all objects

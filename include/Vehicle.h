@@ -30,7 +30,7 @@ namespace Objects {
 			FRONT - front wheel connection index
 			BACK - back wheel connection index
 		*/
-		enum WheelLocation {FRONT=6, BACK=2};
+		enum WheelLocation {FRONT=1, BACK=7};
 
 		/*!
 			Creates Body, front and back Wheels and connects them by

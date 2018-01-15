@@ -23,7 +23,7 @@ namespace Algorithm {
 	const unsigned int INT_NUM_BITS = 32; //!< Brief: number of bits in unsigned value type to hold genotype into
 
 	const float MAX_RADIUS_LIMIT = 0.5f; //!< Brief: maximum possible radius of a wheel
-	const float MAX_HEIGHT_LIMIT = 2.0f; //!< Brief: maximum possible length of one Body segment
+	const float MAX_HEIGHT_LIMIT = 0.7f; //!< Brief: maximum possible length of one Body segment
 	
 	/*!
 		\class Genotype
