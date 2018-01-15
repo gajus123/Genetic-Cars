@@ -4,6 +4,7 @@ SimulationView::SimulationView(Simulation& simulation, QWidget *parent, Qt::Wind
 	simulation_(simulation),
 	QFrame(parent, flags),
 	display_width_(10.0) {
+
 	width_multipier_ = this->width() / display_width_;
 }
 void SimulationView::paintEvent(QPaintEvent *event) {
@@ -58,6 +59,7 @@ void SimulationView::drawWheel(const Objects::Wheel& wheel, QPainter& painter) {
 	painter.translate(wheel.getPosition().x*width_multipier_, wheel.getPosition().y*width_multipier_);
 
 	painter.setBrush(QBrush(QColor(255, 255, 102)));
+	painter.setBrush(QBrush(WHEEL_COLOR));
 	painter.drawEllipse(QPointF(0, 0), wheel.getRadius()*width_multipier_, wheel.getRadius()*width_multipier_);
 
 	painter.rotate(-wheel.getAngle() / M_PI*180.0f);

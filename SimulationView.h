@@ -18,6 +18,7 @@
 #include <cmath>
 
 class SimulationView : public QFrame {
+	const QColor WHEEL_COLOR = QColor(255, 255, 102);
 public:
 	SimulationView(Simulation& simulation, QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 protected:
