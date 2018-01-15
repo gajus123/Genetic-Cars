@@ -1,19 +1,22 @@
-#ifndef SIMULATIONVIEW_H
-#define SIMULATIONVIEW_H
+/*!
+* @authors Jakub Gajownik, Rafa³ Galczak
+* @date 15.01.18
+*
+* \brief SimulationView displays Simulation every frame.
+*/
+
+#ifndef SIMULATION_VIEW_H
+#define SIMULATION_VIEW_H
 
 #include "include\Ground.h"
 #include "include\Wheel.h"
 #include "include\Vehicle.h"
-#include "include\ObjectsFactory.h"
 #include "Simulation.h"
 #include <QFrame>
-#include <QTransform>
 #include <QPainter>
 #include <QPoint>
-#include <QDebug>
 #include <QtMath>
 #include <QWidget>
-#include <QGLWidget>
 #include <QWheelEvent>
 #include <cmath>
 
@@ -23,9 +26,9 @@ class SimulationView : public QFrame {
 public:
 	SimulationView(Simulation& simulation, QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 protected:
-	virtual void paintEvent(QPaintEvent *event);
-	virtual void resizeEvent(QResizeEvent *event);
-	virtual void wheelEvent(QWheelEvent * event);
+	virtual void paintEvent(QPaintEvent *event); //!< Brief: Displays Simulation world.
+	virtual void resizeEvent(QResizeEvent *event); //!< Brief: Calculates new scaling value and sets new displaying center point
+	virtual void wheelEvent(QWheelEvent * event); //!< Brief: Sets new world displaying area
 private:
 	void drawCar(const Objects::Vehicle& car, QPainter& painter);
 	void drawWheel(const Objects::Wheel& wheel, QPainter& painter);
@@ -33,11 +36,11 @@ private:
 	void drawTrack(const Objects::Ground& track, QPainter& painter);
 	void drawTrackSegment(const Objects::Vector2& start_point, const Objects::Vector2& end_point, QPainter& painter);
 
-	Simulation& simulation_;
+	Simulation& simulation_; //!< Brief: Reference to Simulation object
 	
-	float display_width_;
-	float width_multipier_;
-	QPointF display_center_;
+	float display_width_; //!< Brief: Width of world to be display on screen
+	float width_multipier_; //!< Brief: World objects coordinates multiplier
+	QPointF display_center_; //!< Brief: Point of widget which is center of display
 };
 
 #endif
