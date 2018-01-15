@@ -56,7 +56,6 @@ namespace Algorithm {
 	private:
 		std::random_device rd_;
 		std::mt19937 rng_;
-		std::uniform_real_distribution<float> random_;
 
 		std::uint32_t front_radius; //!< Biref: Radius of the front wheel mapped to uint32 in gray code
 		std::uint32_t back_radius; //!< Brief: Radius of the back wheel mapped to uint32 in gray code

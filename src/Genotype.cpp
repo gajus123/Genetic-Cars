@@ -7,10 +7,8 @@
 
 namespace Algorithm {
 
-	Genotype::Genotype()
-	{
-		rng_ = std::mt19937(rd_());
-		random_ = std::uniform_real_distribution<float>(0.0f, MAX_RAND_VALUE);
+	Genotype::Genotype() :
+		rng_(rd_())	{
 	}
 
 	Genotype::Genotype(const Genotype & other) : Genotype()
@@ -29,18 +27,15 @@ namespace Algorithm {
 	}
 
 	void Genotype::inflateWithRandom()
-	{
-		std::random_device rd;
-		std::mt19937 rng(rd());
-		
+	{		
 		std::uint32_t limit = 0;
 		limit = ~limit;
 		std::uniform_int_distribution<std::uint32_t> uni(0, limit);
 
-		front_radius = uni(rng);
-		back_radius = uni(rng);
+		front_radius = uni(rng_);
+		back_radius = uni(rng_);
 		for (std::uint32_t i = 0; i < Objects::Body::BODY_SEGMENTS; ++i) {
-			heights.push_back(uni(rng));
+			heights.push_back(uni(rng_));
 		}
 
 	}
@@ -87,9 +82,11 @@ namespace Algorithm {
 
 	std::uint32_t Genotype::mutate_value(std::uint32_t value, float mutation_rate)
 	{
+		std::uniform_real_distribution<float> random(0.0f, MAX_RAND_VALUE);
+
 		std::uint32_t mask = 0;
 		for (unsigned int i = 0; i < INT_NUM_BITS; ++i) {
-			if (random_(rng_) < mutation_rate) {
+			if (random(rng_) < mutation_rate) {
 				mask |= uint32_t(1);
 			}
 			mask <<= 1;
