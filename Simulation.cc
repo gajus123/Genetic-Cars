@@ -63,7 +63,6 @@ void Simulation::checkActivity() {
 	}
 }
 void Simulation::setPopulationSize(std::size_t new_size) {
-	//this->population_size_ = std::min(newSize, MAXIMUM_CARS);
 	population_.setNextGenerationSize(new_size);
 }
 const std::vector<Objects::Vehicle> Simulation::getVehicles() const {
@@ -85,6 +84,5 @@ const Objects::Vehicle& Simulation::getBestVehicle() const {
 	return *best_vehicle;
 }
 std::size_t Simulation::getPopulationSize() const {
-	//return this->population_size_;
 	return population_.getNextGenerationSize();
 }
