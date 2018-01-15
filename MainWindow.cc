@@ -179,5 +179,12 @@ void MainWindow::pauseSimulation(bool paused) {
 		loop_.start();
 }
 void MainWindow::carsNumberChanged() {
-	qDebug() << "Cars number";
+	QString newText = cars_count_edit_.text();
+	bool ok;
+	std::size_t newCarNumber = newText.toInt(&ok);
+	if (ok)
+	{
+		simulation_.setPopulationSize(newCarNumber);
+	}
+	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
 }
