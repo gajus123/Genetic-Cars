@@ -58,12 +58,12 @@ namespace Algorithm {
 		std::mt19937 rng_;
 		std::uniform_real_distribution<float> random_;
 
-		std::uint32_t front_radius;
-		std::uint32_t back_radius;
-		std::vector<std::uint32_t> heights;
+		std::uint32_t front_radius; //!< Biref: Radius of the front wheel mapped to uint32 in gray code
+		std::uint32_t back_radius; //!< Brief: Radius of the back wheel mapped to uint32 in gray code
+		std::vector<std::uint32_t> heights; //!< Brief: Lenghts of body segments mapped to uint32 in gray code
 
-		std::uint32_t grey2NKB(std::uint32_t grey) const;
-		std::uint32_t NKB2Gray(std::uint32_t nkb) const;
+		std::uint32_t grey2NKB(std::uint32_t grey) const; //!< Brief: converts uint32 from gray code to nkb
+		std::uint32_t NKB2Gray(std::uint32_t nkb) const; //!< Brief: converts uint32 from nkb to gray coed
 
 		std::uint32_t mutate_value(std::uint32_t value, float mutation_rate);//!< Test each bit of value against mutation rate and flips it if passed
 
