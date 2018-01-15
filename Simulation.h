@@ -16,8 +16,6 @@
 #include "include\Ground.h"
 #include "include\GroundGenerator.h"
 #include "include\ObjectsFactory.h"
-//#include "include\Population.h"
-#include <cstdio>
 #include <cmath>
 #include <QTimer>
 

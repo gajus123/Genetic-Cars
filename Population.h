@@ -8,7 +8,6 @@
 
 #include <vector>
 #include <random>
-#include <cstdio>
 #include <fstream>
 #include <QObject>
 #include "include/Genotype.h"
