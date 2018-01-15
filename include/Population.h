@@ -9,12 +9,7 @@
 #include <vector>
 #include <random>
 #include <cstdio>
-<<<<<<< HEAD
 #include <fstream>
-#include "include/Genotype.h"
-=======
->>>>>>> 420216b3e4d5db5c06320dabc7c8400a2611454b
-
 #include "include/Genotype.h"
 
 /*!
