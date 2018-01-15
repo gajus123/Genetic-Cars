@@ -9,9 +9,12 @@
 #include "include\GroundGenerator.h"
 #include "include\ObjectsFactory.h"
 #include <cstdio>
+#include <cmath>
 
 class Simulation : public QObject {
 	Q_OBJECT
+
+		const std::size_t MAXIMUM_CARS = 30;
 public:
 	Simulation(QObject *parent = Q_NULLPTR);
 	void nextGeneration();
@@ -21,6 +24,8 @@ public:
 	const std::weak_ptr<Objects::Ground> getGround() const;
 	void newGround();
 	void newVehicles();
+	std::size_t getPopulationSize() const;
+	void setPopulationSize(std::size_t newSize);
 public slots:
 	void reset();
 private:
