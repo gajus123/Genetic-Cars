@@ -8,6 +8,8 @@
 
 namespace Objects {
 
+	const unsigned int Body::BODY_SEGMENTS = 8;
+
     void Body::beforeBodySetUp() {
         calculateVertices();
     }

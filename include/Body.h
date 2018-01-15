@@ -12,11 +12,10 @@
 #include <cstdio>
 
 namespace Objects {
-
-	const unsigned int BODY_SEGMENTS = 8;
-
     class Body : public Base {
     public:
+		static const unsigned int BODY_SEGMENTS;
+
         Body(std::vector<float> lengths, Vector2 position) : lengths(std::move(lengths)), Base(position) {
 			beforeBodySetUp();
 			createAndSetBody();

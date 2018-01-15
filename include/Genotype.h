@@ -44,6 +44,8 @@ namespace Algorithm {
 		std::uint32_t grey2NKB(std::uint32_t grey) const;
 		std::uint32_t NKB2Gray(std::uint32_t nkb) const;
 
+		std::uint32_t mutate_value(std::uint32_t value, float mutation_rate);
+
 
 		std::uint32_t crossValues(std::uint32_t a, std::uint32_t b) const;
 		float castSignedValue(std::uint32_t grey, float maximum_value = 1.0f) const;
