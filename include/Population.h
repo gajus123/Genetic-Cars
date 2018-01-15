@@ -1,30 +1,37 @@
 #ifndef _GENETIC_CARS_POPULATION_H_
 #define _GENETIC_CARS_POPULATION_H_
 
-#include <algorithm>
+
 #include <vector>
+#include <random>
 #include "include/Genotype.h"
 
 
 namespace Algorithm {
-	//todo make sort work
-	//todo make new population work as well
-
-	const int DEFAULT_ELITE_SPECIMEN = 5;
+	const int DEFAULT_ELITE_SPECIMEN = 4;
 
 	class Population
 	{
 	public:
 		unsigned int elite_specimen = DEFAULT_ELITE_SPECIMEN;
 
+		Population();
+		Population(const Population& other);
+		explicit Population(std::vector<Genotype> genotypes);
+
 		void inflateRandom(unsigned int size);
 		std::vector<Genotype>& getGenotypes();
 
-		//Population newPopulation();
+		Population newPopulation();
 	private:
+		std::random_device rd_;
+		std::mt19937 rng_;
+
 		std::vector<Genotype> genotypes;
 		
-		//void sort();
+		std::pair<Genotype, Genotype> getNewChildren();
+		Genotype& getRandomParent();
+		void sort();
 
 	};
 
