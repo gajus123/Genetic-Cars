@@ -64,7 +64,6 @@ private:
 	StatisticView statistic_view_;
 	SimulationView simulation_view_;
 
-	//Simulation widgets
 	QPushButton reset_button_;
 	QPushButton pause_button_;
 	QToolButton speed_increase_button_;
@@ -73,12 +72,10 @@ private:
 	QLabel cars_count_label_;
 	QLineEdit cars_count_edit_;
 
-	//File widgets
 	QGroupBox file_group_;
 	QPushButton load_button_;
 	QPushButton save_button_;
 
-	//Genetic widgets
 	QLabel mutation_size_label_;
 	QLineEdit mutation_size_edit_;
 	QLabel mutation_rate_label_;
