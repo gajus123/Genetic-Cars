@@ -1,5 +1,6 @@
 //
-// Created by igor on 13.01.18.
+// \author Rafa³ Galczak
+// \date 14.01.18
 //
 
 #include "include/Body.h"
@@ -9,6 +10,8 @@
 namespace Objects {
 
 	const unsigned int Body::BODY_SEGMENTS = 8;
+	const float Body::BODY_FRICTION = Physics::DEFAULT_FRICTION * 100.0f;
+	
 
     void Body::beforeBodySetUp() {
         calculateVertices();
@@ -36,7 +39,7 @@ namespace Objects {
         for (const auto &item : vertices) {
             b2_vertices.push_back(item.asb2Vec2());
         }
-        body = Physics::ObjectsFactory::getInstance().createPolygon(b2_vertices, 1.0f, 0.3f);
+        body = Physics::ObjectsFactory::getInstance().createPolygon(b2_vertices, Physics::DEFAULT_DENSITY, BODY_FRICTION);
     }
 
     std::vector<Vector2> Body::getCurrentVertices() const {

@@ -1,4 +1,9 @@
-#include "..\include\Genotype.h"
+//
+// \author Rafa³ Galczak
+// \date 14.01.18
+//
+
+#include "include/Genotype.h"
 
 namespace Algorithm {
 
