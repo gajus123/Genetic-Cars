@@ -4,6 +4,7 @@
 #include <QtCharts>
 
 class StatisticView : public QChartView {
+	Q_OBJECT
 public:
 	StatisticView(QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 public slots:
