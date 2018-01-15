@@ -7,7 +7,7 @@ Simulation::Simulation(QObject *parent) :
 	population_size_(CARS_NUMBER_ON_START) {
 
 	population_.inflateRandom(CARS_NUMBER_ON_START);
-	watchdog_.setInterval(2000);
+	watchdog_.setInterval(3000);
 	connect(&watchdog_, SIGNAL(timeout()), this, SLOT(checkActivity()));
 	watchdog_.start();
 }
@@ -33,7 +33,6 @@ void Simulation::newVehicles() {
 		vehicles_.push_back(genotype.generate());
 		fitnesses_.emplace_back(0.0f);
 	}
-	printf("%d\n", vehicles_.size());
 }
 void Simulation::reset() {
 	newGround();
@@ -56,10 +55,9 @@ void Simulation::checkActivity() {
 	}
 	if (!active) {
 		emit roundEnd(fitnesses_);
-
 		auto& genotypes = population_.getGenotypes();
 		for (std::size_t i = 0; i < fitnesses_.size(); ++i) {
-			genotypes[i].fitness = fitnesses_[i];
+			genotypes[i].fitness = std::fmaxf(0.0f, fitnesses_[i]);
 		}
 
 		population_.nextPopulation();
