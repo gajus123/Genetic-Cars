@@ -26,7 +26,7 @@ namespace Algorithm {
 	void Genotype::inflateWithRandom()
 	{
 		std::random_device rd;
-		std::mt19937 rng;
+		std::mt19937 rng(rd());
 		
 		std::uint32_t limit = 0;
 		limit = ~limit;
@@ -78,8 +78,9 @@ namespace Algorithm {
 		child.front_radius = crossValues(this->front_radius, other.front_radius);
 		child.back_radius = crossValues(this->back_radius, other.back_radius);
 		for (unsigned int i = 0; i < heights.size(); ++i) {
-			child.heights[i] = crossValues(this->heights[i], other.heights[i]);
+			child.heights.push_back(crossValues(this->heights[i], other.heights[i]));
 		}
+		printf("\n");
 		return child;
 	}
 
