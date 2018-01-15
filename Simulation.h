@@ -16,7 +16,7 @@
 #include "include\Ground.h"
 #include "include\GroundGenerator.h"
 #include "include\ObjectsFactory.h"
-#include "include\Population.h"
+//#include "include\Population.h"
 #include <cstdio>
 #include <cmath>
 #include <QTimer>
@@ -38,22 +38,13 @@ public:
 	void start();
 	void newGround();
 	void resetTimers();
-	void newVehicles();
-	void setMutationRate(float mutation_rate);
-	void setPopulationSize(std::size_t new_size);
-	void setEliteSpecimen(std::size_t elite_specimen);
 
-	void loadFromFile(std::string filename);
-	void saveToFile(std::string filename) const;
-
-	float getMutationRate() const;
-	std::size_t getEliteSpecimen() const;
-	std::size_t getPopulationSize() const;
 	const Objects::Vehicle& getBestVehicle() const;
 	const std::vector<Objects::Vehicle> getVehicles() const;
 	const std::weak_ptr<Objects::Ground> getGround() const;
 public slots:
 	void reset();
+	void newRound(std::vector<Objects::Vehicle> vehicles);
 private slots:
 	void endRound();
 	void checkActivity();
@@ -69,7 +60,7 @@ private:
 	std::vector<Objects::Vehicle> vehicles_;
 	std::shared_ptr<Objects::Ground> ground_;
 
-	Algorithm::Population population_;
+	//Algorithm::Population population_;
 };
 
 #endif
