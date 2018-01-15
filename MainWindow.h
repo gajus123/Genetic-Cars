@@ -40,6 +40,7 @@ public:
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 private slots:
+	void reset();
 	void mutationRateChanged();
 	void mutationSizeChanged();
 	void saveToFile();

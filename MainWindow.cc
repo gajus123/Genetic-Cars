@@ -62,7 +62,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	connect(&mutation_size_edit_, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
 	connect(&load_button_, SIGNAL(clicked()), this, SLOT(loadFromFile()));
 	connect(&save_button_, SIGNAL(clicked()), this, SLOT(saveToFile()));
-	connect(&reset_button_, SIGNAL(clicked()), &simulation_, SLOT(reset()));
+	//connect(&reset_button_, SIGNAL(clicked()), &simulation_, SLOT(reset()));
+	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(reset()));
 	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
 
@@ -73,11 +74,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 
 	simulation_.newGround();
 	simulation_.newVehicles();
-
-	/*statistic_view_.addData(1.0, 0.5, 0.2, 0.3);
-	statistic_view_.addData(2.0, 1.0, 0.6, 0.65);
-	statistic_view_.reset();
-	statistic_view_.addData(0.5, 0.1, 0.3, 0.2);*/
 }
 QWidget* MainWindow::setupSimulationInterface() {
 	//Create container for Simulation manipulation widgets
@@ -178,10 +174,14 @@ void MainWindow::loadFromFile() {
 		"Text Files (*.txt);;All Files (*)");
 }
 void MainWindow::pauseSimulation(bool paused) {
-	if (paused)
+	if (paused) {
 		loop_.stop();
-	else
+		simulation_.stop();
+	}
+	else {
 		loop_.start();
+		simulation_.start();
+	}
 }
 void MainWindow::carsNumberChanged() {
 	QString newText = cars_count_edit_.text();
@@ -192,6 +192,10 @@ void MainWindow::carsNumberChanged() {
 		simulation_.setPopulationSize(newCarNumber);
 	}
 	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
+}
+void MainWindow::reset() {
+	this->statistic_view_.reset();
+	this->simulation_.reset();
 }
 
 template<class WidgetType, class LayoutType>
