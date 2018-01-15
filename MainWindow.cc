@@ -9,7 +9,7 @@
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags),
 	mutation_size_label_("Prawdopodobieństwo mutacji: "),
-	elite_specimen_number_label_("Elite specimen: "),
+	elite_specimen_number_label_("Ilość osobników elitarnych: "),
 	load_button_("Wczytaj"),
 	save_button_("Zapisz"),
 	reset_button_("Resetuj"),
@@ -104,10 +104,6 @@ QWidget* MainWindow::createSimulationWidgets() {
 
 	//Set widgets properties
 	pause_button_.setCheckable(true);
-	speed_decrease_button_.setText("-");
-	speed_increase_button_.setText("+");
-	speed_label_.setText("10");
-	speed_label_.setAlignment(Qt::AlignCenter);
 	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
 	mutation_size_edit_.setText(QString().setNum(simulation_.getMutationRate()));
 	elite_specimen_number_edit_.setText(QString::number(simulation_.getEliteSpecimen()));
@@ -180,14 +176,39 @@ void MainWindow::mutationSizeChanged() {
 	mutation_size_edit_.setText(QString().setNum(simulation_.getMutationRate()));
 }
 void MainWindow::saveToFile() {
-	QString fileName = QFileDialog::getSaveFileName(this,
+	if (!pause_button_.isChecked()) {
+		loop_.stop();
+		simulation_.stop();
+	}
+
+	QString filename = QFileDialog::getSaveFileName(this,
 		"Save Population", "",
 		"Text Files (*.txt);;All Files (*)");
+
+	if (!filename.isEmpty())
+		simulation_.saveToFile(filename.toStdString());
+
+	if (!pause_button_.isChecked()) {
+		loop_.start();
+		simulation_.start();
+	}
 }
 void MainWindow::loadFromFile() {
-	QString fileName = QFileDialog::getOpenFileName(this,
+	if (!pause_button_.isChecked()) {
+		loop_.stop();
+		simulation_.stop();
+	}
+	QString filename = QFileDialog::getOpenFileName(this,
 		"Load Population", "",
 		"Text Files (*.txt);;All Files (*)");
+
+	if (!filename.isEmpty())
+		simulation_.loadFromFile(filename.toStdString());
+
+	if (!pause_button_.isChecked()) {
+		loop_.start();
+		simulation_.start();
+	}
 }
 void MainWindow::pauseSimulation(bool paused) {
 	if (paused) {

@@ -66,9 +66,6 @@ private:
 	QPushButton reset_button_;
 	QPushButton pause_button_;
 	QComboBox simulation_speed_chooser_;
-	QToolButton speed_increase_button_;
-	QToolButton speed_decrease_button_;
-	QLabel speed_label_;
 	QLabel cars_count_label_;
 	QLineEdit cars_count_edit_;
 
