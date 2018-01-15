@@ -116,4 +116,34 @@ namespace Algorithm {
 				return a.fitness > b.fitness;
 		});
 	}
+	void Population::saveToFile(std::string filename) const {
+		std::ofstream output_file;
+		output_file.open(filename);
+
+		output_file << genotypes_.size() << "\n";
+		for (const auto& genotype : genotypes_) {
+			output_file << genotype << "\n";
+		}
+
+		output_file.close();
+	}
+
+	void Population::loadFromFile(std::string filename)
+	{
+		genotypes_.clear();
+
+		std::ifstream input_file;
+		input_file.open(filename);
+
+		std::size_t genotypes_number;
+		input_file >> genotypes_number;
+		for (auto i=0; i<genotypes_number; ++i) {
+			printf("1\n");
+			Genotype g;
+			input_file >> g;
+			genotypes_.emplace_back(g);
+		}
+
+		input_file.close();
+	}
 }

@@ -9,6 +9,7 @@
 #include <vector>
 #include <random>
 #include <cstdio>
+#include <fstream>
 #include "include/Genotype.h"
 
 
@@ -26,7 +27,6 @@ namespace Algorithm {
 	public:
 
 		Population();
-		Population(const Population& other) = delete;
 		explicit Population(std::vector<Genotype> genotypes);
 
 		void reset();
@@ -41,6 +41,9 @@ namespace Algorithm {
 		float getMutationRate() const;
 		std::size_t getEliteSpecimen() const;
 		std::size_t getNextGenerationSize() const;
+
+		void saveToFile(std::string filename) const;
+		void loadFromFile(std::string filename);
 	private:
 		std::random_device rd_;
 		std::mt19937 rng_;
@@ -53,7 +56,6 @@ namespace Algorithm {
 		std::pair<Genotype, Genotype> getNewChildren();
 		Genotype& getRandomParent();
 		void sort();
-
 	};
 
 
