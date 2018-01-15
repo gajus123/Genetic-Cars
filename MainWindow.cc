@@ -105,12 +105,12 @@ void MainWindow::setupSimulationInterface() {
 	reset_button_.setText("Resetuj");
 	pause_button_.setText("Pauza");
 	pause_button_.setCheckable(true);
-	//pause_button_.setChecked(true);
 	speed_decrease_button_.setText("-");
 	speed_increase_button_.setText("+");
 	speed_label_.setText("10");
 	speed_label_.setAlignment(Qt::AlignCenter);
 	cars_count_label_.setText("Ilość pojazdów:");
+	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
 }
 void MainWindow::setupFileInterface() {
 	QHBoxLayout* layout = new QHBoxLayout();
