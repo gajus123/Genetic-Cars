@@ -4,23 +4,21 @@
 //
 
 #include "include/Base.h"
-#include "..\include\Base.h"
-
 
 namespace Objects {
 
-	Base::Base(Vector2 position) : start_position(position) {}
+	Base::Base(Vector2 position) : start_position_(position) {}
 
 	Vector2 Base::getPosition() const { 
-		return Vector2(body->GetPosition()); 
+		return Vector2(body_->GetPosition()); 
 	}
 
 	float Base::getAngle() const { 
-		return (float)body->GetAngle(); 
+		return (float)body_->GetAngle(); 
 	}
 
 	void Base::afterBodySetup() { 
-		body->SetTransform(start_position.asb2Vec2(), 0.0f);
+		body_->SetTransform(start_position_.asb2Vec2(), 0.0f);
 	}
 
 }

@@ -15,7 +15,7 @@ namespace Objects {
 	};
 
     void Wheel::createAndSetBody() {
-        body = Physics::ObjectsFactory::getInstance().createCircle(radius_, Physics::DEFAULT_DENSITY, Physics::DEFAULT_FRICTION);
+        body_ = Physics::ObjectsFactory::getInstance().createCircle(radius_, Physics::DEFAULT_DENSITY, Physics::DEFAULT_FRICTION);
     }
 
 }

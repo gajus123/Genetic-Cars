@@ -64,7 +64,7 @@ namespace Physics {
 	b2RevoluteJoint * ObjectsFactory::createJoint(Objects::Base& a, Objects::Base& b, b2Vec2 point)
 	{
 		b2RevoluteJointDef jointDef;
-		jointDef.Initialize(a.body, b.body, point);
+		jointDef.Initialize(a.body_, b.body_, point);
 		jointDef.enableMotor = true;
 		jointDef.maxMotorTorque = MAX_MOTOR_TORQUE;
 		jointDef.motorSpeed = MOTOR_SPEED;
@@ -74,7 +74,7 @@ namespace Physics {
 
 	void ObjectsFactory::destroyBody(Objects::Base & body)
 	{
-		world->DestroyBody(body.body);
+		world->DestroyBody(body.body_);
 	}
 
 	void ObjectsFactory::destroyJoint(b2RevoluteJoint * joint)
