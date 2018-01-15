@@ -1,8 +1,6 @@
 #ifndef SIMULATIONVIEW_H
 #define SIMULATIONVIEW_H
 
-#include "Track.h"
-#include "Car.h"
 #include "include\Ground.h"
 #include "include\Wheel.h"
 #include "include\Vehicle.h"
