@@ -33,18 +33,18 @@ namespace Objects {
 							 starting at upper one	
 			/param position - position in the world space to spawn body on
 		*/
-        Body(std::vector<float> lengths, Vector2 position) : lengths(std::move(lengths)), Base(position) {
+        Body(std::vector<float> lengths, Vector2 position) : lengths_(std::move(lengths)), Base(position) {
 			beforeBodySetUp();
 			createAndSetBody();	
 			afterBodySetup();
 		};
 
-        std::vector<Vector2> getVertices() const { return vertices; };
+        std::vector<Vector2> getVertices() const { return vertices_; };
         std::vector<Vector2> getCurrentVertices() const; //!< Brief: returns vertices shifted by current position
 
     protected:
-        std::vector<Vector2> vertices;
-        std::vector<float> lengths;
+        std::vector<Vector2> vertices_;
+        std::vector<float> lengths_;
 
         void beforeBodySetUp() override; //!< Brief: Calculates and setus up vertives
         void calculateVertices(); //!< Brief: Calculates b2PolygonShape vertices 

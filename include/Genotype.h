@@ -1,6 +1,12 @@
 #ifndef _GENETIC_CARS_GENOTYPE_H_
 #define _GENETIC_CARS_GENOTYPE_H_
 
+//
+// \author Rafa³ Galczak
+// \date 15.01.18
+//
+
+
 #include <vector>
 #include <random>
 #include <cstdint>

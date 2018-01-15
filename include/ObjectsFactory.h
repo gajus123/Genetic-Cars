@@ -1,5 +1,6 @@
 //
-// Created by igor on 13.01.18.
+// \author Rafa³ Galczak
+// \date 14.01.18
 //
 
 #ifndef GENETIC_CARS_PHYSICSOBJECTSFACTORY_H

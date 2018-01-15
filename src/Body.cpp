@@ -18,7 +18,7 @@ namespace Objects {
     }
 
     void Body::calculateVertices() {
-        assert(lengths.size() == BODY_SEGMENTS);
+        assert(lengths_.size() == BODY_SEGMENTS);
         std::vector<Vector2> normals = {
                 {0.0f, 1.0f},
                 {-1.0f, 1.0f},
@@ -30,13 +30,13 @@ namespace Objects {
                 {1.0f, 1.0f},
         };
         for (int i = 0; i < normals.size(); ++i) {
-            vertices.emplace_back(normals[i] * lengths[i]);
+            vertices_.emplace_back(normals[i] * lengths_[i]);
         }
     }
 
     void Body::createAndSetBody() {
         std::vector<b2Vec2> b2_vertices;
-        for (const auto &item : vertices) {
+        for (const auto &item : vertices_) {
             b2_vertices.push_back(item.asb2Vec2());
         }
         body = Physics::ObjectsFactory::getInstance().createPolygon(b2_vertices, Physics::DEFAULT_DENSITY, BODY_FRICTION);
@@ -45,7 +45,7 @@ namespace Objects {
     std::vector<Vector2> Body::getCurrentVertices() const {
 		Vector2 position = getPosition();
         std::vector<Vector2> curr_vertices;
-        for (const auto &v : vertices) {
+        for (const auto &v : vertices_) {
             curr_vertices.emplace_back(v + position);
         }
         return curr_vertices;
