@@ -17,7 +17,7 @@
 */
 namespace Algorithm {
 
-	const int DEFAULT_ELITE_SPECIMEN = 4; //!< Brief: Default of how any best genotypes are copied to new generation
+	const std::size_t DEFAULT_ELITE_SPECIMEN = 4; //!< Brief: Default of how any best genotypes are copied to new generation
 	const float DEFAULT_MUTATION_RATE = 20.0f; //!< Brief: Percentes of a chance for a bit flip during mutation
 	const std::size_t DEFAULT_POPULATION_SIZE = 10; //!< Brief: Default number of genotypes in the population
 	const std::size_t MIN_ELITE_SPECIMEN = 1;
