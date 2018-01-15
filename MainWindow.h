@@ -39,13 +39,13 @@ public:
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 private slots:
-	void reset();
-	void mutationRateChanged();
-	void mutationSizeChanged();
-	void saveToFile();
-	void loadFromFile();
-	void pauseSimulation(bool paused); //!< Brief: Pause physics and simulation.
-	void carsNumberChanged(); //!< Brief: Change cars number in simulation if writted text is number.
+	void reset(); //!< Brief: Resets whole simulation and genetic algorithm.
+	void mutationRateChanged(); //!< Brief: Reacts to change of mutation rate edit line.
+	void mutationSizeChanged();//!< Brief: Reacts to change of mutation size edit line.
+	void saveToFile(); //!< Brief: Reacts to 'Save' button clicks.
+	void loadFromFile(); //!< Brief: Reacts to 'Load' button clicks.
+	void pauseSimulation(bool paused); //!< Brief: Pauses physics and simulation.
+	void carsNumberChanged(); //!< Brief: Changes cars number in simulation if writted text is number.
 private:
 	QWidget* createSimulationWidgets(); //!< Brief: Creates GUI part responsible for Simulation settings manipulation/displaying. Return pointer to widgets container.
 	QWidget* createFileWidgets(); //!< Brief: Creates GUI part responsible for saving/loading buttons. Return pointer to widgets container.
