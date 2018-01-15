@@ -33,6 +33,8 @@ public:
 	void newVehicles();
 	std::size_t getPopulationSize() const;
 	void setPopulationSize(std::size_t newSize);
+	void stop();
+	void start();
 public slots:
 	void reset();
 	void checkActivity();

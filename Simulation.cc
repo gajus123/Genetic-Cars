@@ -45,6 +45,12 @@ void Simulation::reset() {
 	newGround();
 	newVehicles();
 }
+void Simulation::stop() {
+	watchdog_.stop();
+}
+void Simulation::start() {
+	watchdog_.start();
+}
 void Simulation::checkActivity() {
 	bool active = false;
 	for (std::size_t i = 0; i < vehicles_.size(); ++i) {
