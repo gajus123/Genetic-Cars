@@ -11,6 +11,8 @@
 #include <random>
 #include <cstdint>
 #include <cstdio>
+#include <ostream>
+#include <istream>
 
 #include "include/Vehicle.h"
 
@@ -48,6 +50,9 @@ namespace Algorithm {
 		Genotype cross(Genotype& other) const;//!< Takes lower half bits if this genotype and upper half from other, combines them to create new Genetype
 
 		Objects::Vehicle generate(Objects::Vector2 position = {0.0f, 0.0f}) const; //!< Creates Vehicle corresponding to this Genotype
+		
+		friend std::ostream& operator<< (std::ostream &stream, const Genotype& genotype);
+		friend std::istream& operator>> (std::istream & stream, Genotype& genotype);
 	private:
 		std::random_device rd_;
 		std::mt19937 rng_;

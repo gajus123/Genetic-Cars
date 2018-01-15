@@ -137,5 +137,20 @@ namespace Algorithm {
 		}
 		return Objects::Vehicle(position, heights_r, front_wheel_r, back_wheel_r);
 	}
-
+	std::ostream& operator<< (std::ostream &stream, const Genotype &genotype) {
+		stream << genotype.front_radius << " " << genotype.back_radius << " ";
+		for (const auto& height : genotype.heights) {
+			stream << height << " ";
+		}
+		return stream;
+	}
+	std::istream& operator>> (std::istream & stream, Genotype& genotype) {
+		stream >> genotype.front_radius >> genotype.back_radius;
+		for (std::uint32_t i = 0; i < Objects::Body::BODY_SEGMENTS; ++i) {
+			std::uint32_t temp_value;
+			stream >> temp_value;
+			genotype.heights.push_back(temp_value);
+		}
+		return stream;
+	}
 }
