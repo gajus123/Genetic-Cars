@@ -59,7 +59,6 @@ namespace Algorithm {
 		for (unsigned int i = 0; i < heights.size(); ++i) {
 			child.heights.push_back(crossValues(this->heights[i], other.heights[i]));
 		}
-		printf("\n");
 		return child;
 	}
 
