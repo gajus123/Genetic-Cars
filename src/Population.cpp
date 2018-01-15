@@ -6,28 +6,28 @@
 
 namespace Algorithm {
 	
-	Population::Population(float mutation_rate) : mutation_rate_(mutation_rate) {
+	Population::Population() :
+		mutation_rate_(DEFAULT_MUTATION_RATE),
+		next_population_size_(DEFAULT_GENERATION_SIZE) {
+
 		rng_ = std::mt19937(rd_());
 	}
 
-	Population::Population(const Population & other) : Population(other.mutation_rate_) {
-		genotypes = other.genotypes;
+	Population::Population(std::vector<Genotype> genotypes) : 
+		Population() {
+		genotypes_ = genotypes;
 	}
 
-	Population::Population(std::vector<Genotype> genotypes, float mutation_rate) : Population(mutation_rate) {
-		this->genotypes = genotypes;
-	}
-
-	void Population::inflateRandom(unsigned int size) {
-		for (unsigned int i = 0; i < size; ++i) {
+	void Population::inflateRandom() {
+		for (unsigned int i = 0; i < next_population_size_; ++i) {
 			Genotype g;
 			g.inflateWithRandom();
-			genotypes.emplace_back(g);
+			genotypes_.emplace_back(g);
 		}
 	}
 
 	std::vector<Genotype>& Population::getGenotypes() {
-		return genotypes;
+		return genotypes_;
 	}
 
 	void Population::setMutationRate(float rate)
@@ -42,9 +42,9 @@ namespace Algorithm {
 		std::vector<Genotype> new_population;
 
 		for (int i = 0; i < elite_specimen; ++i) {
-			new_population.push_back(genotypes[i]);
+			new_population.push_back(genotypes_[i]);
 		}
-		for (int i = 0; i < (genotypes.size() - elite_specimen) / 2; ++i) {
+		for (int i = 0; i < (next_population_size_ - elite_specimen) / 2; ++i) {
 			std::pair<Genotype, Genotype> children = getNewChildren();
 			children.first.mutate(mutation_rate_);
 			children.second.mutate(mutation_rate_);
@@ -52,7 +52,7 @@ namespace Algorithm {
 			new_population.push_back(children.second);
 		}
 
-		genotypes = new_population;
+		genotypes_ = new_population;
 	}
 
 	std::pair<Genotype, Genotype> Population::getNewChildren() {
@@ -62,14 +62,14 @@ namespace Algorithm {
 		return std::make_pair(a.cross(b), b.cross(a));
 	}
 
-	Genotype& Population::getRandomParent() {
+	Genotype& Population::getRandomParent() {	
 		float limit = 0.0f;
-		for (const auto& g : genotypes) {
+		for (const auto& g : genotypes_) {
 			limit += g.fitness;
 		}
 		std::uniform_real_distribution<float> random(0.0f, limit);
 		float rulette = random(rng_);
-		for (auto& g : genotypes) {
+		for (auto& g : genotypes_) {
 			if (g.fitness >= rulette) {
 				return g;
 			}
@@ -77,9 +77,18 @@ namespace Algorithm {
 		}
 		throw std::runtime_error("No parent found!");
 	}
+	std::size_t Population::getNextGenerationSize() const {
+		return next_population_size_;
+	}
+	float Population::getMutationRate() const {
+		return mutation_rate_;
+	}
+	void Population::setNextGenerationSize(std::size_t population_size) {
+		next_population_size_ = population_size;
+	}
 
 	void Population::sort() {
-		std::sort(genotypes.begin(), genotypes.end(),
+		std::sort(genotypes_.begin(), genotypes_.end(),
 			[](const Genotype& a, const Genotype& b) {
 				return a.fitness > b.fitness;
 		});

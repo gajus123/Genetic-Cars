@@ -2,11 +2,9 @@
 
 Simulation::Simulation(QObject *parent) :
 	QObject(parent),
-	watchdog_(this),
-	population_(10),
-	population_size_(CARS_NUMBER_ON_START) {
+	watchdog_(this) {
 
-	population_.inflateRandom(CARS_NUMBER_ON_START);
+	population_.inflateRandom();
 	watchdog_.setInterval(3000);
 	connect(&watchdog_, SIGNAL(timeout()), this, SLOT(checkActivity()));
 	watchdog_.start();
@@ -64,8 +62,9 @@ void Simulation::checkActivity() {
 		newVehicles();
 	}
 }
-void Simulation::setPopulationSize(std::size_t newSize) {
-	this->population_size_ = std::min(newSize, MAXIMUM_CARS);
+void Simulation::setPopulationSize(std::size_t new_size) {
+	//this->population_size_ = std::min(newSize, MAXIMUM_CARS);
+	population_.setNextGenerationSize(new_size);
 }
 const std::vector<Objects::Vehicle> Simulation::getVehicles() const {
 	return this->vehicles_;
@@ -86,5 +85,6 @@ const Objects::Vehicle& Simulation::getBestVehicle() const {
 	return *best_vehicle;
 }
 std::size_t Simulation::getPopulationSize() const {
-	return this->population_size_;
+	//return this->population_size_;
+	return population_.getNextGenerationSize();
 }

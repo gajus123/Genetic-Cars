@@ -38,7 +38,7 @@ public:
 	void start();
 	void newGround();
 	void newVehicles();
-	void setPopulationSize(std::size_t newSize);
+	void setPopulationSize(std::size_t new_size);
 
 	std::size_t getPopulationSize() const;
 	const Objects::Vehicle& getBestVehicle() const;
@@ -54,7 +54,6 @@ private:
 
 	QTimer watchdog_;
 
-	unsigned int population_size_;
 	std::vector<float> fitnesses_;
 	std::vector<Objects::Vehicle> vehicles_;
 	std::shared_ptr<Objects::Ground> ground_;
