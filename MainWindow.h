@@ -25,6 +25,7 @@
 #include <QGroupBox>
 #include <QtCharts>
 #include <QFileDialog>
+#include <QComboBox>
 
 class MainWindow : public QMainWindow {
 	Q_OBJECT
@@ -43,11 +44,12 @@ private slots:
 	void loadFromFile(); //!< Brief: Reacts to 'Load' button clicks.
 	void pauseSimulation(bool paused); //!< Brief: Pauses physics and simulation.
 	void carsNumberChanged(); //!< Brief: Changes cars number in simulation if writted text is number.
+	void speedChanged(); //!< Brief: Changes speed simulation to the selected one.
 private:
 	QWidget* createSimulationWidgets(); //!< Brief: Creates GUI part responsible for Simulation settings manipulation/displaying. Return pointer to widgets container.
 	QWidget* createFileWidgets(); //!< Brief: Creates GUI part responsible for saving/loading buttons. Return pointer to widgets container.
 	QWidget* createAlgorithmWidgets(); //!< Brief: Creates GUI part responsible for Algorithm settings manipulation/displaying. Return pointer to widgets container.
-									
+	void initializeSpeedWidget();
 
 	template<class WidgetType, class LayoutType>
 	std::tuple<WidgetType*, LayoutType*> createLayout(QLayout* parent_layout = Q_NULLPTR); //!< Brief: Creates container of WidgetType, sets its layout to new LayoutType object.
@@ -63,6 +65,7 @@ private:
 
 	QPushButton reset_button_;
 	QPushButton pause_button_;
+	QComboBox simulation_speed_chooser_;
 	QToolButton speed_increase_button_;
 	QToolButton speed_decrease_button_;
 	QLabel speed_label_;
@@ -75,8 +78,8 @@ private:
 
 	QLabel mutation_size_label_;
 	QLineEdit mutation_size_edit_;
-	QLabel mutation_rate_label_;
-	QLineEdit mutation_rate_edit_;
+	QLabel elite_specimen_number_label_;
+	QLineEdit elite_specimen_number_edit_;
 };
 
 #endif
