@@ -1,5 +1,6 @@
 //
-// Created by igor on 13.01.18.
+// \author Rafa³ Galczak
+// \date 13.01.18
 //
 
 #include "Loop.h"

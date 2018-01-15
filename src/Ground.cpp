@@ -29,6 +29,6 @@ namespace Objects {
         for (const auto &v : vertices_) {
             b2_vertices.emplace_back(v.asb2Vec2());
         }
-        body = Physics::ObjectsFactory::getInstance().createGround(b2_vertices);
+        body_ = Physics::ObjectsFactory::getInstance().createGround(b2_vertices);
     }
 }

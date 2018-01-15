@@ -39,7 +39,7 @@ namespace Objects {
         for (const auto &item : vertices_) {
             b2_vertices.push_back(item.asb2Vec2());
         }
-        body = Physics::ObjectsFactory::getInstance().createPolygon(b2_vertices, Physics::DEFAULT_DENSITY, BODY_FRICTION);
+        body_ = Physics::ObjectsFactory::getInstance().createPolygon(b2_vertices, Physics::DEFAULT_DENSITY, BODY_FRICTION);
     }
 
     std::vector<Vector2> Body::getCurrentVertices() const {

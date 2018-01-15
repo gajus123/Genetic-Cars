@@ -35,8 +35,8 @@ namespace Objects {
 		virtual float getAngle() const; //!< /return b2Body rotation
 
     protected:
-        b2Body* body;
-        Vector2 start_position;
+        b2Body* body_;
+        Vector2 start_position_;
 
 		virtual void beforeBodySetUp() {}; //!< Brief: Called before creating a b2Body
 		virtual void createAndSetBody() {}; //!< Brief: Body creation

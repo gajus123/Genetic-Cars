@@ -1,31 +1,56 @@
 //
-// Created by igor on 13.01.18.
+// \author Rafa³ Galczak
+// \date 13.01.18
 //
 
 #ifndef GENETIC_CARS_VEHICLE_H
 #define GENETIC_CARS_VEHICLE_H
 
-#include "include/Wheel.h"
-#include "include/Body.h"
 #include "Box2D/Box2D.h"
 
+#include "include/Body.h"
+#include "include/Wheel.h"
 
 namespace Objects {
 
+	/*!
+		\class Vehicle 
+		\brief Body joined by beJoint with 2 Wheels
+
+		Wehicle is a Body connected with two Wheels by
+		constantly rotating b2RevoluteJoint at Body vertices
+		at indexes WheelLocation::FRONT and WheelLocation::BACK
+	*/
     class Vehicle {
     public:
+		/*!
+			Indexes of Body vertices at which Wheels should be
+			connected to the Body.
+			
+			FRONT - front wheel connection index
+			BACK - back wheel connection index
+		*/
+		enum WheelLocation {FRONT=6, BACK=2};
 
+		/*!
+			Creates Body, front and back Wheels and connects them by
+			rotating b2RevoluteJoint
+			/param postion - postion to spawn Vehicle in the worlds space
+			/param body - /see /class Body - vector of body segments lenghts
+			/param front_wheel_radius - radius of the front wheel 
+			/param back_wheel_radius - radius of the back wheel
+		*/
 		Vehicle(Vector2 position,
 			std::vector<float> body,
 			float front_wheel_radius,
 			float back_wheel_radius);
-		
+
 		Vector2 getPosition() const { return car_body.getPosition(); }
 		const Body& getBody() const { return car_body; }
 		const Wheel& getFrontWheel() const { return front; }
 		const Wheel& getBackWheel() const { return back; }
 
-		void destroy();
+		void destroy(); //!< Brief: calls Physics::ObjectsFactory to destroy each component
     private:
 		Body car_body;
 		Wheel front;
