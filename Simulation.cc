@@ -2,12 +2,16 @@
 
 Simulation::Simulation(QObject *parent) :
 	QObject(parent),
-	watchdog_(this) {
+	watchdog_(this),
+	round_timer_(this) {
 
 	population_.inflateRandom();
-	watchdog_.setInterval(3000);
+	watchdog_.setInterval(CHECK_TIME);
+	round_timer_.setInterval(MAX_ROUND_TIME);
 	connect(&watchdog_, SIGNAL(timeout()), this, SLOT(checkActivity()));
+	connect(&round_timer_, SIGNAL(timeout()), this, SLOT(endRound()));
 	watchdog_.start();
+	round_timer_.start();
 }
 void Simulation::clearVehicles() {
 	for (auto& vehicle : vehicles_) {
@@ -38,9 +42,11 @@ void Simulation::reset() {
 }
 void Simulation::stop() {
 	watchdog_.stop();
+	round_timer_.stop();
 }
 void Simulation::start() {
 	watchdog_.start();
+	round_timer_.start();
 }
 void Simulation::checkActivity() {
 	bool active = false;
@@ -51,16 +57,8 @@ void Simulation::checkActivity() {
 			active = true;
 		}
 	}
-	if (!active) {
-		emit roundEnd(fitnesses_);
-		auto& genotypes = population_.getGenotypes();
-		for (std::size_t i = 0; i < fitnesses_.size(); ++i) {
-			genotypes[i].fitness = std::fmaxf(0.0f, fitnesses_[i]);
-		}
-
-		population_.nextPopulation();
-		newVehicles();
-	}
+	if (!active)
+		endRound();
 }
 void Simulation::setPopulationSize(std::size_t new_size) {
 	population_.setNextGenerationSize(new_size);
@@ -85,4 +83,19 @@ const Objects::Vehicle& Simulation::getBestVehicle() const {
 }
 std::size_t Simulation::getPopulationSize() const {
 	return population_.getNextGenerationSize();
+}
+void Simulation::setMutationRate(float mutation_rate) {
+	population_.setMutationRate(mutation_rate);
+}
+float Simulation::getMutationRate() const {
+	return population_.getMutationRate();
+}
+void Simulation::endRound() {
+	emit roundEnd(fitnesses_);
+	auto& genotypes = population_.getGenotypes();
+	for (std::size_t i = 0; i < fitnesses_.size(); ++i) {
+		genotypes[i].fitness = std::fmaxf(0.0f, fitnesses_[i]);
+	}
+	population_.nextPopulation();
+	newVehicles();
 }

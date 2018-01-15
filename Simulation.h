@@ -31,6 +31,8 @@ class Simulation : public QObject {
 	const std::size_t CARS_NUMBER_ON_START = 10;
 	const float CARS_START_X = 1.0f;
 	const float CARS_START_Y = -5.4f;
+	const std::size_t CHECK_TIME = 3000;
+	const std::size_t MAX_ROUND_TIME = 60000;
 public:
 	Simulation(QObject *parent = Q_NULLPTR);
 
@@ -38,14 +40,18 @@ public:
 	void start();
 	void newGround();
 	void newVehicles();
+	void setMutationRate(float mutation_rate);
 	void setPopulationSize(std::size_t new_size);
 
+	float getMutationRate() const;
 	std::size_t getPopulationSize() const;
 	const Objects::Vehicle& getBestVehicle() const;
 	const std::vector<Objects::Vehicle> getVehicles() const;
 	const std::weak_ptr<Objects::Ground> getGround() const;
 public slots:
 	void reset();
+private slots:
+	void endRound();
 	void checkActivity();
 signals:
 	void roundEnd(std::vector<float> distances);
@@ -53,6 +59,7 @@ private:
 	void clearVehicles();
 
 	QTimer watchdog_;
+	QTimer round_timer_;
 
 	std::vector<float> fitnesses_;
 	std::vector<Objects::Vehicle> vehicles_;
