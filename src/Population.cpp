@@ -30,22 +30,23 @@ namespace Algorithm {
 		return genotypes;
 	}
 
-	Population Population::newPopulation() {
+	void Population::nextPopulation() {
 		sort();
 		std::vector<Genotype> new_population;
-		
+
 		for (int i = 0; i < elite_specimen; ++i) {
 			new_population.push_back(genotypes[i]);
 		}
-		for (int i = elite_specimen; i < genotypes.size()/2 + 1; ++i) {
+		for (int i = 0; i < (genotypes.size() - elite_specimen) / 2; ++i) {
 			std::pair<Genotype, Genotype> children = getNewChildren();
 			new_population.push_back(children.first);
 			new_population.push_back(children.second);
 		}
-		return Population(new_population);
+
+		genotypes = new_population;
 	}
 
-	std::pair<Genotype, Genotype> Population::getNewChildren() {		
+	std::pair<Genotype, Genotype> Population::getNewChildren() {
 		Genotype a = getRandomParent();
 		Genotype b = getRandomParent();
 
@@ -53,12 +54,15 @@ namespace Algorithm {
 	}
 
 	Genotype& Population::getRandomParent() {
+		printf("Test1\n");
 		float limit = 0.0f;
 		for (const auto& g : genotypes) {
 			limit += g.fitness;
 		}
+		printf("%f\n", limit);
 		std::uniform_real_distribution<float> random(0.0f, limit);
 		float rulette = random(rng_);
+		printf("Test2\n");
 		for (auto& g : genotypes) {
 			if (g.fitness <= rulette) {
 				return g;

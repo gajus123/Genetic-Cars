@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <random>
+#include <cstdio>
 #include "include/Genotype.h"
 
 
@@ -22,7 +23,7 @@ namespace Algorithm {
 		void inflateRandom(unsigned int size);
 		std::vector<Genotype>& getGenotypes();
 
-		Population newPopulation();
+		void nextPopulation();
 	private:
 		std::random_device rd_;
 		std::mt19937 rng_;
