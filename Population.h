@@ -10,6 +10,7 @@
 #include <random>
 #include <cstdio>
 #include <fstream>
+#include <QObject>
 #include "include/Genotype.h"
 
 /*!
@@ -36,8 +37,9 @@ namespace Algorithm {
 			nextGeneration - which sorts genotypes by its fitness and creates children
 			...
 	*/
-	class Population
+	class Population : public QObject
 	{
+		Q_OBJECT
 	public:
 
 		Population(); //!< Brief: Initializes rng and empty population
@@ -45,13 +47,12 @@ namespace Algorithm {
 
 		void reset();
 		void inflateRandom(); //!< Brief: Fills population with random genotypes. Size as set in setNextGenerationSize
-		void nextPopulation(); //!< Brief: Creates next population of genotypes based on fitness of the current one
+		//void nextPopulation(); //!< Brief: Creates next population of genotypes based on fitness of the current one
 		std::vector<Genotype>& getGenotypes(); //!< Brief: Returns reference to Genotype's container
 
 		void setMutationRate(float rate); //!< Brief: Sets mutatios rate while creating children for the next generation
 		void setEliteSpecimen(std::size_t elite_specimen);
 		void setNextGenerationSize(std::size_t population_size); //!< Brief: Sets number of genotypes in the next generation
-
 
 		float getMutationRate() const;
 		std::size_t getEliteSpecimen() const;
@@ -59,6 +60,10 @@ namespace Algorithm {
 
 		void saveToFile(std::string filename) const;
 		void loadFromFile(std::string filename);
+	public slots:
+		void nextPopulation(std::vector<float> fitnesses); //!< Brief: Creates next population of genotypes based on fitness of the current one
+	signals:
+		void newVehiclesGenerated(std::vector<Objects::Vehicle> vehicles);
 	private:
 		std::random_device rd_;
 		std::mt19937 rng_;
@@ -70,6 +75,7 @@ namespace Algorithm {
 
 		std::pair<Genotype, Genotype> getNewChildren(); //!< Brief: Returns children of two genotypes choosen by getRandomParent()
 		Genotype& getRandomParent(); //!< Brief: Rerurns Genotype using roulette selection 
+		void generateVehicles();
 		void sort(); //!< Brief: sorts genotypes in place based in their fitness
 
 	};
