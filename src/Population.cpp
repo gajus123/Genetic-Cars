@@ -63,17 +63,14 @@ namespace Algorithm {
 	}
 
 	Genotype& Population::getRandomParent() {
-		printf("Test1\n");
 		float limit = 0.0f;
 		for (const auto& g : genotypes) {
 			limit += g.fitness;
 		}
-		printf("%f\n", limit);
 		std::uniform_real_distribution<float> random(0.0f, limit);
 		float rulette = random(rng_);
-		printf("Test2\n");
 		for (auto& g : genotypes) {
-			if (g.fitness <= rulette) {
+			if (g.fitness >= rulette) {
 				return g;
 			}
 			rulette -= g.fitness;
