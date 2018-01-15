@@ -24,12 +24,10 @@
 class Simulation : public QObject {
 	Q_OBJECT
 
-	const std::size_t MAXIMUM_CARS = 30;
 	const std::size_t TRACK_SEGMENTS = 1000;
 	const float TRACK_SEGMENT_WIDTH = 1.2f;
 	const float TRACK_SEGMENTS_DELTA = 1.0f;
-	const std::size_t CARS_NUMBER_ON_START = 10;
-	const float CARS_START_X = 1.0f;
+	const float CARS_START_X = 6.0f;
 	const float CARS_START_Y = -5.4f;
 	const std::size_t CHECK_TIME = 3000;
 	const std::size_t MAX_ROUND_TIME = 60000;
@@ -42,8 +40,10 @@ public:
 	void newVehicles();
 	void setMutationRate(float mutation_rate);
 	void setPopulationSize(std::size_t new_size);
+	void setEliteSpecimen(std::size_t elite_specimen);
 
 	float getMutationRate() const;
+	std::size_t getEliteSpecimen() const;
 	std::size_t getPopulationSize() const;
 	const Objects::Vehicle& getBestVehicle() const;
 	const std::vector<Objects::Vehicle> getVehicles() const;

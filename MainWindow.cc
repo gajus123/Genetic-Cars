@@ -9,7 +9,7 @@
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags),
 	mutation_size_label_("Prawdopodobieństwo mutacji: "),
-	mutation_rate_label_("Współczynnik mutacji: "),
+	elite_specimen_number_label_("Elite specimen: "),
 	load_button_("Wczytaj"),
 	save_button_("Zapisz"),
 	reset_button_("Resetuj"),
@@ -58,13 +58,14 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	sidebar_layout->addWidget(createAlgorithmWidgets());
 
 
-	connect(&mutation_rate_edit_, SIGNAL(editingFinished()), this, SLOT(mutationRateChanged()));
+	connect(&elite_specimen_number_edit_, SIGNAL(editingFinished()), this, SLOT(mutationRateChanged()));
 	connect(&mutation_size_edit_, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
 	connect(&load_button_, SIGNAL(clicked()), this, SLOT(loadFromFile()));
 	connect(&save_button_, SIGNAL(clicked()), this, SLOT(saveToFile()));
 	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(reset()));
 	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
 	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
+	connect(&simulation_speed_chooser_, SIGNAL(currentIndexChanged(int)), this, SLOT(speedChanged()));
 
 	connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &statistics_, SLOT(calculateStatistics(std::vector<float>)));
 	connect(&statistics_, SIGNAL(newValues(float, float, float, float)), &statistic_view_, SLOT(addData(float, float, float, float)));
@@ -85,16 +86,13 @@ QWidget* MainWindow::createSimulationWidgets() {
 	layout->addWidget(&reset_button_);
 	layout->addWidget(&pause_button_);
 
-	//Create container for Speed manipulation widgets
+	//Create container for Speed manipulation widget
 	QGroupBox* speedContainer;
 	QHBoxLayout* speedLayout;
 	std::tie(speedContainer, speedLayout) = createLayout<QGroupBox, QHBoxLayout>(layout);
 	speedContainer->setTitle("Prędkość symulacji");
 
-	//Add widgets to created container
-	speedLayout->addWidget(&speed_decrease_button_);
-	speedLayout->addWidget(&speed_label_);
-	speedLayout->addWidget(&speed_increase_button_);
+	speedLayout->addWidget(&simulation_speed_chooser_);
 
 	//Create container for Cars number manipulation widgets
 	QHBoxLayout* carsLayout;
@@ -111,6 +109,10 @@ QWidget* MainWindow::createSimulationWidgets() {
 	speed_label_.setText("10");
 	speed_label_.setAlignment(Qt::AlignCenter);
 	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
+	mutation_size_edit_.setText(QString().setNum(simulation_.getMutationRate()));
+	elite_specimen_number_edit_.setText(QString::number(simulation_.getEliteSpecimen()));
+
+	initializeSpeedWidget();
 
 	return groupBox;
 }
@@ -139,28 +141,43 @@ QWidget* MainWindow::createAlgorithmWidgets() {
 	std::tie(std::ignore, labelsLayout) = createLayout<QWidget, QVBoxLayout>(layout);
 
 	labelsLayout->addWidget(&mutation_size_label_);
-	labelsLayout->addWidget(&mutation_rate_label_);
+	labelsLayout->addWidget(&elite_specimen_number_label_);
 
 	//Create column for Mutation settings inputs
 	QVBoxLayout* editsLayout;
 	std::tie(std::ignore, editsLayout) = createLayout<QWidget, QVBoxLayout>(layout);
 
 	editsLayout->addWidget(&mutation_size_edit_);
-	editsLayout->addWidget(&mutation_rate_edit_);
+	editsLayout->addWidget(&elite_specimen_number_edit_);
 
 	return groupBox;
 }
+void MainWindow::initializeSpeedWidget() {
+	simulation_speed_chooser_.addItem("25%", QVariant(1.0f / 240.0f));
+	simulation_speed_chooser_.addItem("50%", QVariant(1.0f / 120.0f));
+	simulation_speed_chooser_.addItem("75%", QVariant(1.0f / 80.0f));
+	simulation_speed_chooser_.addItem("100%", QVariant(1.0f/ 60.0f));
+	simulation_speed_chooser_.addItem("150%", QVariant(1.0f / 40.0f));
+	simulation_speed_chooser_.addItem("200%", QVariant(1.0f / 30.0f));
+	simulation_speed_chooser_.addItem("300%", QVariant(1.0f / 20.0f));
+	simulation_speed_chooser_.addItem("400%", QVariant(1.0f / 15.0f));
+	simulation_speed_chooser_.addItem("500%", QVariant(1.0f / 12.0f));
+	simulation_speed_chooser_.setCurrentIndex(3);
+}
 void MainWindow::mutationRateChanged() {
-	bool number;
-	float temp = mutation_rate_edit_.text().toFloat(&number);
-	if (number)
-		qDebug() << "Rate";
+	QString new_text = elite_specimen_number_edit_.text();
+	bool is_int;
+	std::size_t elite_specimen = new_text.toInt(&is_int);
+	if (is_int)
+		simulation_.setEliteSpecimen(elite_specimen);
+	elite_specimen_number_edit_.setText(QString::number(simulation_.getEliteSpecimen()));
 }
 void MainWindow::mutationSizeChanged() {
-	bool number;
-	float temp = mutation_rate_edit_.text().toFloat(&number);
-	if (number)
-		qDebug() << "Size";
+	bool is_float;
+	float mutation_size = mutation_size_edit_.text().toFloat(&is_float);
+	if (is_float)
+		simulation_.setMutationRate(mutation_size);
+	mutation_size_edit_.setText(QString().setNum(simulation_.getMutationRate()));
 }
 void MainWindow::saveToFile() {
 	QString fileName = QFileDialog::getSaveFileName(this,
@@ -187,14 +204,15 @@ void MainWindow::carsNumberChanged() {
 	bool is_int;
 	std::size_t cars_number = new_text.toInt(&is_int);
 	if (is_int)
-	{
 		simulation_.setPopulationSize(cars_number);
-	}
 	cars_count_edit_.setText(QString::number(simulation_.getPopulationSize()));
 }
 void MainWindow::reset() {
 	this->statistic_view_.reset();
 	this->simulation_.reset();
+}
+void MainWindow::speedChanged() {
+	loop_.setTimeStep(simulation_speed_chooser_.currentData().toFloat());
 }
 
 template<class WidgetType, class LayoutType>

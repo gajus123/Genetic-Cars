@@ -41,7 +41,6 @@ namespace Physics {
 			/param position_iterations - b2World.Step position_iterations param
 		*/
         explicit Loop(b2Vec2 gravity = DEFAULT_GRAVITY,
-                      float32 time_step = TIME_STEP,
                       int32 velocity_iterations = VELOCITY_ITERATIONS,
                       int32 position_iterations = POSITION_ITERATIONS);
         Loop(const Loop &) = delete;
@@ -49,6 +48,7 @@ namespace Physics {
 
 		void start(); //!< Brief: Starts a physics simulation
         void stop(); //!< Breif: Pauses a physisc simulation
+		void setTimeStep(float time_step);
 
         b2World* getWorld();
 	private slots:
@@ -59,7 +59,7 @@ namespace Physics {
 
         b2World* world;
         b2Vec2 gravity;
-        float32 time_step;
+        float32 time_step_;
         int32 velocity_iterations;
         int32 position_iterations;
     };

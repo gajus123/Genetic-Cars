@@ -11,14 +11,20 @@ namespace Algorithm {
 	
 	Population::Population() :
 		mutation_rate_(DEFAULT_MUTATION_RATE),
-		next_population_size_(DEFAULT_GENERATION_SIZE) {
+		next_population_size_(DEFAULT_POPULATION_SIZE) {
 
+		elite_specimen_ = std::min(DEFAULT_ELITE_SPECIMEN, DEFAULT_POPULATION_SIZE);
 		rng_ = std::mt19937(rd_());
 	}
 
 	Population::Population(std::vector<Genotype> genotypes) : 
 		Population() {
 		genotypes_ = genotypes;
+	}
+
+	void Population::reset() {
+		genotypes_.clear();
+		inflateRandom();
 	}
 
 	void Population::inflateRandom() {
@@ -35,8 +41,10 @@ namespace Algorithm {
 
 	void Population::setMutationRate(float rate)
 	{
-		if (rate > MAX_RAND_VALUE)
-			rate = MAX_RAND_VALUE;
+		if (rate > MAX_MUTATION_RATE)
+			rate = MAX_MUTATION_RATE;
+		if (rate < MIN_MUTATION_RATE)
+			rate = MIN_MUTATION_RATE;
 		mutation_rate_ = rate;
 	}
 
@@ -44,15 +52,17 @@ namespace Algorithm {
 		sort();
 		std::vector<Genotype> new_population;
 
-		for (int i = 0; i < elite_specimen; ++i) {
+		for (int i = 0; i < elite_specimen_; ++i) {
 			new_population.push_back(genotypes_[i]);
 		}
-		for (int i = 0; i < (next_population_size_ - elite_specimen) / 2; ++i) {
+		std::size_t population_left = next_population_size_ - elite_specimen_;
+		for (int i = 0; i < (population_left+1) / 2; ++i) {
 			std::pair<Genotype, Genotype> children = getNewChildren();
 			children.first.mutate(mutation_rate_);
 			children.second.mutate(mutation_rate_);
 			new_population.push_back(children.first);
-			new_population.push_back(children.second);
+			if(i*2 + 1 != population_left)
+				new_population.push_back(children.second);
 		}
 
 		genotypes_ = new_population;
@@ -87,7 +97,17 @@ namespace Algorithm {
 		return mutation_rate_;
 	}
 	void Population::setNextGenerationSize(std::size_t population_size) {
-		next_population_size_ = population_size;
+		next_population_size_ = std::min(MAX_POPULATION_SIZE, population_size);
+	}
+	void Population::setEliteSpecimen(std::size_t elite_specimen) {
+		if (elite_specimen > next_population_size_)
+			elite_specimen = next_population_size_;
+		if (elite_specimen < MIN_ELITE_SPECIMEN)
+			elite_specimen = MIN_ELITE_SPECIMEN;
+		elite_specimen_ = elite_specimen;
+	}
+	std::size_t Population::getEliteSpecimen() const {
+		return elite_specimen_;
 	}
 
 	void Population::sort() {
