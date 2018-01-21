@@ -17,9 +17,9 @@
 */
 namespace Algorithm {
 
-	const std::size_t DEFAULT_ELITE_SPECIMEN = 4; //!< Brief: Default of how any best genotypes are copied to new generation
-	const float DEFAULT_MUTATION_RATE = 20.0f; //!< Brief: Percentes of a chance for a bit flip during mutation
-	const std::size_t DEFAULT_POPULATION_SIZE = 10; //!< Brief: Default number of genotypes in the population
+	const std::size_t DEFAULT_ELITE_SPECIMEN = 4; //!  Default of how any best genotypes are copied to new generation
+	const float DEFAULT_MUTATION_RATE = 20.0f; //!  Percentes of a chance for a bit flip during mutation
+	const std::size_t DEFAULT_POPULATION_SIZE = 10; //!  Default number of genotypes in the population
 	const std::size_t MIN_ELITE_SPECIMEN = 1; 
 	const std::size_t MAX_POPULATION_SIZE = 30;
 	const float MAX_MUTATION_RATE = 100.0f;
@@ -41,16 +41,16 @@ namespace Algorithm {
 		Q_OBJECT
 	public:
 
-		Population(); //!< Brief: Initializes rng and empty population
-		explicit Population(std::vector<Genotype> genotypes); //!< Brief: Creates population based on genotypes vector
+		Population(); //!  Initializes rng and empty population
+		explicit Population(std::vector<Genotype> genotypes); //!  Creates population based on genotypes vector
 
 		void reset();
-		void inflateRandom(); //!< Brief: Fills population with random genotypes. Size as set in setNextGenerationSize
-		std::vector<Genotype>& getGenotypes(); //!< Brief: Returns reference to Genotype's container
+		void inflateRandom(); //!  Fills population with random genotypes. Size as set in setNextGenerationSize
+		std::vector<Genotype>& getGenotypes(); //!  Returns reference to Genotype's container
 
-		void setMutationRate(float rate); //!< Brief: Sets mutatios rate while creating children for the next generation
+		void setMutationRate(float rate); //!  Sets mutatios rate while creating children for the next generation
 		void setEliteSpecimen(std::size_t elite_specimen);
-		void setNextGenerationSize(std::size_t population_size); //!< Brief: Sets number of genotypes in the next generation
+		void setNextGenerationSize(std::size_t population_size); //!  Sets number of genotypes in the next generation
 
 		float getMutationRate() const;
 		std::size_t getEliteSpecimen() const;
@@ -59,7 +59,7 @@ namespace Algorithm {
 		void saveToFile(std::string filename) const;
 		void loadFromFile(std::string filename);
 	public slots:
-		void nextPopulation(std::vector<float> fitnesses); //!< Brief: Creates next population of genotypes based on fitness of the current one
+		void nextPopulation(std::vector<float> fitnesses); //!  Creates next population of genotypes based on fitness of the current one
 	signals:
 		void newVehiclesGenerated(std::vector<Objects::Vehicle> vehicles);
 	private:
@@ -68,13 +68,13 @@ namespace Algorithm {
 
 		unsigned int elite_specimen_;
 		std::vector<Genotype> genotypes_;
-		float mutation_rate_; //!< Brief: /see /class Genotype.mutate()
-		unsigned int next_population_size_; //!< Brief: number of genotypes in the next population
+		float mutation_rate_; //!  \class Genotype.mutate()
+		unsigned int next_population_size_; //!  number of genotypes in the next population
 
-		std::pair<Genotype, Genotype> getNewChildren(); //!< Brief: Returns children of two genotypes choosen by getRandomParent()
-		Genotype& getRandomParent(); //!< Brief: Rerurns Genotype using roulette selection 
+		std::pair<Genotype, Genotype> getNewChildren(); //!  Returns children of two genotypes choosen by getRandomParent()
+		Genotype& getRandomParent(); //!  Rerurns Genotype using roulette selection 
 		void generateVehicles();
-		void sort(); //!< Brief: sorts genotypes in place based in their fitness
+		void sort(); //!  sorts genotypes in place based in their fitness
 
 	};
 

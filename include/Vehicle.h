@@ -35,10 +35,10 @@ namespace Objects {
 		/*!
 			Creates Body, front and back Wheels and connects them by
 			rotating b2RevoluteJoint
-			/param postion - postion to spawn Vehicle in the worlds space
-			/param body - /see /class Body - vector of body segments lenghts
-			/param front_wheel_radius - radius of the front wheel 
-			/param back_wheel_radius - radius of the back wheel
+			\param postion - postion to spawn Vehicle in the worlds space
+			\param body - \class Body - vector of body segments lenghts
+			\param front_wheel_radius - radius of the front wheel 
+			\param back_wheel_radius - radius of the back wheel
 		*/
 		Vehicle(Vector2 position,
 			std::vector<float> body,
@@ -50,7 +50,7 @@ namespace Objects {
 		const Wheel& getFrontWheel() const { return front; }
 		const Wheel& getBackWheel() const { return back; }
 
-		void destroy(); //!< Brief: calls Physics::ObjectsFactory to destroy each component
+		void destroy(); //! : calls Physics::ObjectsFactory to destroy each component
     private:
 		Body car_body;
 		Wheel front;

@@ -24,11 +24,11 @@ namespace Objects {
 */
 namespace Physics {
 
-	const float MAX_MOTOR_TORQUE = 60.0f; //!< Brief: max Vehicle motor torque
-	const float MOTOR_SPEED = 7.0 * M_PI; //!< Brief: radians per second
-	const float DEFAULT_DENSITY = 10.0f; //!< Breif: evaluates to object mass
-	const int DEFAULT_GROUP_INDEX = -1;  //!< Brief: default collision layer for dynamic objects
-	const float DEFAULT_FRICTION = 3.0f; //!< Brief: default friction for all objects
+	const float MAX_MOTOR_TORQUE = 60.0f; //!  max Vehicle motor torque
+	const float MOTOR_SPEED = 7.0 * M_PI; //!  radians per second
+	const float DEFAULT_DENSITY = 10.0f; //!  evaluates to object mass
+	const int DEFAULT_GROUP_INDEX = -1;  //!  default collision layer for dynamic objects
+	const float DEFAULT_FRICTION = 3.0f; //!  default friction for all objects
 
 	/*!
 		\class ObjectsFactory
@@ -48,30 +48,30 @@ namespace Physics {
 		/*!
 			init initializes factory instance with reference to physics Loop's b2World.
 			It needs to be called before it's used
-			/param p - physics loop
+			\param p - physics loop
 		*/
-        static ObjectsFactory &init(Loop &p); 
-        static ObjectsFactory &getInstance(); //!< Brief: returns ObjectsFactory instance
+        static ObjectsFactory &init(b2World* w); 
+        static ObjectsFactory &getInstance(); //!  returns ObjectsFactory instance
 
-        b2Body* createCircle(float32 radius, float32 density, float32 friction); //!< Brief: Creates circle in the world space - see b2CircleShape
-        b2Body* createPolygon(std::vector<b2Vec2> vertices, float32 density, float32 friction); //!< Brief: Creates b2PolygonShape from the given vertices
-        b2Body* createGround(std::vector<b2Vec2> vertices); //!< Brief: Creates b2Chain from the given vertices
-		b2RevoluteJoint* createJoint(Objects::Base& a, Objects::Base& b, b2Vec2 point); //!< Brief: Creates rotating b2RevoluteJoin between a and b at given position.
+        b2Body* createCircle(float32 radius, float32 density, float32 friction); //!  Creates circle in the world space - see b2CircleShape
+        b2Body* createPolygon(std::vector<b2Vec2> vertices, float32 density, float32 friction); //!  Creates b2PolygonShape from the given vertices
+        b2Body* createGround(std::vector<b2Vec2> vertices); //!  Creates b2Chain from the given vertices
+		b2RevoluteJoint* createJoint(Objects::Base& a, Objects::Base& b, b2Vec2 point); //!  Creates rotating b2RevoluteJoin between a and b at given position.
 
-		void destroyBody(Objects::Base& body); //!< Brief: wraps b2World.DestroyBody()
-		void destroyJoint(b2RevoluteJoint* joint); //!< Brief: wraps b2World.DestoryJoint() 
+		void destroyBody(Objects::Base& body); //!  wraps b2World.DestroyBody()
+		void destroyJoint(b2RevoluteJoint* joint); //!  wraps b2World.DestoryJoint() 
 
     private:
         static ObjectsFactory instance;
 
-        b2World* world; //!< Brief: Initialized during init
+        b2World* world; //!  Initialized during init
 
         ObjectsFactory() : world(nullptr) {};
         explicit ObjectsFactory(b2World* w);
-        ObjectsFactory &operator=(ObjectsFactory const &); //!< Brief: copies world pointer
+        ObjectsFactory &operator=(ObjectsFactory const &); //!  copies world pointer
 
-        static std::shared_ptr<const b2BodyDef> getDefaultBodyDef(); //!< Brief: Creates dynamic_body b2BodyDef 
-        static std::shared_ptr<const b2FixtureDef> getFixtureDef(	//!< Brief: Creates rigid b2BodyFixture
+        static std::shared_ptr<const b2BodyDef> getDefaultBodyDef(); //!  Creates dynamic_body b2BodyDef 
+        static std::shared_ptr<const b2FixtureDef> getFixtureDef(	//!  Creates rigid b2BodyFixture
 			b2Shape& shape,
 			float32 density = DEFAULT_DENSITY,
 			float32 friction = DEFAULT_FRICTION,

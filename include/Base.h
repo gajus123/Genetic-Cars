@@ -30,17 +30,17 @@ namespace Objects {
     public:
 		friend class Physics::ObjectsFactory;
 
-		explicit Base(Vector2 position = { 0.0f, 0.0f }); //!< Brief: Creates b2Body and sets it's position to /param position
-        virtual Vector2 getPosition() const; //!< /return b2Body position
-		virtual float getAngle() const; //!< /return b2Body rotation
+		explicit Base(Vector2 position = { 0.0f, 0.0f }); //! : Creates b2Body and sets it's position to \param position
+        virtual Vector2 getPosition() const; //!< \return b2Body position
+		virtual float getAngle() const; //!< \return b2Body rotation
 
     protected:
         b2Body* body_;
         Vector2 start_position_;
 
-		virtual void beforeBodySetUp() {}; //!< Brief: Called before creating a b2Body
-		virtual void createAndSetBody() {}; //!< Brief: Body creation
-		virtual void afterBodySetup(); //!< Brief: Called after b2Body was created. Sets it's position
+		virtual void beforeBodySetUp() {}; //! : Called before creating a b2Body
+		virtual void createAndSetBody() {}; //! : Body creation
+		virtual void afterBodySetup(); //! : Called after b2Body was created. Sets it's position
     };
 
 }

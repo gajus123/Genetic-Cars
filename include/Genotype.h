@@ -19,11 +19,11 @@
 
 namespace Algorithm {
 
-	const float MAX_RAND_VALUE= 100.0f; //!< Brief: maximum value rng reacheas in probability tests
-	const unsigned int INT_NUM_BITS = 32; //!< Brief: number of bits in unsigned value type to hold genotype into
+	const float MAX_RAND_VALUE= 100.0f; //!  maximum value rng reacheas in probability tests
+	const unsigned int INT_NUM_BITS = 32; //!  number of bits in unsigned value type to hold genotype into
 
-	const float MAX_RADIUS_LIMIT = 0.5f; //!< Brief: maximum possible radius of a wheel
-	const float MAX_HEIGHT_LIMIT = 0.7f; //!< Brief: maximum possible length of one Body segment
+	const float MAX_RADIUS_LIMIT = 0.5f; //!  maximum possible radius of a wheel
+	const float MAX_HEIGHT_LIMIT = 0.7f; //!  maximum possible length of one Body segment
 	
 	/*!
 		\class Genotype
@@ -38,7 +38,7 @@ namespace Algorithm {
 	class Genotype
 	{
 	public:
-		float fitness; //!< Brief: Nonegative mark of how good phenotype of this genotype is
+		float fitness; //!  Nonegative mark of how good phenotype of this genotype is
 
 		Genotype(); //!< Inits rng
 		Genotype(const Genotype& other); //!< Inits own RNG, copies wheels radiuses and bodys segments heights
@@ -58,18 +58,18 @@ namespace Algorithm {
 		std::mt19937 rng_;
 
 		std::uint32_t front_radius; //!< Biref: Radius of the front wheel mapped to uint32 in gray code
-		std::uint32_t back_radius; //!< Brief: Radius of the back wheel mapped to uint32 in gray code
-		std::vector<std::uint32_t> heights; //!< Brief: Lenghts of body segments mapped to uint32 in gray code
+		std::uint32_t back_radius; //!  Radius of the back wheel mapped to uint32 in gray code
+		std::vector<std::uint32_t> heights; //!  Lenghts of body segments mapped to uint32 in gray code
 
-		std::uint32_t grey2NKB(std::uint32_t grey) const; //!< Brief: converts uint32 from gray code to nkb
-		std::uint32_t NKB2Gray(std::uint32_t nkb) const; //!< Brief: converts uint32 from nkb to gray coed
+		std::uint32_t grey2NKB(std::uint32_t grey) const; //!  converts uint32 from gray code to nkb
+		std::uint32_t NKB2Gray(std::uint32_t nkb) const; //!  converts uint32 from nkb to gray coed
 
 		std::uint32_t mutate_value(std::uint32_t value, float mutation_rate);//!< Test each bit of value against mutation rate and flips it if passed
 
 
 		std::uint32_t crossValues(std::uint32_t a, std::uint32_t b) const; //!< Creates new value from half lower bits of a and half high bits of b
 		float castSignedValue(std::uint32_t grey, float maximum_value = 1.0f) const; //!< Casts number in grey code to unsigned float lower than maximum 
-		float castUnsignedValue(std::uint32_t grey, float maximum_value = 1.0f) const; //!< Brief: Casts number to float lower than maximum and greater than -maximum
+		float castUnsignedValue(std::uint32_t grey, float maximum_value = 1.0f) const; //!  Casts number to float lower than maximum and greater than -maximum
 	};
 }
 #endif // !_GENETIC_CARS_GENOTYPE_H_

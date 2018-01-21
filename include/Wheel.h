@@ -18,13 +18,13 @@ namespace Objects {
 	*/
     class Wheel : public Base {
     public:
-		Wheel(Vector2 position, float radius); //!< Brief: Creates circle with radius at given postion in the world space
+		Wheel(Vector2 position, float radius); //!  Creates circle with radius at given postion in the world space
 
         float getRadius() const {return radius_;}
     protected:
         float radius_;
 
-        void createAndSetBody() override; //!< Brief: Creates b2Body with b2CircleShape 
+        void createAndSetBody() override; //!  Creates b2Body with b2CircleShape 
     };
 
 }

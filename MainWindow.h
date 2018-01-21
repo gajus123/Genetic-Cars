@@ -37,24 +37,24 @@ public:
 	MainWindow(const MainWindow&) = delete;
 	MainWindow& operator=(const MainWindow&) = delete;
 private slots:
-	void resetSimulation(); //!< Brief: Resets whole simulation and genetic algorithm.
-	void eliteSpecimenNumberChanged(); //!< Brief: Reacts to change of mutation rate edit line.
-	void mutationSizeChanged();//!< Brief: Reacts to change of mutation size edit line.
-	void saveToFile(); //!< Brief: Reacts to 'Save' button clicks.
-	void loadFromFile(); //!< Brief: Reacts to 'Load' button clicks.
-	void pauseSimulation(bool paused); //!< Brief: Pauses physics and simulation.
-	void carsNumberChanged(); //!< Brief: Changes cars number in simulation if writted text is number.
-	void speedChanged(); //!< Brief: Changes speed simulation to the selected one.
+	void resetSimulation(); //!  Resets whole simulation and genetic algorithm.
+	void eliteSpecimenNumberChanged(); //!  Reacts to change of mutation rate edit line.
+	void mutationSizeChanged();//!  Reacts to change of mutation size edit line.
+	void saveToFile(); //!  Reacts to 'Save' button clicks.
+	void loadFromFile(); //!  Reacts to 'Load' button clicks.
+	void pauseSimulation(bool paused); //!  Pauses physics and simulation.
+	void carsNumberChanged(); //!  Changes cars number in simulation if writted text is number.
+	void speedChanged(); //!  Changes speed simulation to the selected one.
 private:
-	QWidget* createSimulationWidgets(); //!< Brief: Creates GUI part responsible for Simulation settings manipulation/displaying. Return pointer to widgets container.
-	QWidget* createFileWidgets(); //!< Brief: Creates GUI part responsible for saving/loading buttons. Return pointer to widgets container.
-	QWidget* createAlgorithmWidgets(); //!< Brief: Creates GUI part responsible for Algorithm settings manipulation/displaying. Return pointer to widgets container.
+	QWidget* createSimulationWidgets(); //!  Creates GUI part responsible for Simulation settings manipulation/displaying. Return pointer to widgets container.
+	QWidget* createFileWidgets(); //!  Creates GUI part responsible for saving/loading buttons. Return pointer to widgets container.
+	QWidget* createAlgorithmWidgets(); //!  Creates GUI part responsible for Algorithm settings manipulation/displaying. Return pointer to widgets container.
 	void initializeSpeedWidget();
 	void pauseSimulation();
 	void resumeSimulation();
 
 	template<class WidgetType, class LayoutType>
-	std::tuple<WidgetType*, LayoutType*> createLayout(QLayout* parent_layout = Q_NULLPTR); //!< Brief: Creates container of WidgetType, sets its layout to new LayoutType object.
+	std::tuple<WidgetType*, LayoutType*> createLayout(QLayout* parent_layout = Q_NULLPTR); //!  Creates container of WidgetType, sets its layout to new LayoutType object.
 																						   //!<		   If parent_layout is not Q_NULLPTR, it also adds container into parent_layout.
 																						   //!<		   Returns tuple of pointers of created container and layout.
 

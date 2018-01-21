@@ -16,9 +16,9 @@ class Statistics : public QObject {
 	Q_OBJECT
 
 public slots:
-	void calculateStatistics(std::vector<float> distances); //!< Brief: Calculates generation stats from distance vector
+	void calculateStatistics(std::vector<float> distances); //!  Calculates generation stats from distance vector
 signals:
-	void newValues(float best, float worst, float average, float median); //!< Brief: Sends signal that new generation stats was calculated
+	void newValues(float best, float worst, float average, float median); //!  Sends signal that new generation stats was calculated
 };
 
 #endif

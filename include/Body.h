@@ -25,13 +25,13 @@ namespace Objects {
 	*/
     class Body : public Base {
     public:
-		static const unsigned int BODY_SEGMENTS; //!< Brief: Number of vertices wich body is created from
-		static const float BODY_FRICTION; //!< Brief: Default body friction
+		static const unsigned int BODY_SEGMENTS; //!  Number of vertices wich body is created from
+		static const float BODY_FRICTION; //!  Default body friction
 
 		/*!
-			/param lenghts - length of 8 vectors creating body, going counter-clockwise,
+			\param lenghts - length of 8 vectors creating body, going counter-clockwise,
 							 starting at upper one	
-			/param position - position in the world space to spawn body on
+			\param position - position in the world space to spawn body on
 		*/
         Body(std::vector<float> lengths, Vector2 position) : lengths_(std::move(lengths)), Base(position) {
 			beforeBodySetUp();
@@ -40,16 +40,16 @@ namespace Objects {
 		};
 
         std::vector<Vector2> getVertices() const { return vertices_; };
-        std::vector<Vector2> getCurrentVertices() const; //!< Brief: returns vertices shifted by current position
+        std::vector<Vector2> getCurrentVertices() const; //!  returns vertices shifted by current position
 
     protected:
         std::vector<Vector2> vertices_;
         std::vector<float> lengths_;
 
-        void beforeBodySetUp() override; //!< Brief: Calculates and setus up vertives
-        void calculateVertices(); //!< Brief: Calculates b2PolygonShape vertices 
+        void beforeBodySetUp() override; //!  Calculates and setus up vertives
+        void calculateVertices(); //!  Calculates b2PolygonShape vertices 
 
-        void createAndSetBody() override; //!< Brief: Creates b2PolygonShape based on vertices
+        void createAndSetBody() override; //!  Creates b2PolygonShape based on vertices
     };
 
 }
