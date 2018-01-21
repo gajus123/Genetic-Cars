@@ -1,6 +1,5 @@
 Box2D
 .sconsign.dblite
-site_scons
 genetic cars.vcxproj.filters
 genetic cars.vcxproj
 genetic cars.sln
