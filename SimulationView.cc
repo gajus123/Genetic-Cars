@@ -3,7 +3,7 @@
 SimulationView::SimulationView(Simulation& simulation, QWidget *parent, Qt::WindowFlags flags) :
 	simulation_(simulation),
 	QFrame(parent, flags),
-	display_width_(10.0) {
+	display_width_(30.0) {
 
 	width_multipier_ = this->width() / display_width_;
 }
