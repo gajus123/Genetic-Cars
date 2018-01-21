@@ -39,7 +39,7 @@ public:
 	MainWindow& operator=(const MainWindow&) = delete;
 private slots:
 	void resetSimulation(); //!< Brief: Resets whole simulation and genetic algorithm.
-	void mutationRateChanged(); //!< Brief: Reacts to change of mutation rate edit line.
+	void eliteSpecimenNumberChanged(); //!< Brief: Reacts to change of mutation rate edit line.
 	void mutationSizeChanged();//!< Brief: Reacts to change of mutation size edit line.
 	void saveToFile(); //!< Brief: Reacts to 'Save' button clicks.
 	void loadFromFile(); //!< Brief: Reacts to 'Load' button clicks.

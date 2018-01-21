@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	sidebar_layout->addWidget(createAlgorithmWidgets());
 
 
-	connect(&elite_specimen_number_edit_, SIGNAL(editingFinished()), this, SLOT(mutationRateChanged()));
+	connect(&elite_specimen_number_edit_, SIGNAL(editingFinished()), this, SLOT(eliteSpecimenNumberChanged()));
 	connect(&mutation_size_edit_, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
 	connect(&load_button_, SIGNAL(clicked()), this, SLOT(loadFromFile()));
 	connect(&save_button_, SIGNAL(clicked()), this, SLOT(saveToFile()));
@@ -152,18 +152,18 @@ QWidget* MainWindow::createAlgorithmWidgets() {
 	return groupBox;
 }
 void MainWindow::initializeSpeedWidget() {
-	simulation_speed_chooser_.addItem("25%", QVariant(1.0f / 240.0f));
-	simulation_speed_chooser_.addItem("50%", QVariant(1.0f / 120.0f));
-	simulation_speed_chooser_.addItem("75%", QVariant(1.0f / 80.0f));
-	simulation_speed_chooser_.addItem("100%", QVariant(1.0f/ 60.0f));
-	simulation_speed_chooser_.addItem("150%", QVariant(1.0f / 40.0f));
-	simulation_speed_chooser_.addItem("200%", QVariant(1.0f / 30.0f));
-	simulation_speed_chooser_.addItem("300%", QVariant(1.0f / 20.0f));
-	simulation_speed_chooser_.addItem("400%", QVariant(1.0f / 15.0f));
-	simulation_speed_chooser_.addItem("500%", QVariant(1.0f / 12.0f));
+	simulation_speed_chooser_.addItem("25%", QVariant(0.25f));
+	simulation_speed_chooser_.addItem("50%", QVariant(0.5f));
+	simulation_speed_chooser_.addItem("75%", QVariant(0.75f));
+	simulation_speed_chooser_.addItem("100%", QVariant(1.0f));
+	simulation_speed_chooser_.addItem("150%", QVariant(1.5f));
+	simulation_speed_chooser_.addItem("200%", QVariant(2.0f));
+	simulation_speed_chooser_.addItem("300%", QVariant(3.0f));
+	simulation_speed_chooser_.addItem("400%", QVariant(4.0f));
+	simulation_speed_chooser_.addItem("500%", QVariant(5.0f));
 	simulation_speed_chooser_.setCurrentIndex(3);
 }
-void MainWindow::mutationRateChanged() {
+void MainWindow::eliteSpecimenNumberChanged() {
 	QString new_text = elite_specimen_number_edit_.text();
 	bool is_int;
 	std::size_t elite_specimen = new_text.toInt(&is_int);
@@ -219,6 +219,7 @@ void MainWindow::carsNumberChanged() {
 	if (is_int)
 		population_.setNextGenerationSize(cars_number);
 	cars_count_edit_.setText(QString::number(population_.getNextGenerationSize()));
+	elite_specimen_number_edit_.setText(QString::number(population_.getEliteSpecimen()));
 }
 void MainWindow::resetSimulation() {
 	statistic_view_.reset();
@@ -226,7 +227,9 @@ void MainWindow::resetSimulation() {
 	population_.reset();
 }
 void MainWindow::speedChanged() {
-	loop_.setTimeStep(simulation_speed_chooser_.currentData().toFloat());
+	float time_speed = simulation_speed_chooser_.currentData().toFloat();
+	loop_.setTimeSpeed(time_speed);
+	simulation_.setTimeSpeed(time_speed);
 }
 void MainWindow::pauseSimulation() {
 	loop_.stop();
