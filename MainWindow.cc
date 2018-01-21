@@ -73,7 +73,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &population_, SLOT(nextPopulation(std::vector<float>)));
 	connect(&population_, SIGNAL(newVehiclesGenerated(std::vector<Objects::Vehicle>)), &simulation_, SLOT(newRound(std::vector<Objects::Vehicle>)));
 
-	Physics::ObjectsFactory::init(loop_);
+	Physics::ObjectsFactory::init(loop_.getWorld());
 
 	simulation_.newGround();
 	population_.inflateRandom();

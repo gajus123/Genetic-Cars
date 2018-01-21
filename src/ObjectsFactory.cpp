@@ -8,8 +8,8 @@ namespace Physics {
 
     ObjectsFactory ObjectsFactory::instance;
 
-    ObjectsFactory &ObjectsFactory::init(Loop &p) {
-        return instance = ObjectsFactory(p.getWorld());
+    ObjectsFactory &ObjectsFactory::init(b2World* w) {
+        return instance = ObjectsFactory(w);
     }
 
     ObjectsFactory &ObjectsFactory::getInstance() {

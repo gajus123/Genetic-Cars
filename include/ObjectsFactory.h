@@ -50,7 +50,7 @@ namespace Physics {
 			It needs to be called before it's used
 			/param p - physics loop
 		*/
-        static ObjectsFactory &init(Loop &p); 
+        static ObjectsFactory &init(b2World* w); 
         static ObjectsFactory &getInstance(); //!< Brief: returns ObjectsFactory instance
 
         b2Body* createCircle(float32 radius, float32 density, float32 friction); //!< Brief: Creates circle in the world space - see b2CircleShape
