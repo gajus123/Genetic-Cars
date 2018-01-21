@@ -1,6 +1,7 @@
 import glob
 import re
 import os
+from sys import platform
 
 def search_for_files(pattern):
 	test_pattern = re.compile(pattern)
@@ -18,8 +19,7 @@ def search_for_files(pattern):
 def add_build_path(files, build_path):
 	for i in xrange(0, len(files)):
 		files[i] = build_path + files[i]
-	
-QT5DIR = '/home/gajus123/Qt/5.10.0/gcc_64'
+
 CXXFLAGS = []
 LINKFLAGS = []
 LIBS = []
@@ -37,8 +37,9 @@ elif env['CXX'] == 'cl' or env['CC'] == 'cl':
 	LINKFLAGS.extend(['/LIBPATH:..\\boost_1_65_1\\lib64-msvc-14.0'])
 	CPPPATH.extend(['..\\boost_1_65_1'])
 
-env.Append(QT5DIR=QT5DIR)
-env['ENV']['PKG_CONFIG_PATH'] = os.path.join(QT5DIR, 'lib/pkgconfig')
+if platform == "linux" or platform == "linux2":
+	QT5DIR = os.environ['QT5DIR']
+	env['ENV']['PKG_CONFIG_PATH'] = os.path.join(QT5DIR, 'lib/pkgconfig')
 env.Append(CXXFLAGS=CXXFLAGS)
 env.Append(LINKFLAGS=LINKFLAGS)
 env.Append(LIBS=LIBS)

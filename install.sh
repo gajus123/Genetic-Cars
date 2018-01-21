@@ -4,10 +4,6 @@
 echo "Instalacja GCC"
 sudo apt-get -y install gcc
 
-#Instalacja QT5
-echo "Instalacja QT5"
-sudo apt-get -y install qtbase5-dev
-
 #Instalacja Scons
 echo "Instalacja Scons"
 sudo apt-get -y install scons
@@ -31,3 +27,8 @@ then
 	sudo rm master.zip
 fi
 
+#Pobieranie QT5.10.0
+echo "Pobieranie instalatora QT"
+sudo wget http://gensho.ftp.acc.umu.se/mirror/qt.io/qtproject/archive/online_installers/3.0/qt-unified-linux-x64-3.0.2-online.run
+sudo chmod 755 qt-unified-linux-x64-3.0.2-online.run
+./qt-unified-linux-x64-3.0.2-online.run
