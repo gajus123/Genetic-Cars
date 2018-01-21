@@ -1,5 +1,5 @@
 /*!
-* @authors Jakub Gajownik, Rafa³ Galczak
+* @authors Jakub Gajownik, Rafaï¿½ Galczak
 * @date 15.01.18
 *
 * \brief StatisticView responds for displaying chart of collected stats.
@@ -9,7 +9,11 @@
 #ifndef STATISTICVIEW_H
 #define STATISTICVIEW_H
 
-#include <QtCharts>
+#include <QChart>
+#include <QChartView>
+#include <QLineSeries>
+
+QT_CHARTS_USE_NAMESPACE
 
 class StatisticView : public QChartView {
 	Q_OBJECT
