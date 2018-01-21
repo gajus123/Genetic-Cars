@@ -66,8 +66,6 @@ private:
 	std::vector<float> fitnesses_;
 	std::vector<Objects::Vehicle> vehicles_;
 	std::shared_ptr<Objects::Ground> ground_;
-
-	//Algorithm::Population population_;
 };
 
 #endif
