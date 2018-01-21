@@ -3,10 +3,6 @@
 // \date 15.01.18
 //
 
-* \brief StatisticView responds for displaying chart of collected stats.
-*        As well as being in charge of interacting with other systems using signals (observers).
-*/
-
 #ifndef STATISTICVIEW_H
 #define STATISTICVIEW_H
 
