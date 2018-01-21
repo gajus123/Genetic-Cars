@@ -1,5 +1,5 @@
 /*!
-* @authors Jakub Gajownik, Rafa³ Galczak
+* @authors Jakub Gajownik, Rafaï¿½ Galczak
 * @date 15.01.18
 *
 * \brief SimulationView displays Simulation every frame.
@@ -8,9 +8,9 @@
 #ifndef SIMULATION_VIEW_H
 #define SIMULATION_VIEW_H
 
-#include "include\Ground.h"
-#include "include\Wheel.h"
-#include "include\Vehicle.h"
+#include "include/Ground.h"
+#include "include/Wheel.h"
+#include "include/Vehicle.h"
 #include "Simulation.h"
 #include <QFrame>
 #include <QPainter>
