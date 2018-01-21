@@ -1,5 +1,5 @@
 /*!
-* @authors Jakub Gajownik, Rafa³ Galczak
+* @authors Jakub Gajownik, Rafaï¿½ Galczak
 * @date 15.01.18
 *
 * \brief Simulation aggregate physics objects like Ground and Vehicles.
@@ -16,10 +16,10 @@
 #include <vector>
 #include <cmath>
 
-#include "include\Vehicle.h"
-#include "include\Ground.h"
-#include "include\GroundGenerator.h"
-#include "include\ObjectsFactory.h"
+#include "include/Vehicle.h"
+#include "include/Ground.h"
+#include "include/GroundGenerator.h"
+#include "include/ObjectsFactory.h"
 
 class Simulation : public QObject {
 	Q_OBJECT
