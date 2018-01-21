@@ -1,5 +1,5 @@
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 14.01.18
 //
 
@@ -39,8 +39,8 @@ namespace Objects {
 			afterBodySetup();
 		};
 
-        std::vector<Vector2> getVertices() const { return vertices_; };
-        std::vector<Vector2> getCurrentVertices() const; //!  returns vertices shifted by current position
+        const std::vector<Vector2> getVertices() const;
+        const std::vector<Vector2> getCurrentVertices() const; //!  returns vertices shifted by current position
 
     protected:
         std::vector<Vector2> vertices_;

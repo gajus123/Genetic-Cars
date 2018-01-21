@@ -1,5 +1,5 @@
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 14.01.18
 //
 
@@ -41,8 +41,12 @@ namespace Objects {
         }
         body_ = Physics::ObjectsFactory::getInstance().createPolygon(b2_vertices, Physics::DEFAULT_DENSITY, BODY_FRICTION);
     }
+    
+    const std::vector<Vector2> Body::getVertices() const {
+        return vertices_;
+    };
 
-    std::vector<Vector2> Body::getCurrentVertices() const {
+    const std::vector<Vector2> Body::getCurrentVertices() const {
 		Vector2 position = getPosition();
         std::vector<Vector2> curr_vertices;
         for (const auto &v : vertices_) {
