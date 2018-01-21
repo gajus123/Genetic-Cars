@@ -1,9 +1,7 @@
-/*!
-* @authors Jakub Gajownik, Rafa� Galczak
-* @date 15.01.18
-*
-* \brief SimulationView displays Simulation every frame.
-*/
+//
+// \author Jakub Gajownik
+// \date 15.01.18
+//
 
 #ifndef SIMULATION_VIEW_H
 #define SIMULATION_VIEW_H
@@ -20,6 +18,10 @@
 #include <QWheelEvent>
 #include <cmath>
 
+/*!
+	\class SimulationView
+	\brief Widget which displays physics simulation every frame.
+*/
 class SimulationView : public QFrame {
 	const QColor WHEEL_COLOR = QColor(255, 255, 102);
 	const QColor BODY_COLOR = Qt::green;

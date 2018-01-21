@@ -1,10 +1,7 @@
-/*!
-* @authors Jakub Gajownik, Rafa³ Galczak
-* @date 15.01.18
-*
-* \brief Statistics responds for calculating stats.
-*        As well as being in charge of interacting with other systems using signals (observers).
-*/
+//
+// \authors Jakub Gajownik, Rafaï¿½ Galczak
+// \date 15.01.18
+//
 
 #ifndef STATISTICS_H
 #define STATISTICS_H
@@ -12,6 +9,10 @@
 #include <QObject>
 #include <algorithm>
 
+/*!
+	\class Simulation
+	\brief Responds for calculating stats as well as being in charge of interacting with other systems using signals (observers).
+*/
 class Statistics : public QObject {
 	Q_OBJECT
 

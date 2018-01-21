@@ -1,10 +1,7 @@
-/*!
- * @authors Jakub Gajownik, Rafał Galczak
- * @date 15.01.18
- *
- * \brief MainWindow setups view and application window structure.
- *        As well as being in charge of interacting with user.
- */
+//
+// \authors Jakub Gajownik, Rafał Galczak
+// \date 15.01.18
+//
 
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
@@ -27,6 +24,14 @@
 #include <QFileDialog>
 #include <QComboBox>
 
+/*!
+	\class MainWindow
+	\brief Main user interface class
+	Setups view and application window structure.
+	MainWindow manages all widgets and their actions.
+	
+	After creation call show() to diplay App window.
+*/
 class MainWindow : public QMainWindow {
 	Q_OBJECT
 public:
@@ -49,7 +54,7 @@ private:
 	QWidget* createSimulationWidgets(); //!  Creates GUI part responsible for Simulation settings manipulation/displaying. Return pointer to widgets container.
 	QWidget* createFileWidgets(); //!  Creates GUI part responsible for saving/loading buttons. Return pointer to widgets container.
 	QWidget* createAlgorithmWidgets(); //!  Creates GUI part responsible for Algorithm settings manipulation/displaying. Return pointer to widgets container.
-	void initializeSpeedWidget();
+	void initializeSpeedWidget(); //!  Creates and fill speed selection combo box
 	void pauseSimulation();
 	void resumeSimulation();
 

@@ -1,7 +1,8 @@
-/*!
-* @authors Jakub Gajownik, Rafa� Galczak
-* @date 15.01.18
-*
+//
+// \author Jakub Gajownik
+// \date 15.01.18
+//
+
 * \brief StatisticView responds for displaying chart of collected stats.
 *        As well as being in charge of interacting with other systems using signals (observers).
 */
@@ -15,6 +16,10 @@
 
 QT_CHARTS_USE_NAMESPACE
 
+/*!
+	\brief StatisticView responds for displaying chart of collected stats.
+	As well as being in charge of interacting with other systems using signals (observers).
+*/
 class StatisticView : public QChartView {
 	Q_OBJECT
 public:

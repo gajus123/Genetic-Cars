@@ -1,10 +1,7 @@
-/*!
-* @authors Jakub Gajownik, Rafa� Galczak
-* @date 15.01.18
-*
-* \brief Simulation aggregate physics objects like Ground and Vehicles.
-*        As well as being in charge of interacting with other systems using signals (observers).
-*/
+//
+// \author Jakub Gajownik
+// \date 15.01.18
+//
 
 #ifndef SIMULATION_H
 #define SIMULATION_H
@@ -21,6 +18,11 @@
 #include "include/GroundGenerator.h"
 #include "include/ObjectsFactory.h"
 
+/*!
+	\class Simulation
+	\brief Simulation aggregate physics objects like Ground and Vehicles.
+	Checks vehicles activity. If none of the vehicles are moving forward it inform about it other modules.
+*/
 class Simulation : public QObject {
 	Q_OBJECT
 
@@ -34,22 +36,22 @@ class Simulation : public QObject {
 public:
 	Simulation(QObject *parent = Q_NULLPTR);
 
-	void stop();
-	void start();
+	void stop(); //!  If simulation is running, it stops checking vehicles acitivity
+	void start(); //!  If simulation is not running, it resumes checking vehicles acitivity
 	void newGround();
-	void resetTimers();
+	void resetTimers(); //!  Resets activity checking
 
-	void setTimeSpeed(float time_speed);
+	void setTimeSpeed(float time_speed); //!  Sets time speed multiplier - 1.0 is normal speed
 
-	const Objects::Vehicle& getBestVehicle() const;
+	const Objects::Vehicle& getBestVehicle() const; //!  Returns vehicle with the biggest fitness value
 	const std::vector<Objects::Vehicle> getVehicles() const;
 	const std::weak_ptr<Objects::Ground> getGround() const;
 public slots:
-	void reset();
-	void newRound(std::vector<Objects::Vehicle> vehicles);
+	void reset(); //!  Resets simulation and generate new ground
+	void newRound(std::vector<Objects::Vehicle> vehicles); //!  Starts new simulation round with passed vehicles
 private slots:
 	void endRound();
-	void checkActivity();
+	void checkActivity(); //!  Checks wheater vehicles are still moving, if not it sends roundEnd signal
 signals:
 	void roundEnd(std::vector<float> distances);
 private:

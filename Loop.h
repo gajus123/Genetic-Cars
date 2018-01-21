@@ -1,5 +1,5 @@
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 13.01.18
 //
 
@@ -48,11 +48,11 @@ namespace Physics {
 
 		void start(); //!  Starts a physics simulation
         void stop(); //!  Pauses a physisc simulation
-		void setTimeSpeed(float time_speed);
+		void setTimeSpeed(float time_speed); //!  Sets time speed multiplier - 1.0 is normal speed
 
         b2World* getWorld();
 	private slots:
-		void update(); 
+		void update(); //!  Performs single physics loop iteration
     private:
 		int PHYSICS_FRAME_TIME = 16;
 		QTimer timer_;
