@@ -22,7 +22,7 @@
 class GroundGenerator
 {
 public:
-	static const float DEFAULT_MAX_DELTA; //!< Brief: Max delta designated for optimal track generation
+	static const float DEFAULT_MAX_DELTA; //!  Max delta designated for optimal track generation
 
 	/*!
 		\param segments - number of road segments
@@ -32,7 +32,7 @@ public:
 	*/
 	GroundGenerator(int segments, float x_distance, float max_delta = DEFAULT_MAX_DELTA);
 
-	Objects::Ground* genereteNew(Objects::Vector2 position); //!< Brief: creates new random ground starting at /param position
+	Objects::Ground* genereteNew(Objects::Vector2 position); //!  creates new random ground starting at \param position
 	
 private:
 	int segments_;

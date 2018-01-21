@@ -20,9 +20,9 @@ namespace Objects {
     class Ground : public Base {
     public:
 		/*!
-			/param position - position in the world space at which chain should start
-			/param x_distance - distance on x axis between neighbouring vertices
-			/param heights - vector of y coordinates of vertice
+			\param position - position in the world space at which chain should start
+			\param x_distance - distance on x axis between neighbouring vertices
+			\param heights - vector of y coordinates of vertice
 		*/
 		Ground(Vector2 position, float x_distance, std::vector<float> heights);
 
@@ -35,8 +35,8 @@ namespace Objects {
         std::vector<float> heights_;
         float x_distance_;
 
-        void beforeBodySetUp() override; //!< Brief: sets up chain vertices from x_distance and heights
-        void createAndSetBody() override; //!< Brief: Creates b2Chain static b2Body using Physics::ObjectFactory
+        void beforeBodySetUp() override; //!  sets up chain vertices from x_distance and heights
+        void createAndSetBody() override; //!  Creates b2Chain static b2Body using Physics::ObjectFactory
     };
 
 }

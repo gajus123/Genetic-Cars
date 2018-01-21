@@ -18,9 +18,9 @@ namespace Objects {
         float x, y;
 
         Vector2(float x, float y) : x(x), y(y) {};
-        explicit Vector2(b2Vec2 other): x(other.x), y(other.y) {}; //!< Brief: creates Vector2 from Box2D b2Vec2
+        explicit Vector2(b2Vec2 other): x(other.x), y(other.y) {}; //! : creates Vector2 from Box2D b2Vec2
 
-        b2Vec2 asb2Vec2() const {return {x, y};} //!< Brief: converts Vector2 to Box2D b2Vec2 
+        b2Vec2 asb2Vec2() const {return {x, y};} //! : converts Vector2 to Box2D b2Vec2 
 
         Vector2 operator*(const float scalar) const { return {x*scalar, y*scalar}; }
         Vector2 operator+(const Vector2& other) const { return {x+other.x, y+other.y}; }

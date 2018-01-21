@@ -26,9 +26,9 @@ class SimulationView : public QFrame {
 public:
 	SimulationView(Simulation& simulation, QWidget *parent = Q_NULLPTR, Qt::WindowFlags flags = 0);
 protected:
-	virtual void paintEvent(QPaintEvent *event); //!< Brief: Displays Simulation world.
-	virtual void resizeEvent(QResizeEvent *event); //!< Brief: Calculates new scaling value and sets new displaying center point
-	virtual void wheelEvent(QWheelEvent * event); //!< Brief: Sets new world displaying area
+	virtual void paintEvent(QPaintEvent *event); //!  Displays Simulation world.
+	virtual void resizeEvent(QResizeEvent *event); //!  Calculates new scaling value and sets new displaying center point
+	virtual void wheelEvent(QWheelEvent * event); //!  Sets new world displaying area
 private:
 	void drawCar(const Objects::Vehicle& car, QPainter& painter);
 	void drawWheel(const Objects::Wheel& wheel, QPainter& painter);
@@ -36,11 +36,11 @@ private:
 	void drawTrack(const Objects::Ground& track, QPainter& painter);
 	void drawTrackSegment(const Objects::Vector2& start_point, const Objects::Vector2& end_point, QPainter& painter);
 
-	Simulation& simulation_; //!< Brief: Reference to Simulation object
+	Simulation& simulation_; //!  Reference to Simulation object
 	
-	float display_width_; //!< Brief: Width of world to be display on screen
-	float width_multipier_; //!< Brief: World objects coordinates multiplier
-	QPointF display_center_; //!< Brief: Point of widget which is center of display
+	float display_width_; //!  Width of world to be display on screen
+	float width_multipier_; //!  World objects coordinates multiplier
+	QPointF display_center_; //!  Point of widget which is center of display
 };
 
 #endif
