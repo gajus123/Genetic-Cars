@@ -1,5 +1,5 @@
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 14.01.18
 //
 
@@ -15,6 +15,7 @@ namespace Algorithm {
 	{
 		front_radius = other.front_radius;
 		back_radius = other.back_radius;
+		heights.clear();
 		heights = other.heights;
 	}
 
