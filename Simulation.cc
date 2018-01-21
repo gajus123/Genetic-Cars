@@ -42,6 +42,7 @@ void Simulation::newRound(std::vector<Objects::Vehicle> vehicles) {
 
 void Simulation::reset() {
 	newGround();
+	resetTimers();
 }
 
 void Simulation::stop() {
