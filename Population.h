@@ -69,7 +69,7 @@ namespace Algorithm {
 		unsigned int elite_specimen_;
 		std::vector<Genotype> genotypes_;
 		float mutation_rate_; //!< Brief: /see /class Genotype.mutate()
-		std::size_t next_population_size_; //!< Brief: number of genotypes in the next population
+		unsigned int next_population_size_; //!< Brief: number of genotypes in the next population
 
 		std::pair<Genotype, Genotype> getNewChildren(); //!< Brief: Returns children of two genotypes choosen by getRandomParent()
 		Genotype& getRandomParent(); //!< Brief: Rerurns Genotype using roulette selection 

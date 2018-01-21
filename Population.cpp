@@ -61,10 +61,11 @@ namespace Algorithm {
 		sort();
 		std::vector<Genotype> new_population;
 
-		for (int i = 0; i < elite_specimen_; ++i) {
+		int num_of_elite_specimen = std::min(elite_specimen_, next_population_size_);
+		for (int i = 0; i < num_of_elite_specimen; ++i) {
 			new_population.push_back(genotypes_[i]);
 		}
-		std::size_t population_left = next_population_size_ - elite_specimen_;
+		int population_left = next_population_size_ - elite_specimen_;
 		for (int i = 0; i < (population_left + 1) / 2; ++i) {
 			std::pair<Genotype, Genotype> children = getNewChildren();
 			children.first.mutate(mutation_rate_);
@@ -118,6 +119,7 @@ namespace Algorithm {
 	}
 	void Population::setNextGenerationSize(std::size_t population_size) {
 		next_population_size_ = std::min(MAX_POPULATION_SIZE, population_size);
+		elite_specimen_ = std::min(elite_specimen_, next_population_size_);
 	}
 	void Population::setEliteSpecimen(std::size_t elite_specimen) {
 		if (elite_specimen > next_population_size_)
@@ -158,7 +160,6 @@ namespace Algorithm {
 		std::size_t genotypes_number;
 		input_file >> genotypes_number;
 		for (auto i=0; i<genotypes_number; ++i) {
-			printf("1\n");
 			Genotype g;
 			input_file >> g;
 			genotypes_.emplace_back(g);

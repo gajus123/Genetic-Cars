@@ -48,7 +48,7 @@ namespace Physics {
 
 		void start(); //!< Brief: Starts a physics simulation
         void stop(); //!< Breif: Pauses a physisc simulation
-		void setTimeStep(float time_step);
+		void setTimeSpeed(float time_speed);
 
         b2World* getWorld();
 	private slots:
@@ -60,6 +60,7 @@ namespace Physics {
         b2World* world;
         b2Vec2 gravity;
         float32 time_step_;
+		float32 normal_time_step_;
         int32 velocity_iterations;
         int32 position_iterations;
     };

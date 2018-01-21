@@ -10,6 +10,7 @@ namespace Physics {
     Loop::Loop(b2Vec2 gravity, int32 velocity_iterations, int32 position_iterations) :
 			QObject(),
             world(new b2World(gravity)),
+			normal_time_step_(TIME_STEP),
             time_step_(TIME_STEP),
             velocity_iterations(velocity_iterations),
             position_iterations(position_iterations) {
@@ -37,8 +38,8 @@ namespace Physics {
 	void Loop::start() {
 		timer_.start();
 	}
-	void Loop::setTimeStep(float time_step) {
-		time_step_ = time_step;
+	void Loop::setTimeSpeed(float time_speed) {
+		time_step_ = normal_time_step_ * time_speed;
 	}
 
 }
