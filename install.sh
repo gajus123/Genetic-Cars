@@ -32,3 +32,4 @@ echo "Pobieranie instalatora QT"
 sudo wget http://gensho.ftp.acc.umu.se/mirror/qt.io/qtproject/archive/online_installers/3.0/qt-unified-linux-x64-3.0.2-online.run
 sudo chmod 755 qt-unified-linux-x64-3.0.2-online.run
 ./qt-unified-linux-x64-3.0.2-online.run
+rm qt-unified-linux-x64-3.0.2-online.run
