@@ -13,17 +13,17 @@ namespace Algorithm {
 
 	Genotype::Genotype(const Genotype & other) : Genotype()
 	{
-		front_radius = other.front_radius;
-		back_radius = other.back_radius;
-		heights.clear();
-		heights = other.heights;
+		front_radius_ = other.front_radius_;
+		back_radius_ = other.back_radius_;
+		heights_ = other.heights_;
 	}
 
 	Genotype& Genotype::operator=(const Genotype & other)
 	{
-		front_radius = other.front_radius;
-		back_radius = other.back_radius;
-		heights = other.heights;
+		front_radius_ = other.front_radius_;
+		back_radius_ = other.back_radius_;
+		heights_.clear();
+		heights_ = other.heights_;
 		return *this;
 	}
 
@@ -33,20 +33,20 @@ namespace Algorithm {
 		limit = ~limit;
 		std::uniform_int_distribution<std::uint32_t> uni(0, limit);
 
-		front_radius = uni(rng_);
-		back_radius = uni(rng_);
+		front_radius_ = uni(rng_);
+		back_radius_ = uni(rng_);
 		for (std::uint32_t i = 0; i < Objects::Body::BODY_SEGMENTS; ++i) {
-			heights.push_back(uni(rng_));
+			heights_.push_back(uni(rng_));
 		}
 
 	}
 
 	void Genotype::mutate(float mutation_rate)
 	{
-		front_radius = mutate_value(front_radius, mutation_rate);
-		back_radius = mutate_value(back_radius, mutation_rate);
-		for (unsigned int i = 0; i < heights.size(); ++i) {
-			heights[i] = mutate_value(heights[i], mutation_rate);
+		front_radius_ = mutate_value(front_radius_, mutation_rate);
+		back_radius_ = mutate_value(back_radius_, mutation_rate);
+		for (unsigned int i = 0; i < heights_.size(); ++i) {
+			heights_[i] = mutate_value(heights_[i], mutation_rate);
 		}
 	}
 
@@ -55,10 +55,10 @@ namespace Algorithm {
 	Genotype Genotype::cross(Genotype & other) const
 	{
 		Genotype child;
-		child.front_radius = crossValues(this->front_radius, other.front_radius);
-		child.back_radius = crossValues(this->back_radius, other.back_radius);
-		for (unsigned int i = 0; i < heights.size(); ++i) {
-			child.heights.push_back(crossValues(this->heights[i], other.heights[i]));
+		child.front_radius_ = crossValues(this->front_radius_, other.front_radius_);
+		child.back_radius_ = crossValues(this->back_radius_, other.back_radius_);
+		for (unsigned int i = 0; i < heights_.size(); ++i) {
+			child.heights_.push_back(crossValues(this->heights_[i], other.heights_[i]));
 		}
 		return child;
 	}
@@ -127,27 +127,27 @@ namespace Algorithm {
 
 	Objects::Vehicle Genotype::generate(Objects::Vector2 position) const 
 	{
-		float front_wheel_r = castUnsignedValue(front_radius, MAX_RADIUS_LIMIT);
-		float back_wheel_r = castUnsignedValue(back_radius, MAX_RADIUS_LIMIT);
+		float front_wheel_r = castUnsignedValue(front_radius_, MAX_RADIUS_LIMIT);
+		float back_wheel_r = castUnsignedValue(back_radius_, MAX_RADIUS_LIMIT);
 		std::vector<float> heights_r;
-		for (auto& h : heights) {
+		for (auto& h : heights_) {
 			heights_r.push_back(castUnsignedValue(h, MAX_HEIGHT_LIMIT));
 		}
 		return Objects::Vehicle(position, heights_r, front_wheel_r, back_wheel_r);
 	}
 	std::ostream& operator<< (std::ostream &stream, const Genotype &genotype) {
-		stream << genotype.front_radius << " " << genotype.back_radius << " ";
-		for (const auto& height : genotype.heights) {
+		stream << genotype.front_radius_ << " " << genotype.back_radius_ << " ";
+		for (const auto& height : genotype.heights_) {
 			stream << height << " ";
 		}
 		return stream;
 	}
 	std::istream& operator>> (std::istream & stream, Genotype& genotype) {
-		stream >> genotype.front_radius >> genotype.back_radius;
+		stream >> genotype.front_radius_ >> genotype.back_radius_;
 		for (std::uint32_t i = 0; i < Objects::Body::BODY_SEGMENTS; ++i) {
 			std::uint32_t temp_value;
 			stream >> temp_value;
-			genotype.heights.push_back(temp_value);
+			genotype.heights_.push_back(temp_value);
 		}
 		return stream;
 	}

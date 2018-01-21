@@ -1,10 +1,11 @@
+//
+// \author Rafaï¿½ Galczak
+// \date 13.01.17
+//
+
 #ifndef _GROUND_GENERATOR_H_
 #define _GROUND_GENERATOR_H_
 
-/**
-*	@author Rafa³ Galczak
-*   @date 13.01.17
-*/
 
 #include <random>
 

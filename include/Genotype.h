@@ -1,11 +1,10 @@
-#ifndef _GENETIC_CARS_GENOTYPE_H_
-#define _GENETIC_CARS_GENOTYPE_H_
-
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 15.01.18
 //
 
+#ifndef _GENETIC_CARS_GENOTYPE_H_
+#define _GENETIC_CARS_GENOTYPE_H_
 
 #include <vector>
 #include <random>
@@ -57,9 +56,9 @@ namespace Algorithm {
 		std::random_device rd_;
 		std::mt19937 rng_;
 
-		std::uint32_t front_radius; //!< Biref: Radius of the front wheel mapped to uint32 in gray code
-		std::uint32_t back_radius; //!  Radius of the back wheel mapped to uint32 in gray code
-		std::vector<std::uint32_t> heights; //!  Lenghts of body segments mapped to uint32 in gray code
+		std::uint32_t front_radius_; //!< Biref: Radius of the front wheel mapped to uint32 in gray code
+		std::uint32_t back_radius_; //!  Radius of the back wheel mapped to uint32 in gray code
+		std::vector<std::uint32_t> heights_; //!  Lenghts of body segments mapped to uint32 in gray code
 
 		std::uint32_t grey2NKB(std::uint32_t grey) const; //!  converts uint32 from gray code to nkb
 		std::uint32_t NKB2Gray(std::uint32_t nkb) const; //!  converts uint32 from nkb to gray coed

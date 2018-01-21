@@ -1,5 +1,5 @@
 //
-// \authors Jakub Gajownik, Rafa� Galczak
+// \authors Jakub Gajownik
 // \date 15.01.18
 //
 

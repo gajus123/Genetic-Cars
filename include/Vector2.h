@@ -1,5 +1,6 @@
 //
-// Created by igor on 13.01.18.
+// \author Rafal Galczak
+// \date 13.01.18.
 //
 
 #ifndef GENETIC_CARS_VECTOR2_H
