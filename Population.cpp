@@ -1,5 +1,5 @@
 //
-// \author Rafa³ Galczak
+// \author Rafal Galczak
 // \date 15.01.18
 //
 
@@ -65,6 +65,7 @@ namespace Algorithm {
 		for (int i = 0; i < num_of_elite_specimen; ++i) {
 			new_population.push_back(genotypes_[i]);
 		}
+
 		int population_left = next_population_size_ - elite_specimen_;
 		for (int i = 0; i < (population_left + 1) / 2; ++i) {
 			std::pair<Genotype, Genotype> children = getNewChildren();
@@ -75,6 +76,7 @@ namespace Algorithm {
 				new_population.push_back(children.second);
 		}
 
+		genotypes_.clear();
 		genotypes_ = new_population;
 
 		generateVehicles();
@@ -134,7 +136,7 @@ namespace Algorithm {
 
 	void Population::sort() {
 		std::sort(genotypes_.begin(), genotypes_.end(),
-			[](const Genotype& a, const Genotype& b) {
+			[](const Genotype& a, const Genotype& b) -> bool {
 				return a.fitness > b.fitness;
 		});
 	}
