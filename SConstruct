@@ -19,7 +19,7 @@ def add_build_path(files, build_path):
 	for i in xrange(0, len(files)):
 		files[i] = build_path + files[i]
 	
-QT5DIR = ''
+QT5DIR = '/home/gajus123/Qt/5.10.0/gcc_64'
 CXXFLAGS = []
 LINKFLAGS = []
 LIBS = []
@@ -30,14 +30,15 @@ src_path = './'
 
 env = Environment()
 if env['CXX'] == 'g++':
-	CXXFLAGS.extend(['-fPIC','-std=c++14'])
-	#LINKFLAGS.extend(['-lpthread'])
+	CXXFLAGS.extend(['-fPIC','-std=c++14', '-O3'])
 	LIBS.extend(['boost_unit_test_framework'])
 elif env['CXX'] == 'cl' or env['CC'] == 'cl':
 	CXXFLAGS.extend(['/std:c++14', '/EHsc'])
 	LINKFLAGS.extend(['/LIBPATH:..\\boost_1_65_1\\lib64-msvc-14.0'])
 	CPPPATH.extend(['..\\boost_1_65_1'])
 
+env.Append(QT5DIR=QT5DIR)
+env['ENV']['PKG_CONFIG_PATH'] = os.path.join(QT5DIR, 'lib/pkgconfig')
 env.Append(CXXFLAGS=CXXFLAGS)
 env.Append(LINKFLAGS=LINKFLAGS)
 env.Append(LIBS=LIBS)
