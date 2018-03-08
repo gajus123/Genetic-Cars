@@ -230,17 +230,13 @@ void MainWindow::resetSimulation() {
 }
 void MainWindow::speedChanged() {
 	float time_speed = simulation_speed_chooser_.currentData().toFloat();
-	std::cout << "New speed: " << time_speed << "\n";
 	loop_.setTimeSpeed(time_speed);
-	simulation_.setTimeSpeed(time_speed);
 }
 void MainWindow::pauseSimulation() {
 	loop_.stop();
-	simulation_.stop();
 }
 void MainWindow::resumeSimulation() {
 	loop_.start();
-	simulation_.start();
 }
 
 template<class WidgetType, class LayoutType>

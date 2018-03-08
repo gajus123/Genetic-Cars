@@ -39,12 +39,8 @@ class Simulation : public QObject {
 public:
 	Simulation(QObject *parent = Q_NULLPTR);
 
-	void stop(); //!  If simulation is running, it stops checking vehicles acitivity
-	void start(); //!  If simulation is not running, it resumes checking vehicles acitivity
 	void newGround();
 	void resetTimers(); //!  Resets activity checking
-
-	void setTimeSpeed(float time_speed); //!  Sets time speed multiplier - 1.0 is normal speed
 
 	const Objects::Vehicle& getBestVehicle() const; //!  Returns vehicle with the biggest fitness value
 	const std::vector<Objects::Vehicle> getVehicles() const;
@@ -61,18 +57,12 @@ signals:
 	void roundEnd(std::vector<float> distances);
 private:
 	void clearVehicles();
-	void saveRemainingTime();
 
 	World world_;
-	//QTimer watchdog_;
-	//QTimer round_timer_;
+	
 	Watchdog activity_timer_;
 	Watchdog round_timer_;
 
-	bool is_running_;
-	//int round_time_left_;
-	//int watchdog_time_left_;
-	float time_speed_;
 	std::vector<float> fitnesses_;
 	std::vector<Objects::Vehicle> vehicles_;
 	std::shared_ptr<Objects::Ground> ground_;
