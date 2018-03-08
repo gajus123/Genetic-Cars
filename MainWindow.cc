@@ -75,7 +75,6 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 
 	connect(&loop_, SIGNAL(step(unsigned int)), &simulation_, SLOT(step(unsigned int)));
 
-	//Physics::ObjectsFactory::init(loop_.getWorld());
 	Physics::ObjectsFactory::init(simulation_.getWorld().getWorld());
 
 	simulation_.newGround();
