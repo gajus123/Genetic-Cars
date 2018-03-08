@@ -33,7 +33,7 @@ if env['CXX'] == 'g++':
 	CXXFLAGS.extend(['-fPIC','-std=c++14', '-O3'])
 	LIBS.extend(['boost_unit_test_framework'])
 elif env['CXX'] == 'cl' or env['CC'] == 'cl':
-	CXXFLAGS.extend(['/std:c++14', '/EHsc'])
+	CXXFLAGS.extend(['/std:c++14', '/EHsc', '/Ox'])
 	LINKFLAGS.extend(['/LIBPATH:..\\boost_1_65_1\\lib64-msvc-14.0'])
 	CPPPATH.extend(['..\\boost_1_65_1'])
 
