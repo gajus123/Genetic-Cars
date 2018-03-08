@@ -23,6 +23,7 @@
 #include <QGroupBox>
 #include <QFileDialog>
 #include <QComboBox>
+#include <iostream>
 
 /*!
 	\class MainWindow

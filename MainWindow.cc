@@ -73,7 +73,10 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &population_, SLOT(nextPopulation(std::vector<float>)));
 	connect(&population_, SIGNAL(newVehiclesGenerated(std::vector<Objects::Vehicle>)), &simulation_, SLOT(newRound(std::vector<Objects::Vehicle>)));
 
-	Physics::ObjectsFactory::init(loop_.getWorld());
+	connect(&loop_, SIGNAL(step(unsigned int)), &simulation_, SLOT(step(unsigned int)));
+
+	//Physics::ObjectsFactory::init(loop_.getWorld());
+	Physics::ObjectsFactory::init(simulation_.getWorld().getWorld());
 
 	simulation_.newGround();
 	population_.inflateRandom();
@@ -228,6 +231,7 @@ void MainWindow::resetSimulation() {
 }
 void MainWindow::speedChanged() {
 	float time_speed = simulation_speed_chooser_.currentData().toFloat();
+	std::cout << "New speed: " << time_speed << "\n";
 	loop_.setTimeSpeed(time_speed);
 	simulation_.setTimeSpeed(time_speed);
 }
