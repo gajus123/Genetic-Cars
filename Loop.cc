@@ -29,9 +29,6 @@ namespace Physics {
 	void Loop::setTimeSpeed(float time_speed) {
 		float new_interval = static_cast<float>(PHYSICS_FRAME_TIME) * time_speed;
 		interval_ = static_cast<unsigned int>(new_interval);
-		//std::cout << "Interval: " << interval_ << "\n";
-		//timer_.setInterval(interval_);
-		//time_step_ = normal_time_step_ * time_speed;
 	}
 
 }
