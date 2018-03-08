@@ -1,16 +1,11 @@
 #include "Simulation.h"
 
 Simulation::Simulation(QObject *parent) :
-	QObject(parent),
-	watchdog_(this),
-	round_timer_(this),
-	time_speed_(1.0f),
-	is_running_(true),
-	watchdog_time_left_(0),
-	round_time_left_(0) {
-
-	round_timer_.setSingleShot(true);
-	connect(&watchdog_, SIGNAL(timeout()), this, SLOT(checkActivity()));
+		QObject(parent),
+		activity_timer_(CHECK_TIME),
+		round_timer_(MAX_ROUND_TIME),
+		is_running_(true) {
+	connect(&activity_timer_, SIGNAL(timeout()), this, SLOT(checkActivity()));
 	connect(&round_timer_, SIGNAL(timeout()), this, SLOT(endRound()));
 }
 
@@ -50,8 +45,8 @@ void Simulation::stop() {
 		is_running_ = false;
 
 		saveRemainingTime();
-		watchdog_.stop();
-		round_timer_.stop();
+		//watchdog_.stop();
+		//round_timer_.stop();
 	}
 }
 
@@ -59,11 +54,11 @@ void Simulation::start() {
 	if (!is_running_) {
 		is_running_ = true;
 
-		float watchdog_time_left = static_cast<float>(watchdog_time_left_) / time_speed_;
-		float round_time_left = static_cast<float>(round_time_left_) / time_speed_;
+		//float watchdog_time_left = static_cast<float>(watchdog_time_left_) / time_speed_;
+		//float round_time_left = static_cast<float>(round_time_left_) / time_speed_;
 
-		watchdog_.start(static_cast<int>(watchdog_time_left));
-		round_timer_.start(static_cast<int>(round_time_left));
+		//watchdog_.start(static_cast<int>(watchdog_time_left));
+		//round_timer_.start(static_cast<int>(round_time_left));
 	}
 }
 
@@ -82,21 +77,21 @@ void Simulation::checkActivity() {
 
 void Simulation::setTimeSpeed(float time_speed) {
 	if (is_running_) {
-		float watchdog_time_left = static_cast<float>(watchdog_.remainingTime()) * (time_speed_ / time_speed);
-		float round_time_left = static_cast<float>(round_timer_.remainingTime()) * (time_speed_ / time_speed);
+		//float watchdog_time_left = static_cast<float>(watchdog_.remainingTime()) * (time_speed_ / time_speed);
+		//float round_time_left = static_cast<float>(round_timer_.remainingTime()) * (time_speed_ / time_speed);
 		
-		watchdog_.start(static_cast<int>(watchdog_time_left));
-		round_timer_.start(static_cast<int>(round_time_left));
+		//watchdog_.start(static_cast<int>(watchdog_time_left));
+		//round_timer_.start(static_cast<int>(round_time_left));
 	}
 	time_speed_ = time_speed;
 }
 
 void Simulation::saveRemainingTime() {
-	float watchdog_time_left = static_cast<float>(watchdog_.remainingTime()) * time_speed_;
-	float round_time_left = static_cast<float>(round_timer_.remainingTime()) * time_speed_;
+	//float watchdog_time_left = static_cast<float>(watchdog_.remainingTime()) * time_speed_;
+	//float round_time_left = static_cast<float>(round_timer_.remainingTime()) * time_speed_;
 
-	watchdog_time_left_ = static_cast<float>(watchdog_time_left);
-	round_time_left_ = static_cast<float>(round_time_left);
+	//watchdog_time_left_ = static_cast<float>(watchdog_time_left);
+	//round_time_left_ = static_cast<float>(round_time_left);
 }
 
 const std::vector<Objects::Vehicle> Simulation::getVehicles() const {
@@ -125,9 +120,19 @@ void Simulation::endRound() {
 }
 
 void Simulation::resetTimers() {
-	float watchdog_time = static_cast<float>(CHECK_TIME) / time_speed_;
-	float round_time = static_cast<float>(MAX_ROUND_TIME) / time_speed_;
+	//float watchdog_time = static_cast<float>(CHECK_TIME) / time_speed_;
+	//float round_time = static_cast<float>(MAX_ROUND_TIME) / time_speed_;
 
-	watchdog_.start(static_cast<int>(watchdog_time));
-	round_timer_.start(static_cast<int>(round_time));
+	//watchdog_.start(static_cast<int>(watchdog_time));
+	//round_timer_.start(static_cast<int>(round_time));
+}
+
+World& Simulation::getWorld() {
+	return world_;
+}
+
+void Simulation::step(unsigned int time) {
+	world_.step(time);
+	activity_timer_.step(time);
+	round_timer_.step(time);
 }

@@ -13,6 +13,9 @@
 #include <vector>
 #include <cmath>
 
+#include "World.h"
+#include "Watchdog.h"
+#include "Box2D/Box2D.h"
 #include "include/Vehicle.h"
 #include "include/Ground.h"
 #include "include/GroundGenerator.h"
@@ -46,7 +49,9 @@ public:
 	const Objects::Vehicle& getBestVehicle() const; //!  Returns vehicle with the biggest fitness value
 	const std::vector<Objects::Vehicle> getVehicles() const;
 	const std::weak_ptr<Objects::Ground> getGround() const;
+	World& getWorld();
 public slots:
+	void step(unsigned int time);
 	void reset(); //!  Resets simulation and generate new ground
 	void newRound(std::vector<Objects::Vehicle> vehicles); //!  Starts new simulation round with passed vehicles
 private slots:
@@ -58,12 +63,15 @@ private:
 	void clearVehicles();
 	void saveRemainingTime();
 
-	QTimer watchdog_;
-	QTimer round_timer_;
+	World world_;
+	//QTimer watchdog_;
+	//QTimer round_timer_;
+	Watchdog activity_timer_;
+	Watchdog round_timer_;
 
 	bool is_running_;
-	int round_time_left_;
-	int watchdog_time_left_;
+	//int round_time_left_;
+	//int watchdog_time_left_;
 	float time_speed_;
 	std::vector<float> fitnesses_;
 	std::vector<Objects::Vehicle> vehicles_;
