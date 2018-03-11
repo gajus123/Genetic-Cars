@@ -16,6 +16,7 @@ namespace Algorithm {
 		front_radius_ = other.front_radius_;
 		back_radius_ = other.back_radius_;
 		heights_ = other.heights_;
+		fitness = other.fitness;
 	}
 
 	Genotype& Genotype::operator=(const Genotype & other)
@@ -24,6 +25,7 @@ namespace Algorithm {
 		back_radius_ = other.back_radius_;
 		heights_.clear();
 		heights_ = other.heights_;
+		fitness = other.fitness;
 		return *this;
 	}
 
