@@ -38,6 +38,7 @@ private:
 	float32 time_step_;
 	int32 velocity_iterations_;
 	int32 position_iterations_;
+	float accumulator_;
 };
 
 #endif

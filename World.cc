@@ -9,17 +9,15 @@ World::World(b2Vec2 gravity, int32 velocity_iterations, int32 position_iteration
 
 void World::step(unsigned int time) {
 	float sim_time = static_cast<float>(time) / 1000;
+	accumulator_ += sim_time;
 
-	while (sim_time > 0) {
-		float rem_time = (sim_time > time_step_) ? time_step_ : sim_time;
-		
+	while (accumulator_ > time_step_) {
 		world_->Step(
-			rem_time,
+			time_step_,
 			velocity_iterations_,
 			position_iterations_
 		);
-
-		sim_time -= rem_time;
+		accumulator_ -= time_step_;
 	}
 }
 
