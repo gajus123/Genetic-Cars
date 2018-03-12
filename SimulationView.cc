@@ -61,7 +61,7 @@ void SimulationView::drawWheel(const Objects::Wheel& wheel, QPainter& painter) {
 	painter.setBrush(QBrush(WHEEL_COLOR));
 	painter.drawEllipse(QPointF(0, 0), wheel.getRadius()*width_multipier_, wheel.getRadius()*width_multipier_);
 
-	painter.rotate(-wheel.getAngle() / M_PI*180.0f);
+	painter.rotate(wheel.getAngle() / M_PI*180.0f);
 	painter.drawLine(0, 0, wheel.getRadius()*width_multipier_, 0);
 
 	painter.restore();
