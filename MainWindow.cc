@@ -78,7 +78,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	Physics::ObjectsFactory::init(simulation_.getWorld().getWorld());
 
 	simulation_.newGround();
-	population_.inflateRandom();
+	population_.generateVehicles();
 }
 QWidget* MainWindow::createSimulationWidgets() {
 	//Create container for Simulation manipulation widgets
