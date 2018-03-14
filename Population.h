@@ -44,8 +44,8 @@ namespace Algorithm {
 		Population(); //!  Initializes rng and empty population
 		explicit Population(std::vector<Genotype> genotypes); //!  Creates population based on genotypes vector
 
+		void generateVehicles();
 		void reset();
-		void inflateRandom(); //!  Fills population with random genotypes. Size as set in setNextGenerationSize
 		std::vector<Genotype>& getGenotypes(); //!  Returns reference to Genotype's container
 
 		void setMutationRate(float rate); //!  Sets mutatios rate while creating children for the next generation
@@ -72,8 +72,7 @@ namespace Algorithm {
 		unsigned int next_population_size_; //!  number of genotypes in the next population
 
 		std::pair<Genotype, Genotype> getNewChildren(); //!  Returns children of two genotypes choosen by getRandomParent()
-		Genotype& getRandomParent(); //!  Rerurns Genotype using roulette selection 
-		void generateVehicles();
+		Genotype& getRandomParent(); //!  Rerurns Genotype using roulette selection
 		void sort(); //!  sorts genotypes in place based in their fitness
 
 	};
