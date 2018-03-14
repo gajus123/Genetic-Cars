@@ -14,6 +14,7 @@
 #include <istream>
 
 #include "include/Vehicle.h"
+#include "include/Gene.h"
 
 
 namespace Algorithm {
@@ -44,9 +45,8 @@ namespace Algorithm {
 		
 		Genotype& operator=(const Genotype& other); //!< Inits own RNG, copies wheels radiuses and bodys segments heights
 
-		void inflateWithRandom(); //!< Inits wheels radiuses and bodys segments heights with random values 
 		void mutate(float mutation_rate); //!< Test each bit of genotype against mutation rate and flips it if passed
-		Genotype cross(Genotype& other) const;//!< Takes lower half bits if this genotype and upper half from other, combines them to create new Genetype
+		Genotype cross(const Genotype& other) const;//!< Takes lower half bits if this genotype and upper half from other, combines them to create new Genetype
 
 		Objects::Vehicle generate(Objects::Vector2 position = {0.0f, 0.0f}) const; //!< Creates Vehicle corresponding to this Genotype
 		
@@ -56,19 +56,11 @@ namespace Algorithm {
 		std::random_device rd_;
 		std::mt19937 rng_;
 
-		std::uint32_t front_radius_; //!< Biref: Radius of the front wheel mapped to uint32 in gray code
-		std::uint32_t back_radius_; //!  Radius of the back wheel mapped to uint32 in gray code
-		std::vector<std::uint32_t> heights_; //!  Lenghts of body segments mapped to uint32 in gray code
+		Gene<float> front_radius_;
+		Gene<float> back_radius_;
+		std::vector<Gene<float>> heights_;
 
-		std::uint32_t grey2NKB(std::uint32_t grey) const; //!  converts uint32 from gray code to nkb
-		std::uint32_t NKB2Gray(std::uint32_t nkb) const; //!  converts uint32 from nkb to gray coed
-
-		std::uint32_t mutate_value(std::uint32_t value, float mutation_rate);//!< Test each bit of value against mutation rate and flips it if passed
-
-
-		std::uint32_t crossValues(std::uint32_t a, std::uint32_t b) const; //!< Creates new value from half lower bits of a and half high bits of b
-		float castSignedValue(std::uint32_t grey, float maximum_value = 1.0f) const; //!< Casts number in grey code to unsigned float lower than maximum 
-		float castUnsignedValue(std::uint32_t grey, float maximum_value = 1.0f) const; //!  Casts number to float lower than maximum and greater than -maximum
+		float randFloat(float min_value, float max_value);
 	};
 }
 #endif // !_GENETIC_CARS_GENOTYPE_H_
