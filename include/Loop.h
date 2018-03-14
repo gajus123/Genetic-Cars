@@ -17,7 +17,7 @@ namespace Physics {
 
 	/*!
 		\class Loop
-		\brief Physics loop objec
+		\brief Physics loop object
 
 		Loop wraps Box2D world creation and simulation computing.
 		It is advised that all constructor parameters should remain default.

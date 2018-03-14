@@ -6,12 +6,13 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
-#include "Population.h"
-#include "SimulationView.h"
-#include "StatisticView.h"
-#include "Simulation.h"
-#include "Statistics.h"
-#include "Loop.h"
+#include "include/Population.h"
+#include "include/SimulationView.h"
+#include "include/StatisticView.h"
+#include "include/Simulation.h"
+#include "include/Statistics.h"
+#include "include/Loop.h"
+
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>

@@ -7,7 +7,7 @@
 
 #include "Box2D/Box2D.h"
 #include <QApplication>
-#include "MainWindow.h"
+#include "include/MainWindow.h"
 #include "include/ObjectsFactory.h"
 
 

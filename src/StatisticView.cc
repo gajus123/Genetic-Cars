@@ -1,4 +1,4 @@
-#include "StatisticView.h"
+#include "include/StatisticView.h"
 
 StatisticView::StatisticView(QWidget *parent, Qt::WindowFlags flags) :
 	QChartView(parent) {
