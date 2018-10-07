@@ -34,7 +34,9 @@ namespace Objects {
 							 starting at upper one	
 			\param position - position in the world space to spawn body on
 		*/
-        Body(std::vector<float> lengths, Vector2 position) : lengths_(std::move(lengths)), Base(position) {
+        Body(std::vector<float> lengths, Vector2 position) :
+			Base(position),
+			lengths_(std::move(lengths)) {
 			beforeBodySetUp();
 			createAndSetBody();	
 			afterBodySetup();

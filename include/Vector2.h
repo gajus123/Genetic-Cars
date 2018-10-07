@@ -29,7 +29,7 @@ namespace Objects {
 
         Vector2 operator+=(const Vector2& other) {x += other.x, y += other.y; return *this;}
         Vector2 operator-=(const Vector2& other) {x -= other.x, y -= other.y; return *this;}
-        Vector2 operator-=(const float& scalar) {x *= scalar, scalar; return *this;}
+        Vector2 operator*=(const float& scalar) {x *= scalar, y *= scalar; return *this;}
 
     };
 

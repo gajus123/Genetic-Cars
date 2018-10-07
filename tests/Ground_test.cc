@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_CASE(check_returs_valid_x_distance)
 BOOST_AUTO_TEST_CASE(check_returs_valid_heights)
 {
 	Ground g(Vector2(0.0f, 0.0f), 1.0f, heights);
-	for (int i = 0; i < heights.size(); ++i) {
+	for (std::size_t i = 0; i < heights.size(); ++i) {
 		BOOST_CHECK_EQUAL(g.getHeights()[i], heights[i]);
 	}
 }
@@ -37,7 +37,7 @@ BOOST_AUTO_TEST_CASE(check_returs_valid_heights)
 BOOST_AUTO_TEST_CASE(check_returs_valid_vertices)
 {
 	Ground g(Vector2(0.0f, 0.0f), 1.1f, heights);
-	for (int i = 0; i < heights.size(); ++i) {
+	for (std::size_t i = 0; i < heights.size(); ++i) {
 		BOOST_CHECK_EQUAL(g.getVertices()[i].x, 1.1f*i);
 		BOOST_CHECK_EQUAL(g.getVertices()[i].y, heights[i]);
 	}

@@ -8,7 +8,9 @@
 
 namespace Objects {
 
-	Wheel::Wheel(Vector2 position, float radius) : radius_(radius), Base(position) {
+	Wheel::Wheel(Vector2 position, float radius) :
+		Base(position),
+		radius_(radius) {
 		beforeBodySetUp();
 		createAndSetBody();
 		afterBodySetup();

@@ -15,9 +15,9 @@ class Gene {
 	const float MAX_RAND_VALUE = 100.0f; //!  maximum value rng reacheas in probability tests
 public:
 	Gene(T value, T minimum_value, T maximum_value) :
-			rng_(rd_()),
 			minimum_value_(minimum_value),
-			maximum_value_(maximum_value) {
+			maximum_value_(maximum_value),
+			rng_(rd_()) {
 
 		T divide = (value - minimum_value) / (maximum_value - minimum_value);
 		

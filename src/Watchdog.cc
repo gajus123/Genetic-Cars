@@ -3,8 +3,8 @@
 
 Watchdog::Watchdog(unsigned int miliseconds) : 
 	QObject(),
-	interval_(miliseconds),
-	time_left_(miliseconds) {
+	time_left_(miliseconds),
+	interval_(miliseconds) {
 
 }
 

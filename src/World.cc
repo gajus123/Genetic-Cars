@@ -2,9 +2,9 @@
 
 World::World(b2Vec2 gravity, int32 velocity_iterations, int32 position_iterations, float32 time_step) :
 		world_(new b2World(gravity)),
+		time_step_(time_step),
 		velocity_iterations_(velocity_iterations),
-		position_iterations_(position_iterations),
-		time_step_(time_step) {
+		position_iterations_(position_iterations) {
 }
 
 void World::step(unsigned int time) {

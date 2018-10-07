@@ -8,15 +8,15 @@
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags),
-	mutation_size_label_("Prawdopodobieństwo mutacji: "),
-	elite_specimen_number_label_("Ilość osobników elitarnych: "),
-	load_button_("Wczytaj"),
-	save_button_("Zapisz"),
+	simulation_(),
+	simulation_view_(simulation_),
 	reset_button_("Resetuj"),
 	pause_button_("Pauza"),
 	cars_count_label_("Ilość pojazdów: "),
-	simulation_(),
-	simulation_view_(simulation_) {
+	load_button_("Wczytaj"),
+	save_button_("Zapisz"),
+	mutation_size_label_("Prawdopodobieństwo mutacji: "),
+	elite_specimen_number_label_("Ilość osobników elitarnych: ") {
 
 	setWindowTitle("Genetic Cars"); 
 	

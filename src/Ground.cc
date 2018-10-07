@@ -9,9 +9,9 @@
 namespace Objects {
 
 	Ground::Ground(Vector2 position, float x_distance, std::vector<float> heights) :
-		x_distance_(x_distance),
+        Base(position),
 		heights_(std::move(heights)),
-		Base(position) {
+        x_distance_(x_distance) {
 
 		beforeBodySetUp();
 		createAndSetBody();
@@ -19,7 +19,7 @@ namespace Objects {
 	}
 
     void Ground::beforeBodySetUp() {
-        for (int i = 0; i < heights_.size(); ++i) {
+        for (std::size_t i = 0; i < heights_.size(); ++i) {
             vertices_.emplace_back(std::move(Vector2(x_distance_*i, heights_[i])));
         }
     }

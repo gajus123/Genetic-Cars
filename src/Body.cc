@@ -28,7 +28,7 @@ namespace Objects {
                 {1.0f, 0.0f},
                 {1.0f, 1.0f},
         };
-        for (int i = 0; i < normals.size(); ++i) {
+        for (std::size_t i = 0; i < normals.size(); ++i) {
             vertices_.emplace_back(normals[i] * lengths_[i]);
         }
     }
