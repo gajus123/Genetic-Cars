@@ -50,16 +50,16 @@ set(SOURCE_FILES
 )
 
 set(TEST_FILES
-    src/Body_test.cc
-    src/Gene_test.cc
-    src/Ground_test.cc
-    src/GroundGenerator_test.cc
-    src/ObjectsFactory_test.cc
-    src/Population_test.cc
-    src/Vehicle_test.cc
-    src/Wheel_test.cc
+    tests/Body_test.cc
+    tests/Gene_test.cc
+    tests/Ground_test.cc
+    tests/GroundGenerator_test.cc
+    tests/ObjectsFactory_test.cc
+    tests/Population_test.cc
+    tests/Vehicle_test.cc
+    tests/Wheel_test.cc
 
-    src/test_main.cc
+    tests/test_main.cc
 )
 
 
