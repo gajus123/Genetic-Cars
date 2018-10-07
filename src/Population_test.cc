@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 
-#include "Population.h"
+#include <Population.h>
 
 using namespace Algorithm;
 
@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(check_genotypes_vector_size_ater_inflate_random)
 {
 	Population p;
 	p.setNextGenerationSize(12);
-	p.inflateRandom();
+	p.reset();
 	BOOST_CHECK_EQUAL(p.getGenotypes().size(), 12);
 }
 

@@ -1,18 +1,20 @@
 #include <boost/test/unit_test.hpp>
 #include <vector>
 
-#include "include/Vehicle.h"
+#include <Vehicle.h>
+#include <World.h>
+#include <ObjectsFactory.h>
 
 using namespace Physics;
 using namespace Objects;
 
 struct VehicleTestFixture {
 	VehicleTestFixture() :
-		l(b2Vec2(0.0f, 9.8f), 4, 8),
-		obj(ObjectsFactory::init(l.getWorld())),
+		w(b2Vec2(0.0f, 9.8f), 4, 8),
+		obj(ObjectsFactory::init(w.getWorld())),
 		heights(8, 1.0f){
 	}
-	Loop l;
+	World w;
 	ObjectsFactory& obj;
 	std::vector<float> heights;
 };

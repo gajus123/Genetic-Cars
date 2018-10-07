@@ -1,16 +1,18 @@
 #include <boost/test/unit_test.hpp>
 
-#include "include/GroundGenerator.h"
+#include <GroundGenerator.h>
+#include <World.h>
+#include <ObjectsFactory.h>
 
 using namespace Physics;
 using namespace Objects;
 
 struct GroundGeneratorTestFixture {
 	GroundGeneratorTestFixture() :
-		l(b2Vec2(0.0f, 9.8f), 4, 8),
-		obj(ObjectsFactory::init(l.getWorld())) {
+		w(b2Vec2(0.0f, 9.8f), 4, 8),
+		obj(ObjectsFactory::init(w.getWorld())) {
 	}
-	Loop l;
+	World w;
 	ObjectsFactory& obj;
 };
 

@@ -6,7 +6,7 @@
 #include <boost/test/unit_test.hpp>
 #include <limits>
 
-#include "include/Gene.h"
+#include <Gene.h>
 
 BOOST_AUTO_TEST_SUITE(GeneTests);
 

@@ -1,16 +1,18 @@
 #include <boost/test/unit_test.hpp>
 
-#include "include/Body.h"
+#include <Body.h>
+#include <World.h>
+#include <ObjectsFactory.h>
 
 using namespace Physics;
 using namespace Objects;
 
 struct BodyTestFixture {
 	BodyTestFixture() :
-		l(b2Vec2(0.0f, 9.8f), 4, 8),
-		obj(ObjectsFactory::init(l.getWorld())) {
+		w(b2Vec2(0.0f, 9.8f), 4, 8),
+		obj(ObjectsFactory::init(w.getWorld())) {
 	}
-	Loop l;
+	World w;
 	ObjectsFactory& obj;
 	std::vector<float> lenghts = { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f };
 };
