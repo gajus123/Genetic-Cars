@@ -1,4 +1,4 @@
-#include "include/SimulationView.h"
+#include <SimulationView.h>
 
 SimulationView::SimulationView(Simulation& simulation, QWidget *parent, Qt::WindowFlags flags) :
 	simulation_(simulation),

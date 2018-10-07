@@ -13,13 +13,14 @@
 #include <vector>
 #include <cmath>
 
-#include "World.h"
-#include "Watchdog.h"
-#include "Box2D/Box2D.h"
-#include "include/Vehicle.h"
-#include "include/Ground.h"
-#include "include/GroundGenerator.h"
-#include "include/ObjectsFactory.h"
+#include <Box2D/Box2D.h>
+
+#include <World.h>
+#include <Watchdog.h>
+#include <Vehicle.h>
+#include <Ground.h>
+#include <GroundGenerator.h>
+#include <ObjectsFactory.h>
 
 /*!
 	\class Simulation

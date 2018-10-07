@@ -13,8 +13,8 @@
 #include <ostream>
 #include <istream>
 
-#include "include/Vehicle.h"
-#include "include/Gene.h"
+#include <Vehicle.h>
+#include <Gene.h>
 
 
 namespace Algorithm {

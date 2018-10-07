@@ -1,4 +1,4 @@
-#include "include/Statistics.h"
+#include <Statistics.h>
 
 void Statistics::calculateStatistics(std::vector<float> distances) {
 	float best = *std::max_element(distances.begin(), distances.end());

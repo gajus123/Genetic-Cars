@@ -1,15 +1,15 @@
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 12.01.18
 //
 
 #ifndef GENETIC_CARS_WHEEL_H
 #define GENETIC_CARS_WHEEL_H
 
-#include "Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 
-#include "include/Base.h"
-#include "include/Vector2.h"
+#include <Base.h>
+#include <Vector2.h>
 
 namespace Objects {
 	/*!

@@ -6,7 +6,7 @@
 #ifndef _GENETIC_CARS_WORLD_H_
 #define _GENETIC_CARS_WORLD_H_
 
-#include "Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 
 const b2Vec2 DEFAULT_GRAVITY = b2Vec2(0.0f, 9.8f); //!  Default world gravity
 const float32 TIME_STEP = 1.0f / 60.0f; //!  Physics simulation world step

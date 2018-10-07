@@ -3,9 +3,8 @@
 // \date 14.01.18
 //
 
-#include "include/Body.h"
-
-#include "include/ObjectsFactory.h"
+#include <Body.h>
+#include <ObjectsFactory.h>
 
 namespace Objects {
 

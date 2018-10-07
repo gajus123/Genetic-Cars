@@ -6,10 +6,6 @@
 #ifndef SIMULATION_VIEW_H
 #define SIMULATION_VIEW_H
 
-#include "include/Ground.h"
-#include "include/Wheel.h"
-#include "include/Vehicle.h"
-#include "Simulation.h"
 #include <QFrame>
 #include <QPainter>
 #include <QPoint>
@@ -17,6 +13,11 @@
 #include <QWidget>
 #include <QWheelEvent>
 #include <cmath>
+
+#include <Ground.h>
+#include <Wheel.h>
+#include <Vehicle.h>
+#include <Simulation.h>
 
 /*!
 	\class SimulationView

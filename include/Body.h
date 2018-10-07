@@ -7,10 +7,11 @@
 #define GENETIC_CARS_BODY_H
 
 
-#include "include/Vector2.h"
-#include "include/Base.h"
 #include <vector>
 #include <cstdio>
+
+#include <Vector2.h>
+#include <Base.h>
 
 namespace Objects {
 

@@ -1,13 +1,13 @@
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 12.01.18
 //
 
 #ifndef GENETIC_CARS_BASE_H
 #define GENETIC_CARS_BASE_H
 
-#include "include/Vector2.h"
-#include "include/ObjectsFactory.h"
+#include <Vector2.h>
+#include <ObjectsFactory.h>
 
 namespace Physics {
 	class ObjectsFactory;

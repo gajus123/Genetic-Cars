@@ -1,4 +1,4 @@
-#include "include/Simulation.h"
+#include <Simulation.h>
 
 Simulation::Simulation(QObject *parent) :
 		QObject(parent),

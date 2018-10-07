@@ -5,10 +5,10 @@
  * \brief main initializes and starts app and main window
  */
 
-#include "Box2D/Box2D.h"
+#include <Box2D/Box2D.h>
 #include <QApplication>
-#include "include/MainWindow.h"
-#include "include/ObjectsFactory.h"
+#include <MainWindow.h>
+#include <ObjectsFactory.h>
 
 
 int main(int argc, char *argv[])

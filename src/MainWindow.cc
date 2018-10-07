@@ -3,8 +3,8 @@
  * @date 14.12.17
  *
  */
-#include "include/MainWindow.h"
-#include "include/GroundGenerator.h"
+#include <MainWindow.h>
+#include <GroundGenerator.h>
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags),

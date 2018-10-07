@@ -1,5 +1,5 @@
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 14.01.18
 //
 
@@ -7,12 +7,13 @@
 #define GENETIC_CARS_PHYSICSOBJECTSFACTORY_H
 
 #include <QtMath>
+#include <vector>
 
 #include <Box2D/Dynamics/b2World.h>
-#include "Box2D/Box2D.h"
-#include <vector>
-#include "Loop.h"
-#include "include/Base.h"
+#include <Box2D/Box2D.h>
+
+#include <Loop.h>
+#include <Base.h>
 
 
 namespace Objects {

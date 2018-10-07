@@ -3,7 +3,7 @@
 // \date 14.01.18
 //
 
-#include "include/Genotype.h"
+#include <Genotype.h>
 
 namespace Algorithm {
 

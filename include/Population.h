@@ -10,7 +10,8 @@
 #include <random>
 #include <fstream>
 #include <QObject>
-#include "include/Genotype.h"
+
+#include <Genotype.h>
 
 /*!
 	Algrothim defines basic classes for genetetic evolution of Vehicles

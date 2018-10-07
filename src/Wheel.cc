@@ -1,10 +1,10 @@
 //
-// \author Rafa³ Galczak
+// \author Rafaï¿½ Galczak
 // \date 12.01.18
 //
 
-#include "include/ObjectsFactory.h"
-#include "include/Wheel.h"
+#include <ObjectsFactory.h>
+#include <Wheel.h>
 
 namespace Objects {
 
