@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags),
 	simulation_(),
 	simulation_view_(simulation_),
-    ui_(new Ui::MainWindow) {
+    ui_(new Ui::MainWindow),
+    pause_action_(QKeySequence(Qt::CTRL + Qt::Key_P), this) {
 
     ui_->setupUi(this);
 
@@ -22,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
     sizePolicy.setVerticalStretch(2);
     statistic_view_.setSizePolicy(sizePolicy);
     ui_->verticalLayout_3->addWidget(&statistic_view_);
+
+    connect(&pause_action_, SIGNAL(activated()), ui_->pause_button, SLOT(click()));
 
     connect(ui_->elite_specimen_number_edit, SIGNAL(editingFinished()), this, SLOT(eliteSpecimenNumberChanged()));
     connect(ui_->mutation_size_edit, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));

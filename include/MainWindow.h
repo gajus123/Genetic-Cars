@@ -18,6 +18,7 @@
 #include <QFileDialog>
 #include <QComboBox>
 #include <iostream>
+#include <QShortcut>
 
 #include <Population.h>
 #include <SimulationView.h>
@@ -70,6 +71,8 @@ private:
 	SimulationView simulation_view_;
 
 	Ui::MainWindow* ui_;
+
+	QShortcut pause_action_;
 };
 
 #endif
