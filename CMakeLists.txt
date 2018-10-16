@@ -23,13 +23,11 @@ include_directories(${Qt5Charts_INCLUDE_DIRS})
 set(SOURCE_FILES
     src/Base.cc
     src/Body.cc
-    src/Genotype.cc
     src/Ground.cc
     src/GroundGenerator.cc
     src/Loop.cc
     src/MainWindow.cc
     src/ObjectsFactory.cc
-    src/Population.cc
     src/Simulation.cc
     src/SimulationView.cc
     src/Statistics.cc
@@ -42,11 +40,16 @@ set(SOURCE_FILES
 
     src/MainWindow.ui
 
+    include/algorithm/Gene.hpp
+    include/algorithm/Genotype.hpp
+    src/algorithm/Population.cpp
+    src/algorithm/PopulationWrapper.cpp
+    include/algorithm/PopulationWrapper.h
+
     include/Loop.h
     include/MainWindow.h
     include/Simulation.h
     include/StatisticView.h
-    include/Population.h
     include/Statistics.h
     include/Watchdog.h
 )
