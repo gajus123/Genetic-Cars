@@ -10,6 +10,7 @@
 #include <random>
 #include <fstream>
 #include <QObject>
+#include <functional>
 
 #include <Genotype.h>
 

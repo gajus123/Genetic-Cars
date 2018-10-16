@@ -76,9 +76,7 @@ namespace Algorithm {
 
 	void Population::generateVehicles() {
 		std::vector<Objects::Vehicle> vehicles;
-		for (const auto& genotype : genotypes_) {
-			vehicles.push_back(genotype.generate());
-		}
+		std::transform(genotypes_.begin(), genotypes_.end(), std::back_inserter(vehicles), std::bind(&Genotype::generate, std::placeholders::_1, Objects::Vector2{0.0f, 0.0f}));
 
 		emit newVehiclesGenerated(vehicles);
 	}
