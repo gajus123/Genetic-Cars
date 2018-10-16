@@ -5,183 +5,82 @@
  */
 #include <MainWindow.h>
 #include <GroundGenerator.h>
+#include <ui_MainWindow.h>
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags),
 	simulation_(),
 	simulation_view_(simulation_),
-	reset_button_("Resetuj"),
-	pause_button_("Pauza"),
-	cars_count_label_("Ilość pojazdów: "),
-	load_button_("Wczytaj"),
-	save_button_("Zapisz"),
-	mutation_size_label_("Prawdopodobieństwo mutacji: "),
-	elite_specimen_number_label_("Ilość osobników elitarnych: ") {
+    ui_(new Ui::MainWindow) {
 
-	setWindowTitle("Genetic Cars");
-	
-	//Create container for left and right side
-	QWidget* central_widget;
-	QHBoxLayout* central_layout;
-	std::tie(central_widget, central_layout) = createLayout<QWidget, QHBoxLayout>();
-	setCentralWidget(central_widget);
+    ui_->setupUi(this);
 
-	//Create left side container 
-	QWidget* content;
-	QVBoxLayout* content_layout;
-	std::tie(content, content_layout) = createLayout<QWidget, QVBoxLayout>(central_layout);
+    QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    sizePolicy.setVerticalStretch(3);
+    simulation_view_.setSizePolicy(sizePolicy);
+    ui_->verticalLayout_3->addWidget(&simulation_view_);
+    sizePolicy.setVerticalStretch(2);
+    statistic_view_.setSizePolicy(sizePolicy);
+    ui_->verticalLayout_3->addWidget(&statistic_view_);
 
-	//Create size policy for left side
-	QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-	sizePolicy.setVerticalStretch(3);
-
-	//Set simulation view to expand and height to 3/5
-	simulation_view_.setSizePolicy(sizePolicy);
-	content_layout->addWidget(&simulation_view_);
-
-	//Set statistic view to expand and height to 2/5
-	sizePolicy.setVerticalStretch(2);
-	statistic_view_.setSizePolicy(sizePolicy);
-	content_layout->addWidget(&statistic_view_);
+    connect(ui_->elite_specimen_number_edit, SIGNAL(editingFinished()), this, SLOT(eliteSpecimenNumberChanged()));
+    connect(ui_->mutation_size_edit, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
+    connect(ui_->load_button, SIGNAL(clicked()), this, SLOT(loadFromFile()));
+    connect(ui_->save_button, SIGNAL(clicked()), this, SLOT(saveToFile()));
+    connect(ui_->reset_button, SIGNAL(clicked()), this, SLOT(resetSimulation()));
+    connect(ui_->pause_button, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
+    connect(ui_->cars_count_edit, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
+    connect(ui_->simulation_speed_chooser, SIGNAL(currentIndexChanged(int)), this, SLOT(speedChanged()));
 
 
-	//Create right side container
-	QWidget* sidebar_container;
-	QVBoxLayout* sidebar_layout;
-	std::tie(sidebar_container, sidebar_layout) = createLayout<QWidget, QVBoxLayout>(central_layout);
-	
-	central_layout->setAlignment(sidebar_container, Qt::AlignTop);
-	sidebar_container->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &statistics_, SLOT(calculateStatistics(std::vector<float>)));
+    connect(&statistics_, SIGNAL(newValues(float, float, float, float)), &statistic_view_, SLOT(addData(float, float, float, float)));
 
-	sidebar_layout->addWidget(createSimulationWidgets());
-	sidebar_layout->addWidget(createFileWidgets());
-	sidebar_layout->addWidget(createAlgorithmWidgets());
+    connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &population_, SLOT(nextPopulation(std::vector<float>)));
+    connect(&population_, SIGNAL(newVehiclesGenerated(std::vector<Objects::Vehicle>)), &simulation_, SLOT(newRound(std::vector<Objects::Vehicle>)));
 
+    connect(&loop_, SIGNAL(step(unsigned int)), &simulation_, SLOT(step(unsigned int)));
 
-	connect(&elite_specimen_number_edit_, SIGNAL(editingFinished()), this, SLOT(eliteSpecimenNumberChanged()));
-	connect(&mutation_size_edit_, SIGNAL(editingFinished()), this, SLOT(mutationSizeChanged()));
-	connect(&load_button_, SIGNAL(clicked()), this, SLOT(loadFromFile()));
-	connect(&save_button_, SIGNAL(clicked()), this, SLOT(saveToFile()));
-	connect(&reset_button_, SIGNAL(clicked()), this, SLOT(resetSimulation()));
-	connect(&pause_button_, SIGNAL(toggled(bool)), this, SLOT(pauseSimulation(bool)));
-	connect(&cars_count_edit_, SIGNAL(editingFinished()), this, SLOT(carsNumberChanged()));
-	connect(&simulation_speed_chooser_, SIGNAL(currentIndexChanged(int)), this, SLOT(speedChanged()));
+    Physics::ObjectsFactory::init(simulation_.getWorld().getWorld());
 
-	connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &statistics_, SLOT(calculateStatistics(std::vector<float>)));
-	connect(&statistics_, SIGNAL(newValues(float, float, float, float)), &statistic_view_, SLOT(addData(float, float, float, float)));
+    simulation_.newGround();
+    population_.generateVehicles();
 
-	connect(&simulation_, SIGNAL(roundEnd(std::vector<float>)), &population_, SLOT(nextPopulation(std::vector<float>)));
-	connect(&population_, SIGNAL(newVehiclesGenerated(std::vector<Objects::Vehicle>)), &simulation_, SLOT(newRound(std::vector<Objects::Vehicle>)));
+    initializeSpeedWidget();
 
-	connect(&loop_, SIGNAL(step(unsigned int)), &simulation_, SLOT(step(unsigned int)));
-
-	Physics::ObjectsFactory::init(simulation_.getWorld().getWorld());
-
-	simulation_.newGround();
-	population_.generateVehicles();
-}
-QWidget* MainWindow::createSimulationWidgets() {
-	//Create container for Simulation manipulation widgets
-	QGroupBox* groupBox;
-	QVBoxLayout* layout;
-	std::tie(groupBox, layout) = createLayout<QGroupBox, QVBoxLayout>();
-	groupBox->setTitle("Symulacja");
-
-	//Add widgets to created container
-	layout->addWidget(&reset_button_);
-	layout->addWidget(&pause_button_);
-
-	//Create container for Speed manipulation widget
-	QGroupBox* speedContainer;
-	QHBoxLayout* speedLayout;
-	std::tie(speedContainer, speedLayout) = createLayout<QGroupBox, QHBoxLayout>(layout);
-	speedContainer->setTitle("Prędkość symulacji");
-
-	speedLayout->addWidget(&simulation_speed_chooser_);
-
-	//Create container for Cars number manipulation widgets
-	QHBoxLayout* carsLayout;
-	std::tie(std::ignore, carsLayout) = createLayout<QWidget, QHBoxLayout>(layout);
-
-	//Add widgets to created container
-	carsLayout->addWidget(&cars_count_label_);
-	carsLayout->addWidget(&cars_count_edit_);
-
-	//Set widgets properties
-	pause_button_.setCheckable(true);
-	cars_count_edit_.setText(QString::number(population_.getNextGenerationSize()));
-	mutation_size_edit_.setText(QString().setNum(population_.getMutationRate()));
-	elite_specimen_number_edit_.setText(QString::number(population_.getEliteSpecimen()));
-
-	initializeSpeedWidget();
-
-	return groupBox;
-}
-QWidget* MainWindow::createFileWidgets() {
-	//Create group box for File manipulation widgets
-	QGroupBox* groupBox;
-	QHBoxLayout* layout;
-	std::tie(groupBox, layout) = createLayout<QGroupBox, QHBoxLayout>();
-	groupBox->setTitle("Zapis/odczyt");
-
-	//Add widgets to created group box
-	layout->addWidget(&load_button_);
-	layout->addWidget(&save_button_);
-
-	return groupBox;
-}
-QWidget* MainWindow::createAlgorithmWidgets() {
-	//Create group box for Algorithm settings
-	QGroupBox* groupBox;
-	QHBoxLayout* layout;
-	std::tie(groupBox, layout) = createLayout<QGroupBox, QHBoxLayout>();
-	groupBox->setTitle("Parametry algorytmu genetycznego");
-
-	//Create column for Mutation settings labels
-	QVBoxLayout* labelsLayout;
-	std::tie(std::ignore, labelsLayout) = createLayout<QWidget, QVBoxLayout>(layout);
-
-	labelsLayout->addWidget(&mutation_size_label_);
-	labelsLayout->addWidget(&elite_specimen_number_label_);
-
-	//Create column for Mutation settings inputs
-	QVBoxLayout* editsLayout;
-	std::tie(std::ignore, editsLayout) = createLayout<QWidget, QVBoxLayout>(layout);
-
-	editsLayout->addWidget(&mutation_size_edit_);
-	editsLayout->addWidget(&elite_specimen_number_edit_);
-
-	return groupBox;
+    ui_->cars_count_edit->setText(QString::number(population_.getNextGenerationSize()));
+    ui_->mutation_size_edit->setText(QString::number(population_.getMutationRate()));
+    ui_->elite_specimen_number_edit->setText(QString::number(population_.getEliteSpecimen()));
 }
 void MainWindow::initializeSpeedWidget() {
-	simulation_speed_chooser_.addItem("25%", QVariant(0.25f));
-	simulation_speed_chooser_.addItem("50%", QVariant(0.5f));
-	simulation_speed_chooser_.addItem("75%", QVariant(0.75f));
-	simulation_speed_chooser_.addItem("100%", QVariant(1.0f));
-	simulation_speed_chooser_.addItem("150%", QVariant(1.5f));
-	simulation_speed_chooser_.addItem("200%", QVariant(2.0f));
-	simulation_speed_chooser_.addItem("300%", QVariant(3.0f));
-	simulation_speed_chooser_.addItem("400%", QVariant(4.0f));
-	simulation_speed_chooser_.addItem("500%", QVariant(5.0f));
-	simulation_speed_chooser_.setCurrentIndex(3);
+	ui_->simulation_speed_chooser->addItem("25%", QVariant(0.25f));
+	ui_->simulation_speed_chooser->addItem("50%", QVariant(0.5f));
+	ui_->simulation_speed_chooser->addItem("75%", QVariant(0.75f));
+	ui_->simulation_speed_chooser->addItem("100%", QVariant(1.0f));
+	ui_->simulation_speed_chooser->addItem("150%", QVariant(1.5f));
+	ui_->simulation_speed_chooser->addItem("200%", QVariant(2.0f));
+	ui_->simulation_speed_chooser->addItem("300%", QVariant(3.0f));
+	ui_->simulation_speed_chooser->addItem("400%", QVariant(4.0f));
+	ui_->simulation_speed_chooser->addItem("500%", QVariant(5.0f));
+	ui_->simulation_speed_chooser->setCurrentIndex(3);
 }
 void MainWindow::eliteSpecimenNumberChanged() {
-	QString new_text = elite_specimen_number_edit_.text();
+	QString new_text = ui_->elite_specimen_number_edit->text();
 	bool is_int;
 	std::size_t elite_specimen = new_text.toInt(&is_int);
 	if (is_int)
 		population_.setEliteSpecimen(elite_specimen);
-	elite_specimen_number_edit_.setText(QString::number(population_.getEliteSpecimen()));
+	ui_->elite_specimen_number_edit->setText(QString::number(population_.getEliteSpecimen()));
 }
 void MainWindow::mutationSizeChanged() {
 	bool is_float;
-	float mutation_size = mutation_size_edit_.text().toFloat(&is_float);
+	float mutation_size = ui_->mutation_size_edit->text().toFloat(&is_float);
 	if (is_float)
 		population_.setMutationRate(mutation_size);
-	mutation_size_edit_.setText(QString().setNum(population_.getMutationRate()));
+	ui_->mutation_size_edit->setText(QString().setNum(population_.getMutationRate()));
 }
 void MainWindow::saveToFile() {
-	if (!pause_button_.isChecked())
+	if (!ui_->pause_button->isChecked())
 		pauseSimulation();
 
 	QString filename = QFileDialog::getSaveFileName(this,
@@ -191,11 +90,11 @@ void MainWindow::saveToFile() {
 	if (!filename.isEmpty())
 		population_.saveToFile(filename.toStdString());
 
-	if (!pause_button_.isChecked())
+	if (!ui_->pause_button->isChecked())
 		resumeSimulation();
 }
 void MainWindow::loadFromFile() {
-	if (!pause_button_.isChecked())
+	if (!ui_->pause_button->isChecked())
 		pauseSimulation();
 
 	QString filename = QFileDialog::getOpenFileName(this,
@@ -205,7 +104,7 @@ void MainWindow::loadFromFile() {
 	if (!filename.isEmpty())
 		population_.loadFromFile(filename.toStdString());
 
-	if (!pause_button_.isChecked())
+	if (!ui_->pause_button->isChecked())
 		resumeSimulation();
 }
 void MainWindow::pauseSimulation(bool paused) {
@@ -215,13 +114,13 @@ void MainWindow::pauseSimulation(bool paused) {
 		resumeSimulation();
 }
 void MainWindow::carsNumberChanged() {
-	QString new_text = cars_count_edit_.text();
+	QString new_text = ui_->cars_count_edit->text();
 	bool is_int;
 	std::size_t cars_number = new_text.toInt(&is_int);
 	if (is_int)
 		population_.setNextGenerationSize(cars_number);
-	cars_count_edit_.setText(QString::number(population_.getNextGenerationSize()));
-	elite_specimen_number_edit_.setText(QString::number(population_.getEliteSpecimen()));
+	ui_->cars_count_edit->setText(QString::number(population_.getNextGenerationSize()));
+	ui_->elite_specimen_number_edit->setText(QString::number(population_.getEliteSpecimen()));
 }
 void MainWindow::resetSimulation() {
 	statistic_view_.reset();
@@ -229,7 +128,7 @@ void MainWindow::resetSimulation() {
 	population_.reset();
 }
 void MainWindow::speedChanged() {
-	float time_speed = simulation_speed_chooser_.currentData().toFloat();
+	float time_speed = ui_->simulation_speed_chooser->currentData().toFloat();
 	loop_.setTimeSpeed(time_speed);
 }
 void MainWindow::pauseSimulation() {
@@ -237,14 +136,4 @@ void MainWindow::pauseSimulation() {
 }
 void MainWindow::resumeSimulation() {
 	loop_.start();
-}
-
-template<class WidgetType, class LayoutType>
-std::tuple<WidgetType*, LayoutType*> MainWindow::createLayout(QLayout* parent_layout) {
-	WidgetType* widget = new WidgetType();
-	LayoutType* layout = new LayoutType(widget);
-
-	if (parent_layout != Q_NULLPTR)
-		parent_layout->addWidget(widget);
-	return std::make_tuple(widget, layout);
 }
