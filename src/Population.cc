@@ -16,9 +16,7 @@ namespace Algorithm {
 		elite_specimen_ = std::min(DEFAULT_ELITE_SPECIMEN, DEFAULT_POPULATION_SIZE);
 		rng_ = std::mt19937(rd_());
 
-		for (unsigned int i = 0; i < next_population_size_; ++i) {
-			genotypes_.emplace_back(Genotype());
-		}
+		std::fill_n(std::back_inserter(genotypes_), next_population_size_, Genotype());
 	}
 
 	Population::Population(std::vector<Genotype> genotypes) : 
@@ -28,9 +26,7 @@ namespace Algorithm {
 
 	void Population::reset() {
 		genotypes_.clear();
-		for (unsigned int i = 0; i < next_population_size_; ++i) {
-			genotypes_.emplace_back(Genotype());
-		}
+        std::fill_n(std::back_inserter(genotypes_), next_population_size_, Genotype());
 		generateVehicles();
 	}
 
