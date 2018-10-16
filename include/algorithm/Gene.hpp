@@ -4,12 +4,18 @@
 //
 
 #pragma once
+#include <random>
 
-namespace Algorithm {
+namespace Algorithm2 {
     class Gene {
         const unsigned int INT_NUM_BITS = 32; //!  number of bits in unsigned value type to hold gene into
         const float MAX_RAND_VALUE = 100.0f; //!  maximum value rng reacheas in probability tests
     public:
+        Gene() :
+            rng_(rd_()) {
+            data_ = std::uniform_int_distribution<std::uint32_t>(std::numeric_limits<std::uint32_t>::lowest(), std::numeric_limits<std::uint32_t>::max())(rng_);
+        }
+
         Gene(std::uint32_t value) :
             rng_(rd_()) {
             data_ = NKB2Grey(value);
@@ -52,8 +58,8 @@ namespace Algorithm {
             return data_;
         }
 
-        Gene<T> cross(const Gene<T>& other) const {
-            Gene<T> result(*this);
+        Gene cross(const Gene& other) const {
+            Gene result(*this);
 
             uint32_t mask = 0;
             mask = ~mask;
@@ -65,10 +71,12 @@ namespace Algorithm {
 
         friend std::ostream& operator<< (std::ostream &stream, const Gene& gene) {
             stream << gene.data_;
+            return stream;
         }
 
         friend std::istream& operator>> (std::istream & stream, Gene& gene) {
             stream >> gene.data_;
+            return stream;
         }
     private:
         std::uint32_t NKB2Grey(std::uint32_t nkb) const {
