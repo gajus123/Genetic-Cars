@@ -54,9 +54,7 @@ namespace Algorithm {
 		std::vector<Genotype> new_population;
 
 		int num_of_elite_specimen = std::min(elite_specimen_, next_population_size_);
-		for (int i = 0; i < num_of_elite_specimen; ++i) {
-			new_population.push_back(genotypes_[i]);
-		}
+		std::copy_n(genotypes_.begin(), num_of_elite_specimen, std::back_inserter(new_population));
 
 		int population_left = next_population_size_ - elite_specimen_;
 		for (int i = 0; i < (population_left + 1) / 2; ++i) {
