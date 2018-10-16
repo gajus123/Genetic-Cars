@@ -1,8 +1,6 @@
 #include <boost/test/unit_test.hpp>
 
-#include <Population.h>
-
-using namespace Algorithm;
+/*using namespace Algorithm2;
 
 BOOST_AUTO_TEST_SUITE(PopulationTests);
 
@@ -49,5 +47,5 @@ BOOST_AUTO_TEST_CASE(check_genotypes_vector_size_ater_inflate_random)
 }
 
 BOOST_AUTO_TEST_SUITE_END();
-
+*/
 

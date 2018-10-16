@@ -6,7 +6,7 @@
 #include <boost/test/unit_test.hpp>
 #include <limits>
 
-#include <Gene.h>
+/*#include <Gene.h>
 
 BOOST_AUTO_TEST_SUITE(GeneTests);
 
@@ -35,4 +35,4 @@ BOOST_AUTO_TEST_CASE(gene_cross)
 	BOOST_CHECK_EQUAL(g1.cross(g2).value(), 3276759583);
 }
 
-BOOST_AUTO_TEST_SUITE_END();
+BOOST_AUTO_TEST_SUITE_END();*/
