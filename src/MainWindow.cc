@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	mutation_size_label_("Prawdopodobieństwo mutacji: "),
 	elite_specimen_number_label_("Ilość osobników elitarnych: ") {
 
-	setWindowTitle("Genetic Cars"); 
+	setWindowTitle("Genetic Cars");
 	
 	//Create container for left and right side
 	QWidget* central_widget;
