@@ -7,10 +7,11 @@
 #include <array>
 #include <algorithm>
 #include <experimental/iterator>
+#include <functional>
 
 #include <algorithm/Gene.hpp>
 
-namespace Algorithm {
+namespace Algorithm2 {
     template<std::size_t N>
     class Genotype {
     public:
@@ -35,12 +36,16 @@ namespace Algorithm {
         };
 
         friend std::ostream& operator<< (std::ostream &stream, const Genotype<N>& genotype) {
-            std::copy(genes_.begin(), genes_.end(), std::experimental::make_ostream_joiner(stream, " "));
+            std::copy(genotype.genes_.begin(), genotype.genes_.end(), std::experimental::make_ostream_joiner(stream, " "));
+            return stream;
         }
 
         friend std::istream& operator>> (std::istream & stream, Genotype<N>& genotype) {
-            std::for_each(genes_.begin(), genes_.end(), std::bind(&operator>>, stream, std::placeholders::_1));
+            //std::for_each(genotype.genes_.begin(), genotype.genes_.end(), std::bind(&operator>>, stream, std::placeholders::_1));
+            return stream;
         }
+
+        float fitness;
     private:
         std::array<Gene, N> genes_;
     };
