@@ -51,9 +51,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 
     initializeSpeedWidget();
 
-    ui_->cars_count_edit->setText(QString::number(population_.getNextGenerationSize()));
-    ui_->mutation_size_edit->setText(QString::number(population_.getMutationRate()));
-    ui_->elite_specimen_number_edit->setText(QString::number(population_.getEliteSpecimen()));
+    ui_->cars_count_edit->setText(QString::number(population_.nextGenerationSize()));
+    ui_->mutation_size_edit->setText(QString::number(population_.mutationRate()));
+    ui_->elite_specimen_number_edit->setText(QString::number(population_.eliteSpecimen()));
 }
 void MainWindow::initializeSpeedWidget() {
 	ui_->simulation_speed_chooser->addItem("25%", QVariant(0.25f));
@@ -73,14 +73,14 @@ void MainWindow::eliteSpecimenNumberChanged() {
 	std::size_t elite_specimen = new_text.toInt(&is_int);
 	if (is_int)
 		population_.setEliteSpecimen(elite_specimen);
-	ui_->elite_specimen_number_edit->setText(QString::number(population_.getEliteSpecimen()));
+	ui_->elite_specimen_number_edit->setText(QString::number(population_.eliteSpecimen()));
 }
 void MainWindow::mutationSizeChanged() {
 	bool is_float;
 	float mutation_size = ui_->mutation_size_edit->text().toFloat(&is_float);
 	if (is_float)
 		population_.setMutationRate(mutation_size);
-	ui_->mutation_size_edit->setText(QString().setNum(population_.getMutationRate()));
+	ui_->mutation_size_edit->setText(QString().setNum(population_.mutationRate()));
 }
 void MainWindow::saveToFile() {
 	if (!ui_->pause_button->isChecked())
@@ -136,8 +136,8 @@ void MainWindow::carsNumberChanged() {
 	std::size_t cars_number = new_text.toInt(&is_int);
 	if (is_int)
 		population_.setNextGenerationSize(cars_number);
-	ui_->cars_count_edit->setText(QString::number(population_.getNextGenerationSize()));
-	ui_->elite_specimen_number_edit->setText(QString::number(population_.getEliteSpecimen()));
+	ui_->cars_count_edit->setText(QString::number(population_.nextGenerationSize()));
+	ui_->elite_specimen_number_edit->setText(QString::number(population_.eliteSpecimen()));
 }
 void MainWindow::resetSimulation() {
 	statistic_view_.reset();

@@ -20,12 +20,12 @@
 #include <iostream>
 #include <QShortcut>
 
-#include <Population.h>
 #include <SimulationView.h>
 #include <StatisticView.h>
 #include <Simulation.h>
 #include <Statistics.h>
 #include <Loop.h>
+#include <algorithm/PopulationWrapper.h>
 
 namespace Ui {
     class MainWindow;
@@ -63,7 +63,7 @@ private:
 	void resumeSimulation();
 
 	Physics::Loop loop_;
-	Algorithm::Population population_;
+	Algorithm2::PopulationWrapper population_;
 	Simulation simulation_;
 	Statistics statistics_;
 
