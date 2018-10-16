@@ -83,9 +83,16 @@ void MainWindow::saveToFile() {
 	if (!ui_->pause_button->isChecked())
 		pauseSimulation();
 
-	QString filename = QFileDialog::getSaveFileName(this,
-		"Save Population", "",
-		"Text Files (*.txt);;All Files (*)");
+    QFileDialog file_dialog{this, "Load Population", "", "Text Files (*.txt);;AllFiles (*)"};
+    file_dialog.setAcceptMode(QFileDialog::AcceptSave);
+    file_dialog.setFileMode(QFileDialog::AnyFile);
+    file_dialog.setOption(QFileDialog::DontUseNativeDialog, true);
+    if(QDialog::Accepted != file_dialog.exec()) {
+        if (!ui_->pause_button->isChecked())
+            resumeSimulation();
+        return;
+    }
+    QString filename = file_dialog.selectedFiles().at(0);
 
 	if (!filename.isEmpty())
 		population_.saveToFile(filename.toStdString());
@@ -97,9 +104,16 @@ void MainWindow::loadFromFile() {
 	if (!ui_->pause_button->isChecked())
 		pauseSimulation();
 
-	QString filename = QFileDialog::getOpenFileName(this,
-		"Load Population", "",
-		"Text Files (*.txt);;All Files (*)");
+	QFileDialog file_dialog{this, "Load Population", "", "Text Files (*.txt);;AllFiles (*)"};
+	file_dialog.setAcceptMode(QFileDialog::AcceptOpen);
+	file_dialog.setFileMode(QFileDialog::ExistingFile);
+	file_dialog.setOption(QFileDialog::DontUseNativeDialog, true);
+	if(QDialog::Accepted != file_dialog.exec()) {
+        if (!ui_->pause_button->isChecked())
+            resumeSimulation();
+	    return;
+	}
+	QString filename = file_dialog.selectedFiles().at(0);
 
 	if (!filename.isEmpty())
 		population_.loadFromFile(filename.toStdString());
