@@ -152,7 +152,7 @@ namespace Algorithm {
 		for (std::size_t i=0; i<genotypes_number; ++i) {
 			Genotype g;
 			input_file >> g;
-			genotypes_.emplace_back(g);
+			genotypes_.emplace_back(std::move(g));
 		}
 
 		input_file.close();
