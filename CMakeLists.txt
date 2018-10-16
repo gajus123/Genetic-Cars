@@ -40,6 +40,8 @@ set(SOURCE_FILES
     src/Wheel.cc
     src/World.cc
 
+    src/MainWindow.ui
+
     include/Loop.h
     include/MainWindow.h
     include/Simulation.h
