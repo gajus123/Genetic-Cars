@@ -15,14 +15,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
     pause_action_(QKeySequence(Qt::CTRL + Qt::Key_P), this) {
 
     ui_->setupUi(this);
-
-    QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    sizePolicy.setVerticalStretch(3);
-    simulation_view_.setSizePolicy(sizePolicy);
-    ui_->verticalLayout_3->addWidget(&simulation_view_);
-    sizePolicy.setVerticalStretch(2);
-    statistic_view_.setSizePolicy(sizePolicy);
-    ui_->verticalLayout_3->addWidget(&statistic_view_);
+    
+    ui_->gridLayout_5->addWidget(&simulation_view_);
+    ui_->gridLayout_8->addWidget(&statistic_view_);
 
     connect(&pause_action_, SIGNAL(activated()), ui_->pause_button, SLOT(click()));
 
