@@ -4,8 +4,8 @@
  *
  */
 #include <MainWindow.h>
-#include <GroundGenerator.h>
-#include <ui_MainWindow.h>
+#include <physics/objects/GroundGenerator.h>
+#include <ui/ui_MainWindow.h>
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
 	QMainWindow(parent, flags),

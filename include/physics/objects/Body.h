@@ -11,7 +11,7 @@
 #include <cstdio>
 
 #include <Vector2.h>
-#include <Base.h>
+#include <physics/objects/Base.h>
 
 namespace Objects {
 

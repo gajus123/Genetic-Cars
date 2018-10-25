@@ -2,8 +2,8 @@
 // Created by igor on 13.01.18.
 //
 
-#include <Ground.h>
-#include <ObjectsFactory.h>
+#include <physics/objects/Ground.h>
+#include <physics/objects/ObjectsFactory.h>
 
 
 namespace Objects {

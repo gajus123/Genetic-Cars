@@ -8,7 +8,7 @@
 #include <Box2D/Box2D.h>
 #include <QApplication>
 #include <MainWindow.h>
-#include <ObjectsFactory.h>
+#include <physics/objects/ObjectsFactory.h>
 
 
 int main(int argc, char *argv[])

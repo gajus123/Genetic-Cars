@@ -8,8 +8,8 @@
 
 #include <Box2D/Box2D.h>
 
-#include <Body.h>
-#include <Wheel.h>
+#include <physics/objects/Body.h>
+#include <physics/objects/Wheel.h>
 
 namespace Objects {
 

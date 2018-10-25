@@ -12,8 +12,8 @@
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Box2D.h>
 
-#include <Loop.h>
-#include <Base.h>
+#include <simulation/Loop.h>
+#include <physics/objects/Base.h>
 
 
 namespace Objects {

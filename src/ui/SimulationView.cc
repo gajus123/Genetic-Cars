@@ -1,4 +1,4 @@
-#include <SimulationView.h>
+#include <ui/SimulationView.h>
 
 SimulationView::SimulationView(Simulation& simulation, QWidget *parent, Qt::WindowFlags flags) :
 	QFrame(parent, flags),

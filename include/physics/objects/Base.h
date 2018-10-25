@@ -7,7 +7,7 @@
 #define GENETIC_CARS_BASE_H
 
 #include <Vector2.h>
-#include <ObjectsFactory.h>
+#include <physics/objects/ObjectsFactory.h>
 
 namespace Physics {
 	class ObjectsFactory;

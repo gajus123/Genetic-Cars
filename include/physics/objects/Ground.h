@@ -8,7 +8,7 @@
 
 #include <vector>
 
-#include <Base.h>
+#include <physics/objects/Base.h>
 
 namespace Objects {
 

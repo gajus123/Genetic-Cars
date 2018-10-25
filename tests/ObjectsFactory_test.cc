@@ -1,8 +1,8 @@
 #include <vector>
 #include <boost/test/unit_test.hpp>
 
-#include <World.h>
-#include <ObjectsFactory.h>
+#include <physics/World.h>
+#include <physics/objects/ObjectsFactory.h>
 
 using namespace Physics;
 

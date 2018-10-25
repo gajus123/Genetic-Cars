@@ -1,9 +1,9 @@
 #include <boost/test/unit_test.hpp>
 #include <vector>
 
-#include <Vehicle.h>
-#include <World.h>
-#include <ObjectsFactory.h>
+#include <physics/objects/Vehicle.h>
+#include <physics/World.h>
+#include <physics/objects/ObjectsFactory.h>
 
 using namespace Physics;
 using namespace Objects;

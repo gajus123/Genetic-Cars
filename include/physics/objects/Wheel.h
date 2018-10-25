@@ -8,7 +8,7 @@
 
 #include <Box2D/Box2D.h>
 
-#include <Base.h>
+#include <physics/objects/Base.h>
 #include <Vector2.h>
 
 namespace Objects {

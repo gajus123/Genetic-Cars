@@ -3,8 +3,8 @@
 // \date 13.01.18
 //
 
-#include <Vehicle.h>
-#include <ObjectsFactory.h>
+#include <physics/objects/Vehicle.h>
+#include <physics/objects/ObjectsFactory.h>
 
 namespace Objects {
 

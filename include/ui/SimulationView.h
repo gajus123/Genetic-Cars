@@ -14,10 +14,10 @@
 #include <QWheelEvent>
 #include <cmath>
 
-#include <Ground.h>
-#include <Wheel.h>
-#include <Vehicle.h>
-#include <Simulation.h>
+#include <physics/objects/Ground.h>
+#include <physics/objects/Wheel.h>
+#include <physics/objects/Vehicle.h>
+#include <simulation/Simulation.h>
 
 /*!
 	\class SimulationView

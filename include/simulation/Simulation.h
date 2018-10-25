@@ -15,12 +15,12 @@
 
 #include <Box2D/Box2D.h>
 
-#include <World.h>
-#include <Watchdog.h>
-#include <Vehicle.h>
-#include <Ground.h>
-#include <GroundGenerator.h>
-#include <ObjectsFactory.h>
+#include <physics/World.h>
+#include <simulation/Watchdog.h>
+#include <physics/objects/Vehicle.h>
+#include <physics/objects/Ground.h>
+#include <physics/objects/GroundGenerator.h>
+#include <physics/objects/ObjectsFactory.h>
 
 /*!
 	\class Simulation

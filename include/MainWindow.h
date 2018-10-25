@@ -20,11 +20,11 @@
 #include <iostream>
 #include <QShortcut>
 
-#include <SimulationView.h>
-#include <StatisticView.h>
-#include <Simulation.h>
+#include <ui/SimulationView.h>
+#include <ui/StatisticView.h>
+#include <simulation/Simulation.h>
 #include <Statistics.h>
-#include <Loop.h>
+#include <simulation/Loop.h>
 #include <algorithm/PopulationWrapper.h>
 
 namespace Ui {

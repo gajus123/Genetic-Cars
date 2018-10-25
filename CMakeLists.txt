@@ -21,24 +21,24 @@ find_package(Qt5Charts REQUIRED)
 include_directories(${Qt5Charts_INCLUDE_DIRS})
 
 set(SOURCE_FILES
-    src/Base.cc
-    src/Body.cc
-    src/Ground.cc
-    src/GroundGenerator.cc
-    src/Loop.cc
+        src/physics/objects/Base.cc
+        src/physics/objects/Body.cc
+        src/physics/objects/Ground.cc
+        src/physics/objects/GroundGenerator.cc
+        src/simulation/Loop.cc
     src/MainWindow.cc
-    src/ObjectsFactory.cc
-    src/Simulation.cc
-    src/SimulationView.cc
+        src/physics/objects/ObjectsFactory.cc
+        src/simulation/Simulation.cc
+        src/ui/SimulationView.cc
     src/Statistics.cc
-    src/StatisticView.cc
+        src/ui/StatisticView.cc
     src/Vector2.cc
-    src/Vehicle.cc
-    src/Watchdog.cc
-    src/Wheel.cc
-    src/World.cc
+        src/physics/objects/Vehicle.cc
+        src/simulation/Watchdog.cc
+        src/physics/objects/Wheel.cc
+        src/physics/World.cc
 
-    src/MainWindow.ui
+        src/ui/MainWindow.ui
 
     include/algorithm/Gene.hpp
     include/algorithm/Genotype.hpp
@@ -46,12 +46,12 @@ set(SOURCE_FILES
     src/algorithm/PopulationWrapper.cpp
     include/algorithm/PopulationWrapper.h
 
-    include/Loop.h
+        include/simulation/Loop.h
     include/MainWindow.h
-    include/Simulation.h
-    include/StatisticView.h
+        include/simulation/Simulation.h
+        include/ui/StatisticView.h
     include/Statistics.h
-    include/Watchdog.h
+        include/simulation/Watchdog.h
 )
 
 set(TEST_FILES
