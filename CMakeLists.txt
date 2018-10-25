@@ -55,14 +55,14 @@ set(SOURCE_FILES
 )
 
 set(TEST_FILES
-    tests/Body_test.cc
-    tests/Gene_test.cc
-    tests/Ground_test.cc
-    tests/GroundGenerator_test.cc
-    tests/ObjectsFactory_test.cc
-    tests/Population_test.cc
-    tests/Vehicle_test.cc
-    tests/Wheel_test.cc
+        tests/physics/objects/Body_test.cc
+        tests/algorithm/Gene_test.cc
+        tests/physics/objects/Ground_test.cc
+        tests/physics/objects/GroundGenerator_test.cc
+        tests/physics/objects/ObjectsFactory_test.cc
+        tests/algorithm/Population_test.cc
+        tests/physics/objects/Vehicle_test.cc
+        tests/physics/objects/Wheel_test.cc
 
     tests/test_main.cc
 )
