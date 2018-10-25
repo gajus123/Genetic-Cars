@@ -1,5 +1,7 @@
 # Genetic Cars
 
+![Alt text](https://user-images.githubusercontent.com/23700632/47530334-9889ae80-d8aa-11e8-9cfb-09d547071d1d.png "Screenshot")
+
 ### Prerequisites
 
 You will need:
